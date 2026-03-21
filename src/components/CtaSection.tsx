@@ -1,9 +1,4 @@
 import { useState } from 'react'
-import emailjs from '@emailjs/browser'
-
-const EMAILJS_SERVICE_ID = 'EMAILJS_SERVICE_ID'
-const EMAILJS_TEMPLATE_ID = 'EMAILJS_TEMPLATE_ID'
-const EMAILJS_PUBLIC_KEY = 'EMAILJS_PUBLIC_KEY'
 
 export default function CtaSection() {
   const [email, setEmail] = useState('')
@@ -14,18 +9,11 @@ export default function CtaSection() {
     e.preventDefault()
     if (!email) return
     setStatus('sending')
-    try {
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        { email, role, source: 'cta' },
-        EMAILJS_PUBLIC_KEY
-      )
+    // TODO: EmailJS integracija
+    setTimeout(() => {
       setStatus('success')
       setEmail('')
-    } catch {
-      setStatus('error')
-    }
+    }, 800)
   }
 
   return (
