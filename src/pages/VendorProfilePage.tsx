@@ -69,16 +69,16 @@ export default function VendorProfilePage() {
 
   useEffect(() => {
     if (!slug) return
-    Promise.all([
+    Promise.allSettled([
       api.get(`/vendors/${slug}/`),
       api.get(`/vendors/${slug}/products/`),
       api.get(`/vendors/${slug}/reviews/`),
       api.get(`/vendors/${slug}/posts/`),
     ]).then(([v, p, r, po]) => {
-      setVendor(v.data)
-      setProducts(p.data)
-      setReviews(r.data)
-      setPosts(po.data)
+      if (v.status === 'fulfilled') setVendor(v.value.data)
+      if (p.status === 'fulfilled') setProducts(p.value.data)
+      if (r.status === 'fulfilled') setReviews(r.value.data)
+      if (po.status === 'fulfilled') setPosts(po.value.data)
     }).finally(() => setLoading(false))
   }, [slug])
 
