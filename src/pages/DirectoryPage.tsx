@@ -30,6 +30,7 @@ interface Post {
 }
 
 const stars = (n: number) => '★'.repeat(Math.round(n)) + '☆'.repeat(5 - Math.round(n))
+const normalize = (s: string) => s.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase()
 
 export default function DirectoryPage() {
   const [vendors, setVendors] = useState<Vendor[]>([])
@@ -52,11 +53,12 @@ export default function DirectoryPage() {
     import('./VendorMap').then((m) => setMap(() => m.default))
   }, [])
 
+  const q = normalize(search)
   const filtered = search
     ? vendors.filter(
         (v) =>
-          v.name.toLowerCase().includes(search.toLowerCase()) ||
-          v.location.toLowerCase().includes(search.toLowerCase())
+          normalize(v.name).includes(q) ||
+          normalize(v.location).includes(q)
       )
     : vendors
 
