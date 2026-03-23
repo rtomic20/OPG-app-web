@@ -76,7 +76,7 @@ export default function VendorProfilePage() {
       api.get(`/vendors/${slug}/posts/`),
     ]).then(([v, p, r, po]) => {
       if (v.status === 'fulfilled') setVendor(v.value.data)
-      if (p.status === 'fulfilled') setProducts(p.value.data)
+      if (p.status === 'fulfilled') setProducts(p.value.data?.results ?? p.value.data)
       if (r.status === 'fulfilled') setReviews(r.value.data)
       if (po.status === 'fulfilled') setPosts(po.value.data)
     }).finally(() => setLoading(false))
