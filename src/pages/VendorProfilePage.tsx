@@ -230,7 +230,7 @@ export default function VendorProfilePage() {
                     <h3 className="font-semibold text-gray-900 text-sm">{p.name}</h3>
                     {p.description && <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">{p.description}</p>}
                     <div className="flex items-center justify-between mt-3">
-                      <span className="font-bold text-green-700">{p.price.toFixed(2)} € / {p.unit}</span>
+                      <span className="font-bold text-green-700">{parseFloat(String(p.price)).toFixed(2)} € / {p.unit}</span>
                       <button
                         onClick={() => handleAddToCart(p)}
                         disabled={!p.is_available}

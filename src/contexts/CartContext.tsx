@@ -29,7 +29,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const vendorSlug = items.length > 0 ? items[0].vendor_slug : null
 
-  const addItem = (item: CartItem) => {
+  const addItem = (raw: CartItem) => {
+    const item = { ...raw, price: parseFloat(String(raw.price)) }
     setItems((prev) => {
       // Košarica može imati samo jedan vendor
       if (prev.length > 0 && prev[0].vendor_slug !== item.vendor_slug) {
