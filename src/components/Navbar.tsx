@@ -10,6 +10,7 @@ export default function Navbar() {
   const { count } = useCart()
   const location = useLocation()
   const isLanding = location.pathname === '/'
+  const isAuth = ['/prijava', '/registracija'].includes(location.pathname)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -33,9 +34,11 @@ export default function Navbar() {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-6">
-            <Link to="/opgovi" className="text-green-800 hover:text-green-600 font-medium transition-colors">
-              OPG-ovi
-            </Link>
+            {!isAuth && (
+              <Link to="/opgovi" className="text-green-800 hover:text-green-600 font-medium transition-colors">
+                OPG-ovi
+              </Link>
+            )}
             {isLanding && (
               <>
                 <a href="#kako-radi" className="text-green-800 hover:text-green-600 font-medium transition-colors">Kako radi</a>
@@ -101,7 +104,7 @@ export default function Navbar() {
 
         {menuOpen && (
           <div className="md:hidden bg-white border-t border-green-100 py-4 space-y-2">
-            <Link to="/opgovi" className="block px-4 py-2 text-green-800 font-medium" onClick={() => setMenuOpen(false)}>OPG-ovi</Link>
+            {!isAuth && <Link to="/opgovi" className="block px-4 py-2 text-green-800 font-medium" onClick={() => setMenuOpen(false)}>OPG-ovi</Link>}
             {user ? (
               <>
                 <span className="block px-4 py-2 text-sm text-gray-500">{user.email}</span>

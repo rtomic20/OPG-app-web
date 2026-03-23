@@ -47,9 +47,9 @@ export default function DirectoryPage() {
   const withCoords = filtered.filter((v) => v.latitude && v.longitude)
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navbar />
-      <div className="pt-20 pb-16">
+      <div className="flex-1 pt-20 pb-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="py-8">

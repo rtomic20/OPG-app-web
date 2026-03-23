@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export default function Footer() {
   const year = new Date().getFullYear()
 
@@ -9,7 +11,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 text-white font-bold text-xl mb-3">
               <span>🌿</span>
-              <span>OPG Marketplace</span>
+              <span>Tržnjak</span>
             </div>
             <p className="text-green-400 text-sm leading-relaxed">
               Spajamo lokalne OPG-ove s kupcima koji cijene svježu i domaću hranu.
@@ -20,18 +22,15 @@ export default function Footer() {
           <div>
             <h3 className="text-white font-semibold mb-3">Navigacija</h3>
             <ul className="space-y-2 text-sm">
-              {[
-                { label: 'Kako radi', href: '#kako-radi' },
-                { label: 'Prednosti', href: '#prednosti' },
-                { label: 'Kategorije', href: '#kategorije' },
-                { label: 'Prijava na čekanje', href: '#waitlist' },
-              ].map(link => (
-                <li key={link.href}>
-                  <a href={link.href} className="hover:text-white transition-colors">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <Link to="/opgovi" className="hover:text-white transition-colors">OPG-ovi</Link>
+              </li>
+              <li>
+                <Link to="/prijava" className="hover:text-white transition-colors">Prijava</Link>
+              </li>
+              <li>
+                <Link to="/registracija" className="hover:text-white transition-colors">Registracija</Link>
+              </li>
             </ul>
           </div>
 
@@ -41,10 +40,10 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  href="mailto:info@opgmarketplace.hr"
+                  href="mailto:info@trznjak.hr"
                   className="hover:text-white transition-colors"
                 >
-                  info@opgmarketplace.hr
+                  info@trznjak.hr
                 </a>
               </li>
               <li className="text-green-400">Hrvatska</li>
@@ -53,7 +52,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-green-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-sm text-green-500">
-          <span>© {year} OPG Marketplace. Sva prava pridržana.</span>
+          <span>© {year} Tržnjak. Sva prava pridržana.</span>
           <div className="flex gap-4">
             <a href="#" className="hover:text-green-300 transition-colors">Privatnost</a>
             <a href="#" className="hover:text-green-300 transition-colors">Uvjeti korištenja</a>
