@@ -135,7 +135,7 @@ export default function VendorProfilePage() {
           )}
         </div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-end gap-4 -mt-10 pb-4">
+          <div className="flex items-end gap-4 -mt-10 pb-4 relative z-10">
             <div className="w-20 h-20 rounded-2xl border-4 border-white bg-white shadow-md flex items-center justify-center overflow-hidden flex-shrink-0">
               {vendor.logo ? (
                 <img src={vendor.logo} alt={vendor.name} className="w-full h-full object-cover" />
@@ -143,8 +143,8 @@ export default function VendorProfilePage() {
                 <span className="text-3xl">🌿</span>
               )}
             </div>
-            <div className="pb-1 flex-1">
-              <h1 className="text-2xl font-bold text-gray-900">{vendor.name}</h1>
+            <div className="pb-2 flex-1 min-w-0">
+              <h1 className="text-2xl font-bold text-gray-900 break-words">{vendor.name}</h1>
               <div className="flex flex-wrap items-center gap-3 mt-1">
                 <span className="text-sm text-gray-500">📍 {vendor.location}</span>
                 {vendor.avg_rating && (
