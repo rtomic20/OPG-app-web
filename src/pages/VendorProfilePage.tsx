@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom'
 import api from '../services/api'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import { useCart } from '../contexts/CartContext'
 
 interface Vendor {
   id: number
@@ -55,7 +54,6 @@ const stars = (n: number) => '★'.repeat(Math.round(n)) + '☆'.repeat(5 - Math
 
 export default function VendorProfilePage() {
   const { slug } = useParams<{ slug: string }>()
-  const { addItem } = useCart()
 
   const [vendor, setVendor] = useState<Vendor | null>(null)
   const [products, setProducts] = useState<Product[]>([])
@@ -65,7 +63,6 @@ export default function VendorProfilePage() {
   const [tab, setTab] = useState<'products' | 'posts' | 'reviews'>('products')
   const [followEmail, setFollowEmail] = useState('')
   const [followStatus, setFollowStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle')
-  const [added, setAdded] = useState<number | null>(null)
 
   useEffect(() => {
     if (!slug) return
@@ -91,22 +88,6 @@ export default function VendorProfilePage() {
     } catch {
       setFollowStatus('error')
     }
-  }
-
-  const handleAddToCart = (product: Product) => {
-    if (!vendor) return
-    addItem({
-      product_id: product.id,
-      product_name: product.name,
-      price: product.price,
-      unit: product.unit,
-      quantity: 1,
-      vendor_id: vendor.id,
-      vendor_name: vendor.name,
-      vendor_slug: vendor.slug,
-    })
-    setAdded(product.id)
-    setTimeout(() => setAdded(null), 1500)
   }
 
   if (loading) return (
@@ -231,19 +212,9 @@ export default function VendorProfilePage() {
                     {p.description && <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">{p.description}</p>}
                     <div className="flex items-center justify-between mt-3">
                       <span className="font-bold text-green-700">{parseFloat(String(p.price)).toFixed(2)} € / {p.unit}</span>
-                      <button
-                        onClick={() => handleAddToCart(p)}
-                        disabled={!p.is_available}
-                        className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-colors ${
-                          added === p.id
-                            ? 'bg-green-100 text-green-700'
-                            : p.is_available
-                              ? 'bg-green-600 text-white hover:bg-green-700'
-                              : 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                        }`}
-                      >
-                        {added === p.id ? '✓ Dodano' : p.is_available ? 'Dodaj' : 'Nedostupno'}
-                      </button>
+                      {!p.is_available && (
+                        <span className="text-xs text-gray-400 bg-gray-100 px-3 py-1.5 rounded-lg">Nedostupno</span>
+                      )}
                     </div>
                   </div>
                 </div>
