@@ -71,10 +71,15 @@ export default function LoginPage() {
               {loading ? 'Prijava...' : 'Prijavi se'}
             </button>
           </form>
-          <p className="text-center text-sm text-gray-500 mt-4">
-            Nemaš račun?{' '}
-            <Link to="/registracija" className="text-green-600 font-medium hover:underline">Registriraj se</Link>
-          </p>
+          <div className="flex justify-between items-center mt-4">
+            <Link to="/zaboravili-lozinku" className="text-sm text-gray-400 hover:underline">
+              Zaboravili ste lozinku?
+            </Link>
+            <p className="text-sm text-gray-500">
+              Nemaš račun?{' '}
+              <Link to="/registracija" className="text-green-600 font-medium hover:underline">Registriraj se</Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>

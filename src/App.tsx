@@ -6,6 +6,8 @@ import VendorProfilePage from './pages/VendorProfilePage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import ProfilePage from './pages/ProfilePage'
+import ForgotPasswordPage from './pages/ForgotPasswordPage'
+import ResetPasswordPage from './pages/ResetPasswordPage'
 import './index.css'
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -23,6 +25,8 @@ function AppRoutes() {
       <Route path="/prijava" element={<LoginPage />} />
       <Route path="/registracija" element={<RegisterPage />} />
       <Route path="/profil" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+      <Route path="/zaboravili-lozinku" element={<ForgotPasswordPage />} />
+      <Route path="/reset-lozinka" element={<ResetPasswordPage />} />
       <Route path="*" element={<LandingPage />} />
     </Routes>
   )
