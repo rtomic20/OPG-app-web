@@ -3,12 +3,15 @@ import { Link } from 'react-router-dom'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 
-// Fix Leaflet default marker icons
-delete (L.Icon.Default.prototype as any)._getIconUrl
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+const pinIcon = L.divIcon({
+  className: '',
+  html: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="36" viewBox="0 0 28 36">
+    <path d="M14 0C6.27 0 0 6.27 0 14c0 9.75 14 22 14 22S28 23.75 28 14C28 6.27 21.73 0 14 0z" fill="#16a34a"/>
+    <circle cx="14" cy="14" r="6" fill="white"/>
+  </svg>`,
+  iconSize: [28, 36],
+  iconAnchor: [14, 36],
+  popupAnchor: [0, -36],
 })
 
 interface Vendor {
@@ -31,7 +34,7 @@ export default function VendorMap({ vendors }: { vendors: Vendor[] }) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {vendors.map((v) => (
-        <Marker key={v.id} position={[parseFloat(v.latitude), parseFloat(v.longitude)]}>
+        <Marker key={v.id} position={[parseFloat(v.latitude), parseFloat(v.longitude)]} icon={pinIcon}>
           <Popup>
             <div className="text-sm">
               <p className="font-bold">{v.name}</p>
