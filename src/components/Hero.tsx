@@ -1,20 +1,29 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import api from '../services/api'
 
 export default function Hero() {
   const [email, setEmail] = useState('')
   const [role, setRole] = useState<'kupac' | 'opg'>('kupac')
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
+  const [counts, setCounts] = useState<{ kupac: number; opg: number } | null>(null)
   const formRef = useRef<HTMLFormElement>(null)
+
+  useEffect(() => {
+    api.get('/auth/waitlist/stats/').then((r) => setCounts(r.data)).catch(() => {})
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email) return
     setStatus('sending')
-    // TODO: EmailJS integracija
-    setTimeout(() => {
+    try {
+      const { data } = await api.post('/auth/waitlist/', { email, role })
+      setCounts(data)
       setStatus('success')
       setEmail('')
-    }, 800)
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -118,18 +127,18 @@ export default function Hero() {
         </div>
 
         {/* Social proof stats */}
-        <div className="flex flex-wrap justify-center gap-8 sm:gap-12">
-          {[
-            { num: '50+', label: 'OPG-ova na čekanju' },
-            { num: '200+', label: 'zainteresiranih kupaca' },
-            { num: '5', label: 'regija pokriveno' },
-          ].map(stat => (
-            <div key={stat.label} className="text-center">
-              <div className="text-3xl font-bold text-green-600">{stat.num}</div>
-              <div className="text-sm text-green-700 mt-1">{stat.label}</div>
+        {counts && (
+          <div className="flex flex-wrap justify-center gap-8 sm:gap-12">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-green-600">{counts.opg}</div>
+              <div className="text-sm text-green-700 mt-1">OPG-ova prijavljeno</div>
             </div>
-          ))}
-        </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-green-600">{counts.kupac}</div>
+              <div className="text-sm text-green-700 mt-1">kupaca prijavljeno</div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   )

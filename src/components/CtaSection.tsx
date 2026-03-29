@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import api from '../services/api'
 
 export default function CtaSection() {
   const [email, setEmail] = useState('')
@@ -9,11 +10,13 @@ export default function CtaSection() {
     e.preventDefault()
     if (!email) return
     setStatus('sending')
-    // TODO: EmailJS integracija
-    setTimeout(() => {
+    try {
+      await api.post('/auth/waitlist/', { email, role })
       setStatus('success')
       setEmail('')
-    }, 800)
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
