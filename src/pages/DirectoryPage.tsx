@@ -186,27 +186,7 @@ export default function DirectoryPage() {
             <div className="mt-4">
               <h2 className="text-xl font-bold text-gray-900 mb-4">Zadnje od OPG-ova</h2>
               {posts.length === 0 ? (
-                <div className="space-y-4">
-                  {/* Pro-forma placeholder posts */}
-                  {[
-                    { vendor: 'OPG Tomić', time: 'Prije 2 sata', text: 'Danas smo ubr ali prvu šarzu jagoda ove sezone! Dostava kreće sutra — naručite dok ima zaliha. 🍓', emoji: '🌿' },
-                    { vendor: 'OPG Žagari', time: 'Jučer u 14:32', text: 'Nova serija domaćeg sira od ovčjeg mlijeka stigla je na policu. Odlično uz lokalni med! 🧀', emoji: '🌿' },
-                  ].map((p, i) => (
-                    <div key={i} className="bg-white rounded-2xl border border-gray-200 p-4 flex gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center flex-shrink-0 text-xl">
-                        {p.emoji}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between gap-2 mb-1">
-                          <span className="font-semibold text-sm text-gray-900">{p.vendor}</span>
-                          <span className="text-xs text-gray-400 whitespace-nowrap">{p.time}</span>
-                        </div>
-                        <p className="text-sm text-gray-700">{p.text}</p>
-                        <p className="text-xs text-green-500 mt-1 italic">— primjer objave (pro forma)</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <p className="text-gray-400 text-center py-8">Nema objava.</p>
               ) : (
                 <div className="space-y-4">
                   {posts.map((p) => (

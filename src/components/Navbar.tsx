@@ -49,7 +49,9 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-3">
             {user ? (
               <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-600">{user.first_name || user.email}</span>
+                <Link to="/profil" className="text-sm text-green-700 font-medium hover:text-green-600">
+                  {user.first_name || user.email}
+                </Link>
                 <button onClick={logout} className="text-sm text-red-500 hover:text-red-700">Odjava</button>
               </div>
             ) : (
@@ -85,7 +87,7 @@ export default function Navbar() {
             {!isAuth && <Link to="/opgovi" className="block px-4 py-2 text-green-800 font-medium" onClick={() => setMenuOpen(false)}>OPG-ovi</Link>}
             {user ? (
               <>
-                <span className="block px-4 py-2 text-sm text-gray-500">{user.email}</span>
+                <Link to="/profil" className="block px-4 py-2 text-green-800 font-medium" onClick={() => setMenuOpen(false)}>Moj profil</Link>
                 <button onClick={() => { logout(); setMenuOpen(false) }} className="block w-full text-left px-4 py-2 text-red-500">Odjava</button>
               </>
             ) : (

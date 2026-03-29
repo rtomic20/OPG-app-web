@@ -40,10 +40,10 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  href="mailto:info@trznjak.hr"
+                  href="mailto:info@trznjak.com"
                   className="hover:text-white transition-colors"
                 >
-                  info@trznjak.hr
+                  info@trznjak.com
                 </a>
               </li>
               <li className="text-green-400">Hrvatska</li>

@@ -18,14 +18,14 @@ export default function LoginPage() {
     setLoading(true)
     setError('')
     try {
-      await login(email, password)
-      navigate(from, { replace: true })
-    } catch (err: any) {
-      if (err.message === 'WRONG_APP') {
-        setError('Ovaj račun je za OPG panel. Koristi trznjak.hr/panel za prijavu.')
+      const role = await login(email, password)
+      if (role === 'opg_owner' || role === 'admin') {
+        window.location.href = 'http://46.224.189.114'
       } else {
-        setError('Pogrešan email ili lozinka.')
+        navigate(from === '/' ? '/profil' : from, { replace: true })
       }
+    } catch {
+      setError('Pogrešan email ili lozinka.')
     } finally {
       setLoading(false)
     }

@@ -13,7 +13,7 @@ interface User {
 interface AuthContextType {
   user: User | null
   loading: boolean
-  login: (email: string, password: string) => Promise<void>
+  login: (email: string, password: string) => Promise<string>
   logout: () => void
 }
 
@@ -38,15 +38,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [])
 
-  const login = async (email: string, password: string) => {
+  const login = async (email: string, password: string): Promise<string> => {
     const { data } = await api.post('/auth/token/', { email, password })
     const me = await api.get('/auth/me/', { headers: { Authorization: `Bearer ${data.access}` } })
-    if (me.data.role === 'opg_owner' || me.data.role === 'admin') {
-      throw new Error('WRONG_APP')
-    }
     localStorage.setItem('trznjak_access', data.access)
     localStorage.setItem('trznjak_refresh', data.refresh)
     setUser(me.data)
+    return me.data.role
   }
 
   const logout = () => {
