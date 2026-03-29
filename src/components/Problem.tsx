@@ -63,7 +63,7 @@ export default function Problem() {
         {/* VS banner */}
         <div className="mt-14 rounded-2xl overflow-hidden grid md:grid-cols-2">
           <div className="bg-red-100 p-8">
-            <h3 className="font-bold text-red-800 mb-4 text-lg">❌ Bez OPG Marketplace-a</h3>
+            <h3 className="font-bold text-red-800 mb-4 text-lg">❌ Bez Tržnjaka</h3>
             <ul className="space-y-2 text-red-700">
               {[
                 'Tražiš OPG-ove na Facebook grupama',
@@ -78,7 +78,7 @@ export default function Problem() {
             </ul>
           </div>
           <div className="bg-green-100 p-8">
-            <h3 className="font-bold text-green-800 mb-4 text-lg">✅ S OPG Marketplace-om</h3>
+            <h3 className="font-bold text-green-800 mb-4 text-lg">✅ S Tržnjakom</h3>
             <ul className="space-y-2 text-green-700">
               {[
                 'Naruči od lokalnog OPG-a za nekoliko minuta',

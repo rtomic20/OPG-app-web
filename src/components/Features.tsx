@@ -61,7 +61,7 @@ export default function Features() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-14">
           <span className="inline-block bg-green-100 text-green-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
-            Zašto OPG Marketplace
+            Zašto Tržnjak
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-green-950 mb-4">
             Prednosti koje čine razliku

@@ -76,7 +76,7 @@ export default function HowItWorks() {
             Jednostavno kao kupovina na tržnici
           </h2>
           <p className="text-green-700 text-lg max-w-xl mx-auto">
-            OPG Marketplace radi za obje strane — i za producente i za kupce.
+            Tržnjak radi za obje strane — i za producente i za kupce.
           </p>
         </div>
 
