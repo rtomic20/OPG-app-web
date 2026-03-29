@@ -20,7 +20,7 @@ api.interceptors.response.use(
       if (refresh) {
         try {
           const { data } = await axios.post(
-            `${import.meta.env.VITE_API_URL || 'http://46.224.189.114/api'}/auth/token/refresh/`,
+            `${import.meta.env.VITE_API_URL || 'https://api.trznjak.com/api'}/auth/token/refresh/`,
             { refresh }
           )
           localStorage.setItem('trznjak_access', data.access)

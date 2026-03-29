@@ -63,7 +63,7 @@ export default function RegisterPage() {
                 <p className="text-xs text-gray-500 mt-1">Naručujem od lokalnih OPG-ova</p>
               </button>
               <a
-                href="http://46.224.189.114/register"
+                href="https://panel.trznjak.com/register"
                 className="bg-white border-2 border-gray-200 hover:border-green-500 rounded-2xl p-6 text-left transition-all group block"
               >
                 <div className="text-3xl mb-3">🌾</div>

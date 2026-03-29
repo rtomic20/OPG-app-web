@@ -20,7 +20,7 @@ export default function LoginPage() {
     try {
       const role = await login(email, password)
       if (role === 'opg_owner' || role === 'admin') {
-        window.location.href = 'http://46.224.189.114'
+        window.location.href = 'https://panel.trznjak.com'
       } else {
         navigate(from === '/' ? '/profil' : from, { replace: true })
       }
