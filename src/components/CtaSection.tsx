@@ -41,8 +41,7 @@ export default function CtaSection() {
           OPG vlasnici koji se prijave kao prvi dobit će premium profil <strong className="text-white">besplatno</strong>.
         </p>
         <p className="text-green-300 text-sm mb-10">
-          ⏳ Platforma se otvara u travnju 2026. — ostalo je još samo {' '}
-          <strong className="text-white">par tjedana</strong>.
+          ⏳ Platforma dolazi <strong className="text-white">uskoro</strong> — prijavi se i budi među prvima.
         </p>
 
         {/* Role toggle */}
