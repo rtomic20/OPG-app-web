@@ -40,7 +40,7 @@ const STATUS_LABEL: Record<string, { label: string; color: string }> = {
 type Tab = 'orders' | 'profile'
 
 export default function ProfilePage() {
-  const { user, logout } = useAuth()
+  const { user } = useAuth()
   const navigate = useNavigate()
   const [tab, setTab] = useState<Tab>('orders')
   const [orders, setOrders] = useState<Order[]>([])
@@ -84,40 +84,14 @@ export default function ProfilePage() {
     }
   }
 
-  const handleLogout = () => {
-    logout()
-    navigate('/')
-  }
-
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <Navbar />
       <div className="flex-1 pt-20 pb-16">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="py-8 flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                <span className="text-green-700 font-bold text-lg">
-                  {(user?.first_name?.[0] || user?.email?.[0] || '?').toUpperCase()}
-                </span>
-              </div>
-              <div>
-                <h1 className="text-xl font-bold text-gray-900">
-                  Zdravo, {user?.first_name || user?.email}
-                </h1>
-                <p className="text-sm text-gray-400 mt-0.5">{user?.email}</p>
-              </div>
-            </div>
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-red-600 border border-gray-200 hover:border-red-200 px-3 py-1.5 rounded-lg transition-colors"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-              </svg>
-              Odjava
-            </button>
+          <div className="py-8">
+            <h1 className="text-2xl font-bold text-gray-900">Moj profil</h1>
           </div>
 
           {/* Tabs */}

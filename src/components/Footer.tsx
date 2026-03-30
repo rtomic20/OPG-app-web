@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Logo from './Logo'
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -10,7 +11,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 text-white font-bold text-xl mb-3">
-              <span>🌿</span>
+              <Logo size={28} white />
               <span>Tržnjak</span>
             </div>
             <p className="text-green-400 text-sm leading-relaxed">
