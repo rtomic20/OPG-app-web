@@ -51,6 +51,8 @@ export default function LoginPage() {
       panelTab?.close()
       setError('Pogrešan email ili lozinka.')
     } finally {
+      setPassword('')
+      setEmail('')
       setLoading(false)
     }
   }
