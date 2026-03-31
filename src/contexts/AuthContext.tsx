@@ -13,7 +13,8 @@ interface User {
 interface AuthContextType {
   user: User | null
   loading: boolean
-  login: (email: string, password: string) => Promise<{ role: string; access?: string; refresh?: string }>
+  login: (email: string, password: string) => Promise<{ role: string; access?: string; refresh?: string; mfa_session?: string }>
+  loginWithTokens: (access: string, refresh: string) => Promise<{ role: string; access: string; refresh: string }>
   logout: () => void
 }
 
@@ -38,8 +39,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [])
 
-  const login = async (email: string, password: string): Promise<{ role: string; access?: string; refresh?: string }> => {
+  const login = async (email: string, password: string): Promise<{ role: string; access?: string; refresh?: string; mfa_session?: string }> => {
     const { data } = await api.post('/auth/token/', { email, password })
+    if (data.mfa_required) {
+      return { role: 'mfa_required', mfa_session: data.mfa_session }
+    }
     const me = await api.get('/auth/me/', { headers: { Authorization: `Bearer ${data.access}` } })
     if (me.data.role === 'customer') {
       localStorage.setItem('trznjak_access', data.access)
@@ -49,6 +53,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
     // OPG/admin — ne spremat ovdje, vrati tokene za redirect na panel
     return { role: me.data.role, access: data.access, refresh: data.refresh }
+  }
+
+  const loginWithTokens = async (access: string, refresh: string): Promise<{ role: string; access: string; refresh: string }> => {
+    const me = await api.get('/auth/me/', { headers: { Authorization: `Bearer ${access}` } })
+    if (me.data.role === 'customer') {
+      localStorage.setItem('trznjak_access', access)
+      localStorage.setItem('trznjak_refresh', refresh)
+      setUser(me.data)
+    }
+    return { role: me.data.role, access, refresh }
   }
 
   const logout = () => {
@@ -62,7 +76,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, loginWithTokens, logout }}>
       {children}
     </AuthContext.Provider>
   )

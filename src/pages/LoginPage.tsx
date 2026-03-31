@@ -1,41 +1,48 @@
 import { useState } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import api from '../services/api'
 import Navbar from '../components/Navbar'
 import Logo from '../components/Logo'
 
 export default function LoginPage() {
-  const { login } = useAuth()
+  const { login, loginWithTokens } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
   const from = (location.state as any)?.from || '/'
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passVisible, setPassVisible] = useState(false)
+  const [mfaSession, setMfaSession] = useState('')
+  const [mfaCode, setMfaCode] = useState('')
+  const [step, setStep] = useState<'credentials' | 'mfa'>('credentials')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+
+  const redirectToPanel = async (access: string, refresh: string, panelTab: Window | null) => {
+    const apiBase = import.meta.env.VITE_API_URL || 'https://api.trznjak.com/api'
+    const codeRes = await fetch(`${apiBase}/auth/transfer-token/`, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${access}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ refresh }),
+    })
+    const { code } = await codeRes.json()
+    panelTab!.location.href = `https://panel.trznjak.com/auto-login?code=${code}`
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setError('')
-    // Otvori blank tab odmah (prije await) — inače popup blocker blokira
     const panelTab = window.open('', '_blank')
     try {
       const result = await login(email, password)
-      if (result.role === 'opg_owner' || result.role === 'admin') {
-        // Exchange JWT for a one-time code (30s TTL) — code in URL, not the token itself
-        const apiBase = import.meta.env.VITE_API_URL || 'https://api.trznjak.com/api'
-        const codeRes = await fetch(`${apiBase}/auth/transfer-token/`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${result.access}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ refresh: result.refresh }),
-        })
-        const { code } = await codeRes.json()
-        panelTab!.location.href = `https://panel.trznjak.com/auto-login?code=${code}`
+      if (result.role === 'mfa_required') {
+        panelTab?.close()
+        setMfaSession(result.mfa_session!)
+        setStep('mfa')
+      } else if (result.role === 'opg_owner' || result.role === 'admin') {
+        await redirectToPanel(result.access!, result.refresh!, panelTab)
       } else {
         panelTab?.close()
         navigate(from === '/' ? '/profil' : from, { replace: true })
@@ -43,6 +50,28 @@ export default function LoginPage() {
     } catch {
       panelTab?.close()
       setError('Pogrešan email ili lozinka.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleMfa = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setError('')
+    const panelTab = window.open('', '_blank')
+    try {
+      const { data } = await api.post('/auth/mfa/verify/', { mfa_session: mfaSession, code: mfaCode })
+      const result = await loginWithTokens(data.access, data.refresh)
+      if (result.role === 'opg_owner' || result.role === 'admin') {
+        await redirectToPanel(result.access, result.refresh, panelTab)
+      } else {
+        panelTab?.close()
+        navigate(from === '/' ? '/profil' : from, { replace: true })
+      }
+    } catch {
+      panelTab?.close()
+      setError('Neispravan kod. Pokušaj ponovo.')
     } finally {
       setLoading(false)
     }
@@ -60,6 +89,35 @@ export default function LoginPage() {
             <h1 className="text-xl font-bold text-gray-900">Prijava</h1>
             <p className="text-sm text-gray-500 mt-1">Dobrodošao/la na Tržnjak</p>
           </div>
+          {step === 'mfa' ? (
+            <form onSubmit={handleMfa} className="space-y-4">
+              <div className="text-center text-sm text-gray-500 mb-2">
+                Unesite 6-znamenkasti kod iz autentifikacijske aplikacije
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Verifikacijski kod</label>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={6}
+                  value={mfaCode}
+                  onChange={(e) => setMfaCode(e.target.value.replace(/\D/g, ''))}
+                  autoFocus
+                  className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-sm text-center tracking-widest text-lg focus:outline-none focus:ring-2 focus:ring-green-300"
+                  placeholder="000000"
+                />
+              </div>
+              {error && <p className="text-red-600 text-sm">{error}</p>}
+              <button type="submit" disabled={loading || mfaCode.length !== 6}
+                className="w-full bg-green-600 text-white py-2.5 rounded-lg font-medium hover:bg-green-700 disabled:opacity-50 transition-colors">
+                {loading ? 'Provjera...' : 'Potvrdi'}
+              </button>
+              <button type="button" onClick={() => { setStep('credentials'); setError(''); setMfaCode('') }}
+                className="w-full text-sm text-gray-400 hover:text-gray-600">
+                ← Natrag
+              </button>
+            </form>
+          ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
@@ -105,6 +163,7 @@ export default function LoginPage() {
               {loading ? 'Prijava...' : 'Prijavi se'}
             </button>
           </form>
+          )}
           <div className="flex justify-between items-center mt-4">
             <Link to="/zaboravili-lozinku" className="text-sm text-gray-400 hover:underline">
               Zaboravili ste lozinku?
