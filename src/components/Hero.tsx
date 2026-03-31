@@ -1,24 +1,18 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import api from '../services/api'
 
 export default function Hero() {
   const [email, setEmail] = useState('')
   const [role, setRole] = useState<'kupac' | 'opg'>('kupac')
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
-  const [counts, setCounts] = useState<{ kupac: number; opg: number } | null>(null)
   const formRef = useRef<HTMLFormElement>(null)
-
-  useEffect(() => {
-    api.get('/auth/waitlist/stats/').then((r) => setCounts(r.data)).catch(() => {})
-  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!email) return
     setStatus('sending')
     try {
-      const { data } = await api.post('/auth/waitlist/', { email, role })
-      setCounts(data)
+      await api.post('/auth/waitlist/', { email, role })
       setStatus('success')
       setEmail('')
     } catch {
@@ -121,19 +115,6 @@ export default function Hero() {
           <p className="text-green-500 text-xs mt-3">Bez spama. Odjavi se kad god želiš.</p>
         </div>
 
-        {/* Social proof stats */}
-        {counts && (
-          <div className="flex flex-wrap justify-center gap-8 sm:gap-12">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-green-600">{counts.opg}</div>
-              <div className="text-sm text-green-700 mt-1">OPG-ova prijavljeno</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-green-600">{counts.kupac}</div>
-              <div className="text-sm text-green-700 mt-1">kupaca prijavljeno</div>
-            </div>
-          </div>
-        )}
       </div>
     </section>
   )
