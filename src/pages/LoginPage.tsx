@@ -73,6 +73,7 @@ export default function LoginPage() {
       panelTab?.close()
       setError('Neispravan kod. Pokušaj ponovo.')
     } finally {
+      setMfaCode('')
       setLoading(false)
     }
   }
@@ -112,7 +113,7 @@ export default function LoginPage() {
                 className="w-full bg-green-600 text-white py-2.5 rounded-lg font-medium hover:bg-green-700 disabled:opacity-50 transition-colors">
                 {loading ? 'Provjera...' : 'Potvrdi'}
               </button>
-              <button type="button" onClick={() => { setStep('credentials'); setError(''); setMfaCode('') }}
+              <button type="button" onClick={() => { setStep('credentials'); setError(''); setMfaCode(''); setMfaSession('') }}
                 className="w-full text-sm text-gray-400 hover:text-gray-600">
                 ← Natrag
               </button>
