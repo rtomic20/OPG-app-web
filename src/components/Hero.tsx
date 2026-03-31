@@ -29,19 +29,14 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16"
-      style={{
-        background: 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 40%, #bbf7d0 100%)',
-      }}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 bg-gradient-to-br from-green-50 via-green-100 to-green-200"
     >
       {/* Decorative blobs */}
       <div
-        className="absolute top-20 right-10 w-72 h-72 rounded-full opacity-20 blur-3xl"
-        style={{ background: '#16a34a' }}
+        className="absolute top-20 right-10 w-72 h-72 rounded-full opacity-20 blur-3xl bg-green-600"
       />
       <div
-        className="absolute bottom-20 left-10 w-96 h-96 rounded-full opacity-15 blur-3xl"
-        style={{ background: '#65a30d' }}
+        className="absolute bottom-20 left-10 w-96 h-96 rounded-full opacity-15 blur-3xl bg-lime-600"
       />
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">

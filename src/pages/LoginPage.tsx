@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import Navbar from '../components/Navbar'
+import Logo from '../components/Logo'
 
 export default function LoginPage() {
   const { login } = useAuth()
@@ -17,14 +18,29 @@ export default function LoginPage() {
     e.preventDefault()
     setLoading(true)
     setError('')
+    // Otvori blank tab odmah (prije await) — inače popup blocker blokira
+    const panelTab = window.open('', '_blank')
     try {
-      const role = await login(email, password)
-      if (role === 'opg_owner' || role === 'admin') {
-        window.location.href = 'https://panel.trznjak.com'
+      const result = await login(email, password)
+      if (result.role === 'opg_owner' || result.role === 'admin') {
+        // Exchange JWT for a one-time code (30s TTL) — code in URL, not the token itself
+        const apiBase = import.meta.env.VITE_API_URL || 'https://api.trznjak.com/api'
+        const codeRes = await fetch(`${apiBase}/auth/transfer-token/`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${result.access}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ refresh: result.refresh }),
+        })
+        const { code } = await codeRes.json()
+        panelTab!.location.href = `https://panel.trznjak.com/auto-login?code=${code}`
       } else {
+        panelTab?.close()
         navigate(from === '/' ? '/profil' : from, { replace: true })
       }
     } catch {
+      panelTab?.close()
       setError('Pogrešan email ili lozinka.')
     } finally {
       setLoading(false)
@@ -37,7 +53,9 @@ export default function LoginPage() {
       <div className="pt-24 pb-16 flex items-center justify-center px-4">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 w-full max-w-sm">
           <div className="text-center mb-6">
-            <div className="text-4xl mb-2">🌿</div>
+            <div className="flex justify-center mb-3">
+              <Logo size={48} />
+            </div>
             <h1 className="text-xl font-bold text-gray-900">Prijava</h1>
             <p className="text-sm text-gray-500 mt-1">Dobrodošao/la na Tržnjak</p>
           </div>

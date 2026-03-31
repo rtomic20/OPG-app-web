@@ -11,7 +11,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 text-white font-bold text-xl mb-3">
-              <Logo size={28} white />
+              <Logo size={28} variant="white" />
               <span>Tržnjak</span>
             </div>
             <p className="text-green-400 text-sm leading-relaxed">

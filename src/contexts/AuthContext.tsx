@@ -13,7 +13,7 @@ interface User {
 interface AuthContextType {
   user: User | null
   loading: boolean
-  login: (email: string, password: string) => Promise<string>
+  login: (email: string, password: string) => Promise<{ role: string; access?: string; refresh?: string }>
   logout: () => void
 }
 
@@ -38,16 +38,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [])
 
-  const login = async (email: string, password: string): Promise<string> => {
+  const login = async (email: string, password: string): Promise<{ role: string; access?: string; refresh?: string }> => {
     const { data } = await api.post('/auth/token/', { email, password })
     const me = await api.get('/auth/me/', { headers: { Authorization: `Bearer ${data.access}` } })
-    localStorage.setItem('trznjak_access', data.access)
-    localStorage.setItem('trznjak_refresh', data.refresh)
-    setUser(me.data)
-    return me.data.role
+    if (me.data.role === 'customer') {
+      localStorage.setItem('trznjak_access', data.access)
+      localStorage.setItem('trznjak_refresh', data.refresh)
+      setUser(me.data)
+      return { role: me.data.role }
+    }
+    // OPG/admin — ne spremat ovdje, vrati tokene za redirect na panel
+    return { role: me.data.role, access: data.access, refresh: data.refresh }
   }
 
   const logout = () => {
+    const refresh = localStorage.getItem('trznjak_refresh')
+    if (refresh) {
+      api.post('/auth/logout/', { refresh }).catch(() => {})
+    }
     localStorage.removeItem('trznjak_access')
     localStorage.removeItem('trznjak_refresh')
     setUser(null)

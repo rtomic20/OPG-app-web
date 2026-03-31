@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import api from '../services/api'
 import Navbar from '../components/Navbar'
+import Logo from '../components/Logo'
 
 type Step = 'choose' | 'customer'
 
@@ -49,7 +50,9 @@ export default function RegisterPage() {
         {step === 'choose' && (
           <div className="w-full max-w-md">
             <div className="text-center mb-8">
-              <div className="text-4xl mb-2">🌿</div>
+              <div className="flex justify-center mb-3">
+                <Logo size={48} />
+              </div>
               <h1 className="text-2xl font-bold text-gray-900">Kreiraj račun</h1>
               <p className="text-sm text-gray-500 mt-1">Odaberi kako želiš koristiti Tržnjak</p>
             </div>

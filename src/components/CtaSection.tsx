@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import api from '../services/api'
+import Logo from './Logo'
 
 export default function CtaSection() {
   const [email, setEmail] = useState('')
@@ -22,17 +23,16 @@ export default function CtaSection() {
   return (
     <section
       id="waitlist-cta"
-      className="py-24 relative overflow-hidden"
-      style={{
-        background: 'linear-gradient(135deg, #14532d 0%, #166534 50%, #15803d 100%)',
-      }}
+      className="py-24 relative overflow-hidden bg-gradient-to-br from-green-900 via-green-800 to-green-700"
     >
       {/* Decorative */}
       <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10 blur-3xl bg-lime-400" />
       <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full opacity-10 blur-3xl bg-green-300" />
 
       <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 text-center">
-        <div className="text-5xl mb-6">🌿</div>
+        <div className="flex justify-center mb-6">
+          <Logo size={56} variant="white" />
+        </div>
         <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
           Budi prvi u svojoj regiji
         </h2>
