@@ -162,7 +162,7 @@ export default function ProfilePage() {
                           <div className="flex items-center gap-2">
                             <span className="text-base">🛒</span>
                             <div>
-                              <span className="font-semibold text-gray-900 text-sm">Košarica #{minId}</span>
+                              <span className="font-semibold text-gray-900 text-sm">Košarica</span>
                               <p className="text-xs text-gray-500 mt-0.5">
                                 {group.orders.length} OPG-a · {new Date(group.orders[0].created_at).toLocaleDateString('hr-HR', { day: 'numeric', month: 'long', year: 'numeric' })}
                               </p>
