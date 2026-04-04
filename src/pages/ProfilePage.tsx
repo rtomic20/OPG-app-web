@@ -25,6 +25,8 @@ interface Order {
   payment_status: string
   items: OrderItem[]
   created_at: string
+  basket_id: string
+  basket_index: number
 }
 
 const STATUS_LABEL: Record<string, { label: string; color: string }> = {
@@ -126,65 +128,146 @@ export default function ProfilePage() {
                     Pregledaj OPG-ove →
                   </Link>
                 </div>
-              ) : orders.map((order) => {
-                const st = STATUS_LABEL[order.status] ?? { label: order.status, color: 'bg-gray-100 text-gray-600' }
-                const isOpen = expanded === order.id
-                return (
-                  <div key={order.id} className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                    <button
-                      onClick={() => setExpanded(isOpen ? null : order.id)}
-                      className="w-full p-4 text-left flex items-center justify-between gap-3"
-                    >
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <span className="font-semibold text-gray-900 text-sm">
-                            {order.vendor_name}
-                          </span>
-                          <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${st.color}`}>
-                            {st.label}
-                          </span>
-                        </div>
-                        <p className="text-xs text-gray-400 mt-0.5">
-                          {new Date(order.created_at).toLocaleDateString('hr-HR', { day: 'numeric', month: 'long', year: 'numeric' })}
-                          {' · '}
-                          {order.delivery_type === 'delivery' ? 'Dostava' : 'Preuzimanje'}
-                        </p>
-                      </div>
-                      <div className="text-right flex-shrink-0">
-                        <p className="font-bold text-green-700 text-sm">{parseFloat(String(order.total)).toFixed(2)} €</p>
-                        <p className="text-xs text-gray-400 mt-0.5">{isOpen ? '▲' : '▼'}</p>
-                      </div>
-                    </button>
-                    {isOpen && (
-                      <div className="border-t border-gray-100 px-4 pb-4 pt-3">
-                        <div className="space-y-1.5 mb-3">
-                          {order.items.map((item) => (
-                            <div key={item.id} className="flex justify-between text-sm">
-                              <span className="text-gray-700">
-                                {item.product_name} × {item.quantity} {item.unit}
-                              </span>
-                              <span className="text-gray-900 font-medium">{parseFloat(String(item.line_total)).toFixed(2)} €</span>
+              ) : (() => {
+                // Group orders by basket_id — same as Flutter OrdersScreen
+                type Group = { basket_id: string; orders: Order[] }
+                const groups: Group[] = []
+                const basketMap: Record<string, Group> = {}
+                orders.forEach((o) => {
+                  if (o.basket_id) {
+                    if (!basketMap[o.basket_id]) {
+                      basketMap[o.basket_id] = { basket_id: o.basket_id, orders: [] }
+                      groups.push(basketMap[o.basket_id])
+                    }
+                    basketMap[o.basket_id].orders.push(o)
+                  } else {
+                    groups.push({ basket_id: '', orders: [o] })
+                  }
+                })
+
+                return groups.map((group) => {
+                  const isBasket = group.basket_id && group.orders.length > 1
+                  const minId = isBasket ? Math.min(...group.orders.map((o) => o.id)) : null
+                  const basketTotal = isBasket ? group.orders.reduce((sum, o) => sum + parseFloat(String(o.total)), 0) : null
+                  const basketOpen = isBasket ? group.orders.some((o) => expanded === o.id) || expanded === -minId! : false
+
+                  if (isBasket) {
+                    return (
+                      <div key={group.basket_id} className="bg-white rounded-2xl border border-green-200 overflow-hidden">
+                        {/* Basket header */}
+                        <button
+                          onClick={() => setExpanded(basketOpen ? null : -minId!)}
+                          className="w-full p-4 text-left flex items-center justify-between gap-3 bg-green-50"
+                        >
+                          <div className="flex items-center gap-2">
+                            <span className="text-base">🛒</span>
+                            <div>
+                              <span className="font-semibold text-gray-900 text-sm">Košarica #{minId}</span>
+                              <p className="text-xs text-gray-500 mt-0.5">
+                                {group.orders.length} OPG-a · {new Date(group.orders[0].created_at).toLocaleDateString('hr-HR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                              </p>
                             </div>
-                          ))}
-                        </div>
-                        <div className="flex items-center justify-between pt-2 border-t border-gray-100">
-                          <span className="text-xs text-gray-400">
-                            {order.payment_method === 'card' ? 'Kartica' : 'Gotovina'}
-                            {' · '}
-                            {order.payment_status === 'paid' ? 'Plaćeno' : 'Nije plaćeno'}
-                          </span>
-                          <Link
-                            to={`/opgovi/${order.vendor_slug}`}
-                            className="text-xs text-green-600 hover:underline"
-                          >
-                            Posjet OPG-u →
-                          </Link>
-                        </div>
+                          </div>
+                          <div className="text-right flex-shrink-0">
+                            <p className="font-bold text-green-700 text-sm">{basketTotal!.toFixed(2)} €</p>
+                            <p className="text-xs text-gray-400 mt-0.5">{basketOpen ? '▲' : '▼'}</p>
+                          </div>
+                        </button>
+                        {/* Sub-orders */}
+                        {basketOpen && group.orders.map((order, oi) => {
+                          const st = STATUS_LABEL[order.status] ?? { label: order.status, color: 'bg-gray-100 text-gray-600' }
+                          const isOpen = expanded === order.id
+                          return (
+                            <div key={order.id} className={`border-t border-gray-100 ${oi > 0 ? 'border-t' : ''}`}>
+                              <button
+                                onClick={() => setExpanded(isOpen ? -minId! : order.id)}
+                                className="w-full px-4 py-3 text-left flex items-center justify-between gap-3"
+                              >
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-2 flex-wrap">
+                                    <span className="text-xs text-gray-400">#{minId}-{order.basket_index || oi + 1}</span>
+                                    <span className="font-medium text-gray-800 text-sm">{order.vendor_name}</span>
+                                    <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${st.color}`}>{st.label}</span>
+                                  </div>
+                                </div>
+                                <div className="text-right flex-shrink-0">
+                                  <p className="font-semibold text-gray-700 text-sm">{parseFloat(String(order.total)).toFixed(2)} €</p>
+                                  <p className="text-xs text-gray-400">{isOpen ? '▲' : '▼'}</p>
+                                </div>
+                              </button>
+                              {isOpen && (
+                                <div className="bg-gray-50 px-4 pb-3 pt-2">
+                                  <div className="space-y-1.5 mb-3">
+                                    {order.items.map((item) => (
+                                      <div key={item.id} className="flex justify-between text-sm">
+                                        <span className="text-gray-700">{item.product_name} × {item.quantity} {item.unit}</span>
+                                        <span className="text-gray-900 font-medium">{parseFloat(String(item.line_total)).toFixed(2)} €</span>
+                                      </div>
+                                    ))}
+                                  </div>
+                                  <div className="flex items-center justify-between pt-2 border-t border-gray-100">
+                                    <span className="text-xs text-gray-400">
+                                      {order.payment_method === 'card' ? 'Kartica' : 'Gotovina'} · {order.payment_status === 'paid' ? 'Plaćeno' : 'Nije plaćeno'}
+                                    </span>
+                                    <Link to={`/opgovi/${order.vendor_slug}`} className="text-xs text-green-600 hover:underline">Posjet OPG-u →</Link>
+                                  </div>
+                                </div>
+                              )}
+                            </div>
+                          )
+                        })}
                       </div>
-                    )}
-                  </div>
-                )
-              })}
+                    )
+                  }
+
+                  // Single order (no basket)
+                  const order = group.orders[0]
+                  const st = STATUS_LABEL[order.status] ?? { label: order.status, color: 'bg-gray-100 text-gray-600' }
+                  const isOpen = expanded === order.id
+                  return (
+                    <div key={order.id} className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                      <button
+                        onClick={() => setExpanded(isOpen ? null : order.id)}
+                        className="w-full p-4 text-left flex items-center justify-between gap-3"
+                      >
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="font-semibold text-gray-900 text-sm">{order.vendor_name}</span>
+                            <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${st.color}`}>{st.label}</span>
+                          </div>
+                          <p className="text-xs text-gray-400 mt-0.5">
+                            {new Date(order.created_at).toLocaleDateString('hr-HR', { day: 'numeric', month: 'long', year: 'numeric' })}
+                            {' · '}
+                            {order.delivery_type === 'delivery' ? 'Dostava' : 'Preuzimanje'}
+                          </p>
+                        </div>
+                        <div className="text-right flex-shrink-0">
+                          <p className="font-bold text-green-700 text-sm">{parseFloat(String(order.total)).toFixed(2)} €</p>
+                          <p className="text-xs text-gray-400 mt-0.5">{isOpen ? '▲' : '▼'}</p>
+                        </div>
+                      </button>
+                      {isOpen && (
+                        <div className="border-t border-gray-100 px-4 pb-4 pt-3">
+                          <div className="space-y-1.5 mb-3">
+                            {order.items.map((item) => (
+                              <div key={item.id} className="flex justify-between text-sm">
+                                <span className="text-gray-700">{item.product_name} × {item.quantity} {item.unit}</span>
+                                <span className="text-gray-900 font-medium">{parseFloat(String(item.line_total)).toFixed(2)} €</span>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="flex items-center justify-between pt-2 border-t border-gray-100">
+                            <span className="text-xs text-gray-400">
+                              {order.payment_method === 'card' ? 'Kartica' : 'Gotovina'} · {order.payment_status === 'paid' ? 'Plaćeno' : 'Nije plaćeno'}
+                            </span>
+                            <Link to={`/opgovi/${order.vendor_slug}`} className="text-xs text-green-600 hover:underline">Posjet OPG-u →</Link>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )
+                })
+              })()}
             </div>
           )}
 
