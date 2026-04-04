@@ -146,9 +146,12 @@ export default function DirectoryPage() {
                   to={`/opgovi/${v.slug}`}
                   className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-md transition-shadow group"
                 >
-                  <div className="h-36 bg-gradient-to-br from-green-100 to-emerald-50 flex items-center justify-center">
+                  <div className="h-36 bg-gradient-to-br from-green-100 to-emerald-50 flex items-center justify-center relative overflow-hidden">
                     {v.logo ? (
-                      <img src={v.logo} alt={v.name} className="h-full w-full object-cover" />
+                      <>
+                        <img src={v.logo} alt={v.name} className="h-full w-full object-cover" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                      </>
                     ) : (
                       <span className="text-5xl">🌿</span>
                     )}

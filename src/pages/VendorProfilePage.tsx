@@ -112,7 +112,10 @@ export default function VendorProfilePage() {
       <div className="pt-16">
         <div className="h-48 bg-gradient-to-br from-green-200 to-emerald-100 relative">
           {vendor.cover_image && (
-            <img src={vendor.cover_image} alt="" className="w-full h-full object-cover" />
+            <>
+              <img src={vendor.cover_image} alt="" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
+            </>
           )}
         </div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
