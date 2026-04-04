@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import api from '../services/api'
 import { useAuth } from '../contexts/AuthContext'
@@ -39,7 +39,15 @@ const STATUS_LABEL: Record<string, { label: string; color: string }> = {
   cancelled:  { label: 'Otkazano',     color: 'bg-red-50 text-red-600' },
 }
 
-type Tab = 'orders' | 'profile'
+interface SupportMessage {
+  id: number
+  content: string
+  is_admin: boolean
+  is_read: boolean
+  created_at: string
+}
+
+type Tab = 'orders' | 'profile' | 'support'
 
 export default function ProfilePage() {
   const { user } = useAuth()
@@ -52,6 +60,13 @@ export default function ProfilePage() {
   const [profileForm, setProfileForm] = useState({ first_name: '', last_name: '', phone: '', delivery_address: '' })
   const [profileLoading, setProfileLoading] = useState(false)
   const [profileMsg, setProfileMsg] = useState('')
+
+  // Support
+  const [supportMessages, setSupportMessages] = useState<SupportMessage[]>([])
+  const [supportInput, setSupportInput] = useState('')
+  const [supportSending, setSupportSending] = useState(false)
+  const supportPollRef = useRef<ReturnType<typeof setInterval> | null>(null)
+  const supportEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (user) {
@@ -70,6 +85,43 @@ export default function ProfilePage() {
       .catch(() => {})
       .finally(() => setLoadingOrders(false))
   }, [])
+
+  const fetchSupport = () => {
+    api.get('/support/thread/')
+      .then((r) => setSupportMessages(r.data.messages ?? []))
+      .catch(() => {})
+  }
+
+  useEffect(() => {
+    if (tab === 'support') {
+      fetchSupport()
+      supportPollRef.current = setInterval(fetchSupport, 5000)
+    } else {
+      if (supportPollRef.current) clearInterval(supportPollRef.current)
+    }
+    return () => {
+      if (supportPollRef.current) clearInterval(supportPollRef.current)
+    }
+  }, [tab])
+
+  useEffect(() => {
+    supportEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [supportMessages])
+
+  const handleSupportSend = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!supportInput.trim()) return
+    setSupportSending(true)
+    try {
+      await api.post('/support/thread/', { content: supportInput })
+      setSupportInput('')
+      fetchSupport()
+    } catch {
+      // ignore
+    } finally {
+      setSupportSending(false)
+    }
+  }
 
   const handleProfileSave = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -100,6 +152,7 @@ export default function ProfilePage() {
             {([
               { key: 'orders', label: 'Moje narudžbe' },
               { key: 'profile', label: 'Moji podaci' },
+              { key: 'support', label: 'Podrška' },
             ] as const).map((t) => (
               <button
                 key={t.key}
@@ -328,6 +381,55 @@ export default function ProfilePage() {
                   className="w-full bg-green-600 text-white py-2.5 rounded-lg font-medium hover:bg-green-700 disabled:opacity-50 transition-colors"
                 >
                   {profileLoading ? 'Spremanje...' : 'Spremi promjene'}
+                </button>
+              </form>
+            </div>
+          )}
+
+          {/* Podrška */}
+          {tab === 'support' && (
+            <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden flex flex-col" style={{ height: '520px' }}>
+              {/* Messages */}
+              <div className="flex-1 overflow-y-auto p-4 space-y-3">
+                {supportMessages.length === 0 && (
+                  <div className="text-center py-12 text-gray-400 text-sm">
+                    <p className="text-3xl mb-2">💬</p>
+                    <p>Pošalji nam poruku — odgovorit ćemo što prije.</p>
+                  </div>
+                )}
+                {supportMessages.map((m) => (
+                  <div key={m.id} className={`flex ${m.is_admin ? 'justify-end' : 'justify-start'}`}>
+                    <div className={`max-w-xs px-3 py-2 rounded-2xl text-sm ${
+                      m.is_admin
+                        ? 'bg-green-600 text-white rounded-br-sm'
+                        : 'bg-gray-100 text-gray-800 rounded-bl-sm'
+                    }`}>
+                      {m.is_admin && (
+                        <p className="text-xs font-semibold text-green-100 mb-0.5">Podrška</p>
+                      )}
+                      <p>{m.content}</p>
+                      <p className={`text-xs mt-1 ${m.is_admin ? 'text-green-200' : 'text-gray-400'}`}>
+                        {new Date(m.created_at).toLocaleString('hr-HR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+                <div ref={supportEndRef} />
+              </div>
+              {/* Input */}
+              <form onSubmit={handleSupportSend} className="border-t border-gray-200 p-3 flex gap-2">
+                <input
+                  value={supportInput}
+                  onChange={(e) => setSupportInput(e.target.value)}
+                  placeholder="Napiši poruku..."
+                  className="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-300"
+                />
+                <button
+                  type="submit"
+                  disabled={supportSending || !supportInput.trim()}
+                  className="px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-lg hover:bg-green-700 disabled:opacity-50 transition-colors"
+                >
+                  Pošalji
                 </button>
               </form>
             </div>
