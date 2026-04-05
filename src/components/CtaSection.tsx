@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { CircleCheck } from 'lucide-react'
 import api from '../services/api'
 import Logo from './Logo'
 
@@ -25,7 +26,6 @@ export default function CtaSection() {
       id="waitlist-cta"
       className="py-24 relative overflow-hidden bg-gradient-to-br from-green-900 via-green-800 to-green-700"
     >
-      {/* Decorative */}
       <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10 blur-3xl bg-lime-400" />
       <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full opacity-10 blur-3xl bg-green-300" />
 
@@ -38,13 +38,13 @@ export default function CtaSection() {
         </h2>
         <p className="text-green-200 text-lg mb-4 leading-relaxed">
           Prijavi se na listu čekanja i dobij ekskluzivan rani pristup.
-          OPG vlasnici koji se prijave kao prvi dobit će premium profil <strong className="text-white">besplatno</strong>.
+          OPG vlasnici koji se prijave kao prvi dobit će premium profil{' '}
+          <strong className="text-white">besplatno</strong>.
         </p>
         <p className="text-green-300 text-sm mb-10">
-          ⏳ Platforma dolazi <strong className="text-white">uskoro</strong> — prijavi se i budi među prvima.
+          Platforma dolazi <strong className="text-white">uskoro</strong> — prijavi se i budi među prvima.
         </p>
 
-        {/* Role toggle */}
         <div className="flex justify-center mb-6">
           <div className="inline-flex rounded-lg overflow-hidden border border-green-500">
             <button
@@ -56,7 +56,7 @@ export default function CtaSection() {
                   : 'text-green-200 hover:text-white'
               }`}
             >
-              🛒 Kupac
+              Kupac
             </button>
             <button
               type="button"
@@ -67,14 +67,16 @@ export default function CtaSection() {
                   : 'text-green-200 hover:text-white'
               }`}
             >
-              🌾 OPG vlasnik
+              OPG vlasnik
             </button>
           </div>
         </div>
 
         {status === 'success' ? (
           <div className="bg-white/10 rounded-2xl p-8 max-w-md mx-auto">
-            <span className="text-5xl block mb-3">🎉</span>
+            <div className="flex justify-center mb-3">
+              <CircleCheck className="w-12 h-12 text-green-400" />
+            </div>
             <p className="text-white font-bold text-xl mb-2">Prijava uspješna!</p>
             <p className="text-green-200">Javit ćemo se prije otvaranja platforme.</p>
           </div>
@@ -101,11 +103,13 @@ export default function CtaSection() {
           <p className="text-red-300 text-sm mt-3">Greška pri slanju. Pokušaj ponovo.</p>
         )}
 
-        {/* Trust badges */}
         <div className="flex flex-wrap justify-center gap-6 mt-10 text-green-300 text-sm">
-          <span>✓ Bez pretplate</span>
-          <span>✓ Bez spama</span>
-          <span>✓ Odjavi se kad god</span>
+          {['Bez pretplate', 'Bez spama', 'Odjavi se kad god'].map(t => (
+            <span key={t} className="flex items-center gap-1.5">
+              <CircleCheck className="w-4 h-4 text-green-400" />
+              {t}
+            </span>
+          ))}
         </div>
       </div>
     </section>

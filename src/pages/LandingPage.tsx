@@ -4,6 +4,7 @@ import Problem from '../components/Problem'
 import HowItWorks from '../components/HowItWorks'
 import Features from '../components/Features'
 import Categories from '../components/Categories'
+import ObjaveSection from '../components/ObjaveSection'
 import CtaSection from '../components/CtaSection'
 import Footer from '../components/Footer'
 
@@ -16,6 +17,7 @@ export default function LandingPage() {
       <HowItWorks />
       <Features />
       <Categories />
+      <ObjaveSection />
       <CtaSection />
       <Footer />
     </div>

@@ -1,18 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
+import { Search, Store, Package, X, Check } from 'lucide-react'
 
 const problems = [
   {
-    icon: '🔍',
+    Icon: Search,
     title: 'Teško je pronaći lokalnog proizvođača',
     desc: 'OPG-ovi nemaju online prisutnost. Kupci ne znaju ni da postoje farme u svojoj regiji.',
   },
   {
-    icon: '🏪',
+    Icon: Store,
     title: 'Supermarketi uzimaju veliki udio',
     desc: 'Posrednici smanjuju zaradu OPG-ovima na minimum, a kupci plaćaju višu cijenu za manje svježu hranu.',
   },
   {
-    icon: '📦',
+    Icon: Package,
     title: 'Nema sigurnog načina narudžbe',
     desc: 'Sve se radi telefonom ili osobno. Nema pregleda dostupnosti, cijena ni pouzdane isporuke.',
   },
@@ -38,10 +39,10 @@ export default function Problem() {
           <span className="inline-block bg-red-50 text-red-600 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
             Problem koji rješavamo
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-green-950 mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 mb-4">
             Lokalna hrana postoji, ali je teška za naći
           </h2>
-          <p className="text-green-700 text-lg max-w-2xl mx-auto">
+          <p className="text-stone-600 text-lg max-w-2xl mx-auto">
             Hrvatska ima više od 150.000 OPG-ova, a većina kupaca ne zna gdje ih naći.
             Sustav je broken — mi ga popravljamo.
           </p>
@@ -53,17 +54,21 @@ export default function Problem() {
               key={p.title}
               className={`animate-fade-in animate-delay-${(i + 1) * 100} bg-red-50 border border-red-100 rounded-2xl p-8 text-center`}
             >
-              <div className="text-5xl mb-4">{p.icon}</div>
-              <h3 className="text-xl font-bold text-green-950 mb-3">{p.title}</h3>
-              <p className="text-green-800 leading-relaxed">{p.desc}</p>
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-red-100 mb-5">
+                <p.Icon className="w-7 h-7 text-red-500" strokeWidth={1.5} />
+              </div>
+              <h3 className="text-xl font-bold text-stone-900 mb-3">{p.title}</h3>
+              <p className="text-stone-700 leading-relaxed">{p.desc}</p>
             </div>
           ))}
         </div>
 
         {/* VS banner */}
         <div className="mt-14 rounded-2xl overflow-hidden grid md:grid-cols-2">
-          <div className="bg-red-100 p-8">
-            <h3 className="font-bold text-red-800 mb-4 text-lg">❌ Bez Tržnjaka</h3>
+          <div className="bg-red-50 p-8">
+            <h3 className="font-bold text-red-800 mb-4 text-lg flex items-center gap-2">
+              <X className="w-5 h-5 text-red-500" /> Bez Tržnjaka
+            </h3>
             <ul className="space-y-2 text-red-700">
               {[
                 'Tražiš OPG-ove na Facebook grupama',
@@ -77,8 +82,10 @@ export default function Problem() {
               ))}
             </ul>
           </div>
-          <div className="bg-green-100 p-8">
-            <h3 className="font-bold text-green-800 mb-4 text-lg">✅ S Tržnjakom</h3>
+          <div className="bg-green-50 p-8">
+            <h3 className="font-bold text-green-800 mb-4 text-lg flex items-center gap-2">
+              <Check className="w-5 h-5 text-green-600" /> S Tržnjakom
+            </h3>
             <ul className="space-y-2 text-green-700">
               {[
                 'Naruči od lokalnog OPG-a za nekoliko minuta',

@@ -28,7 +28,12 @@ export default function LoginPage() {
     })
     const { code } = await codeRes.json()
     const panelBase = import.meta.env.VITE_PANEL_URL || 'http://46.224.189.114'
-    panelTab!.location.href = `${panelBase}/auto-login?code=${code}`
+    const url = `${panelBase}/auto-login?code=${code}`
+    if (panelTab) {
+      panelTab.location.href = url
+    } else {
+      window.location.href = url
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {

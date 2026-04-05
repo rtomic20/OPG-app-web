@@ -1,43 +1,44 @@
 import { useEffect, useRef, useState } from 'react'
+import { Sprout, MapPin, Handshake, Banknote, Smartphone, ShieldCheck, Leaf, Star } from 'lucide-react'
 
 const features = [
   {
-    icon: '🌱',
+    Icon: Sprout,
     title: 'Svježe ubrano',
     desc: 'Proizvodi se beru dan-dva prije isporuke. Ne tjednima u hladnjačama.',
   },
   {
-    icon: '📍',
+    Icon: MapPin,
     title: '100% lokalno',
     desc: 'Samo OPG-ovi iz tvoje regije. Kraći put = svježije i ekološki prihvatljivije.',
   },
   {
-    icon: '🤝',
+    Icon: Handshake,
     title: 'Direktno od farmera',
     desc: 'Znaš od koga kupuješ. Pročitaj priču iza farme i provjeri certifikate.',
   },
   {
-    icon: '💸',
+    Icon: Banknote,
     title: 'Bez posrednika',
     desc: 'OPG dobiva pravednu cijenu, kupac plaća manje nego u supermarketu.',
   },
   {
-    icon: '📱',
+    Icon: Smartphone,
     title: 'Sve na jednom mjestu',
     desc: 'Web i mobilna aplikacija. Naruči, prati isporuku i ocijeni — sve u par klikova.',
   },
   {
-    icon: '🔒',
+    Icon: ShieldCheck,
     title: 'Sigurno plaćanje',
     desc: 'Online plaćanje karticom ili gotovinom pri preuzimanju — odabereš što ti odgovara.',
   },
   {
-    icon: '🌍',
+    Icon: Leaf,
     title: 'Ekološki svjesno',
     desc: 'Manje prijevoza, manje ambalaže, manje otpada. Lokalno kupovanje je zeleno kupovanje.',
   },
   {
-    icon: '⭐',
+    Icon: Star,
     title: 'Ocjene i recenzije',
     desc: 'Transparentna zajednica — čitaj iskustva drugih kupaca i dijeli svoja.',
   },
@@ -63,10 +64,10 @@ export default function Features() {
           <span className="inline-block bg-green-100 text-green-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
             Zašto Tržnjak
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-green-950 mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 mb-4">
             Prednosti koje čine razliku
           </h2>
-          <p className="text-green-700 text-lg max-w-xl mx-auto">
+          <p className="text-stone-600 text-lg max-w-xl mx-auto">
             Dizajnirano da bude jednostavno za OPG-ove i ugodno za kupce.
           </p>
         </div>
@@ -75,11 +76,13 @@ export default function Features() {
           {features.map((f, i) => (
             <div
               key={f.title}
-              className={`animate-fade-in animate-delay-${Math.min((i % 4 + 1) * 100, 400)} group p-6 rounded-2xl border border-green-100 hover:border-green-300 hover:shadow-md transition-all`}
+              className={`animate-fade-in animate-delay-${Math.min((i % 4 + 1) * 100, 400)} group p-6 rounded-2xl border border-stone-100 hover:border-green-200 hover:shadow-md transition-all`}
             >
-              <div className="text-4xl mb-4">{f.icon}</div>
-              <h3 className="text-lg font-bold text-green-950 mb-2">{f.title}</h3>
-              <p className="text-green-700 text-sm leading-relaxed">{f.desc}</p>
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-green-50 mb-4 group-hover:bg-green-100 transition-colors">
+                <f.Icon className="w-6 h-6 text-green-600" strokeWidth={1.5} />
+              </div>
+              <h3 className="text-lg font-bold text-stone-900 mb-2">{f.title}</h3>
+              <p className="text-stone-600 text-sm leading-relaxed">{f.desc}</p>
             </div>
           ))}
         </div>
