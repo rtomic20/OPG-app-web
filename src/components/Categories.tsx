@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 
 const categories = [
-  { icon: '🍅', name: 'Voće i povrće', desc: 'Rajčice, tikvice, paprika, jabuke...' },
+  { icon: '🍅', name: 'Voće i povrće', desc: 'Rajčice, tikvice, paprika, jabuke, jagode...' },
   { icon: '🍯', name: 'Med i pčelinji proizvodi', desc: 'Med, propolis, vosak, matična mliječ' },
-  { icon: '🥚', name: 'Jaja i perad', desc: 'Svježa jaja, domaća piletina, puretina' },
-  { icon: '🥛', name: 'Mlijeko i mliječni', desc: 'Svježe mlijeko, sir, jogurt, vrhnje' },
-  { icon: '🌾', name: 'Žitarice i mahunarke', desc: 'Pšenica, kukuruz, grah, leća' },
+  { icon: '🥚', name: 'Jaja', desc: 'Svježa jaja slobodnih kokoši, domaća perad' },
+  { icon: '🥛', name: 'Mliječni proizvodi', desc: 'Svježe mlijeko, sir, jogurt, vrhnje, skuta' },
+  { icon: '🥩', name: 'Meso i mesne prerađevine', desc: 'Janjetina, svinjetina, kobasice, pršut, slanina' },
   { icon: '🫒', name: 'Maslinovo ulje', desc: 'Extra djevičansko ulje, masline, paste' },
-  { icon: '🍷', name: 'Vino i rakija', desc: 'Domaće vino, rakija, liker, vinjak' },
-  { icon: '🌿', name: 'Začinsko bilje', desc: 'Lavanda, ružmarin, bazilika, origano' },
-  { icon: '🍄', name: 'Gljive', desc: 'Tartufi, bukovače, šampinjoni, sušene' },
-  { icon: '🥩', name: 'Meso i mesni', desc: 'Janjetina, svinjetina, kobasice, pršut' },
+  { icon: '🍷', name: 'Vino', desc: 'Domaće vino, bijelo, crno, rosé, prošek' },
+  { icon: '🍞', name: 'Pekarski proizvodi', desc: 'Domaći kruh, pogača, kolači, štrukli' },
+  { icon: '🌿', name: 'Začini i biljni proizvodi', desc: 'Lavanda, ružmarin, bazilika, origano, čajevi' },
+  { icon: '🍓', name: 'Džemovi, sokovi i zimnica', desc: 'Domaći džemovi, voćni sokovi, ajvar, ukiseljeno' },
 ]
 
 export default function Categories() {
