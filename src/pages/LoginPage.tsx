@@ -27,7 +27,8 @@ export default function LoginPage() {
       body: JSON.stringify({ refresh }),
     })
     const { code } = await codeRes.json()
-    panelTab!.location.href = `https://panel.trznjak.com/auto-login?code=${code}`
+    const panelBase = import.meta.env.VITE_PANEL_URL || 'http://46.224.189.114'
+    panelTab!.location.href = `${panelBase}/auto-login?code=${code}`
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
