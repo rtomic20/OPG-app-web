@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upitnik za OPG-ove</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #F7F3EE; font-family: 'Source Sans 3', sans-serif; color: #1A1A1A; padding-bottom: 80px; }
+  .hero { background: #2D5016; padding: 48px 24px 40px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 220px; height: 220px; border-radius: 50%; background: rgba(124,181,24,0.15); }
+  .hero::after { content: ''; position: absolute; bottom: -40px; left: -40px; width: 160px; height: 160px; border-radius: 50%; background: rgba(255,255,255,0.05); }
+  .hero-tag { display: inline-block; background: #7CB518; color: white; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 4px 14px; border-radius: 20px; margin-bottom: 16px; }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: 32px; color: white; line-height: 1.2; margin-bottom: 10px; position: relative; z-index: 1; }
+  .hero p { color: rgba(255,255,255,0.7); font-size: 15px; font-weight: 300; position: relative; z-index: 1; }
+  .content { padding: 24px 16px 0; max-width: 640px; margin: 0 auto; }
+  .section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; margin-top: 8px; }
+  .section-icon { width: 40px; height: 40px; border-radius: 10px; background: #2D5016; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .section-header h2 { font-family: 'Playfair Display', serif; font-size: 20px; color: #2D5016; line-height: 1.2; }
+  .section-header p { font-size: 13px; color: #6B6B6B; margin-top: 2px; }
+  .group { margin-bottom: 28px; }
+  .group-title { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #7CB518; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 1px solid #D4C9B8; }
+  .q-card { background: white; border-radius: 12px; padding: 18px; margin-bottom: 12px; border: 1px solid #D4C9B8; transition: box-shadow 0.2s; }
+  .q-card:hover { box-shadow: 0 4px 16px rgba(45,80,22,0.08); }
+  .q-label { font-size: 14px; font-weight: 500; color: #1A1A1A; margin-bottom: 12px; line-height: 1.4; }
+  .q-num { display: inline-block; width: 22px; height: 22px; border-radius: 50%; background: #E8F0D8; color: #2D5016; font-size: 11px; font-weight: 700; text-align: center; line-height: 22px; margin-right: 8px; }
+  .radio-group, .check-group { display: flex; flex-direction: column; gap: 8px; }
+  .opt-btn { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 8px; border: 1.5px solid #D4C9B8; cursor: pointer; transition: all 0.15s; font-size: 13px; color: #1A1A1A; background: white; text-align: left; width: 100%; font-family: 'Source Sans 3', sans-serif; }
+  .opt-btn:hover { border-color: #7CB518; background: #E8F0D8; }
+  .opt-btn.selected { border-color: #7CB518; background: #E8F0D8; color: #2D5016; font-weight: 500; }
+  .radio-dot { width: 16px; height: 16px; border-radius: 50%; border: 2px solid #D4C9B8; flex-shrink: 0; transition: all 0.15s; position: relative; }
+  .opt-btn.selected .radio-dot { border-color: #7CB518; background: #7CB518; }
+  .opt-btn.selected .radio-dot::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: white; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+  .check-box { width: 16px; height: 16px; border-radius: 4px; border: 2px solid #D4C9B8; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; transition: all 0.15s; }
+  .opt-btn.selected .check-box { border-color: #7CB518; background: #7CB518; color: white; }
+  .scale-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .scale-btn { flex: 1; min-width: 36px; height: 40px; border-radius: 8px; border: 1.5px solid #D4C9B8; background: white; cursor: pointer; font-size: 13px; font-weight: 500; color: #6B6B6B; transition: all 0.15s; font-family: 'Source Sans 3', sans-serif; }
+  .scale-btn:hover { border-color: #7CB518; color: #2D5016; }
+  .scale-btn.selected { background: #2D5016; border-color: #2D5016; color: white; font-weight: 600; }
+  .scale-labels { display: flex; justify-content: space-between; margin-top: 6px; font-size: 11px; color: #6B6B6B; }
+  textarea, input[type=text], input[type=email] { width: 100%; padding: 10px 12px; border: 1.5px solid #D4C9B8; border-radius: 8px; font-family: 'Source Sans 3', sans-serif; font-size: 13px; color: #1A1A1A; outline: none; transition: border-color 0.15s; background: white; }
+  textarea { min-height: 90px; resize: vertical; }
+  textarea:focus, input:focus { border-color: #7CB518; }
+  .ostalo-box, .platform-box { margin-top: 8px; animation: fadeIn 0.2s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+  .email-section { background: white; border-radius: 12px; padding: 18px; margin-bottom: 12px; border: 1px solid #D4C9B8; }
+  .email-label { font-size: 14px; font-weight: 500; color: #1A1A1A; margin-bottom: 4px; }
+  .email-sublabel { font-size: 12px; color: #6B6B6B; margin-bottom: 10px; }
+  .submit-btn { width: 100%; padding: 16px; background: #2D5016; color: white; border: none; border-radius: 12px; font-family: 'Source Sans 3', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 8px; transition: all 0.2s; letter-spacing: 0.3px; }
+  .submit-btn:hover { background: #3d6b1f; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(45,80,22,0.25); }
+  .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .note { font-size: 11px; color: #6B6B6B; text-align: center; margin-top: 16px; line-height: 1.6; }
+  .sending-msg { text-align: center; color: #7CB518; margin-top: 12px; font-size: 14px; }
+  .success { text-align: center; padding: 60px 24px; display: none; }
+  .success-icon { font-size: 56px; margin-bottom: 16px; }
+  .success h2 { font-family: 'Playfair Display', serif; font-size: 24px; color: #2D5016; margin-bottom: 8px; }
+  .success p { color: #6B6B6B; font-size: 15px; }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">Istraživanje tržišta · OPG-ovi</div>
+  <h1>Pomozite nam razumjeti<br>vaše potrebe</h1>
+  <p>Anketa za OPG-ove · ~9 minuta</p>
+</div>
+
+<div class="content">
+
+  <!-- Success screen -->
+  <div class="success" id="success">
+    <div class="success-icon">🌱</div>
+    <h2>Hvala vam!</h2>
+    <p>Vaši odgovori su zaprimljeni.<br>Pomažete nam izgraditi bolju platformu za sve OPG-ove u Hrvatskoj.</p>
+  </div>
+
+  <!-- Survey -->
+  <div id="survey">
+    <div class="section-header">
+      <div class="section-icon">🌾</div>
+      <div>
+        <h2>Upitnik za OPG-ove</h2>
+        <p>17 pitanja · ~9 minuta</p>
+      </div>
+    </div>
+
+    <!-- GROUP 1 -->
+    <div class="group">
+      <div class="group-title">O vašem OPG-u</div>
+
+      <div class="q-card">
+        <div class="q-label"><span class="q-num">1</span>Koja je vaša primarna djelatnost?</div>
+        <div class="radio-group" id="o1">
+          <button class="opt-btn" onclick="selectRadio('o1',this)"><span class="radio-dot"></span>Voće i povrće</button>
+          <button class="opt-btn" onclick="selectRadio('o1',this)"><span class="radio-dot"></span>Mliječni proizvodi</button>
+          <button class="opt-btn" onclick="selectRadio('o1',this)"><span class="radio-dot"></span>Meso i mesni proizvodi</button>
+          <button class="opt-btn" onclick="selectRadio('o1',this)"><span class="radio-dot"></span>Žitarice i mahunarke</button>
+          <button class="opt-btn" onclick="selectRadio('o1',this)"><span class="radio-dot"></span>Med i pčelinji proizvodi</button>
+          <button class="opt-btn" onclick="selectRadio('o1',this)"><span class="radio-dot"></span>Višestruke kulture</button>
+          <button class="opt-btn" onclick="selectRadio('o1',this)" data-ostalo="o1_ostalo"><span class="radio-dot"></span>Ostalo</button>
+        </div>
+        <div class="ostalo-box hidden" id="o1_ostalo"><input type="text" placeholder="Molimo opišite..." id="o1_ostalo_val"></div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-label"><span class="q-num">2</span>Koliko dugo poslujete kao OPG?</div>
+        <div class="radio-group" id="o2">
+          <button class="opt-btn" onclick="selectRadio('o2',this)"><span class="radio-dot"></span>Manje od 2 godine</button>
+          <button class="opt-btn" onclick="selectRadio('o2',this)"><span class="radio-dot"></span>2–5 godina</button>
+          <button class="opt-btn" onclick="selectRadio('o2',this)"><span class="radio-dot"></span>5–10 godina</button>
+          <button class="opt-btn" onclick="selectRadio('o2',this)"><span class="radio-dot"></span>Više od 10 godina</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- GROUP 2 -->
+    <div class="group">
+      <div class="group-title">Prodaja i distribucija</div>
+
+      <div class="q-card">
+        <div class="q-label"><span class="q-num">3</span>Kroz koje kanale trenutno prodajete svoje proizvode? (može više odgovora)</div>
+        <div class="check-group" id="o3">
+          <button class="opt-btn" onclick="selectCheck('o3',this)"><span class="check-box"></span>Direktna prodaja na OPG-u</button>
+          <button class="opt-btn" onclick="selectCheck('o3',this)"><span class="check-box"></span>Zelena tržnica</button>
+          <button class="opt-btn" onclick="selectCheck('o3',this)"><span class="check-box"></span>Vlastita web/online prodaja</button>
+          <button class="opt-btn" onclick="selectCheck('o3',this)"><span class="check-box"></span>Posrednici / otkupljivači</button>
+          <button class="opt-btn" onclick="selectCheck('o3',this)"><span class="check-box"></span>Restorani i ugostiteljstvo</button>
+          <button class="opt-btn" onclick="selectCheck('o3',this)"><span class="check-box"></span>Supermarketi / trgovine</button>
+          <button class="opt-btn" onclick="selectCheck('o3',this)"><span class="check-box"></span>Platforme (Njuškalo, i sl.)</button>
+          <button class="opt-btn" onclick="selectCheck('o3',this)" data-ostalo="o3_ostalo"><span class="check-box"></span>Ostalo</button>
+        </div>
+        <div class="ostalo-box hidden" id="o3_ostalo"><input type="text" placeholder="Molimo opišite..." id="o3_ostalo_val"></div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-label"><span class="q-num">4</span>Koliki udio prihoda dolazi od direktne prodaje krajnjim kupcima?</div>
+        <div class="radio-group" id="o4">
+          <button class="opt-btn" onclick="selectRadio('o4',this)"><span class="radio-dot"></span>Manje od 20%</button>
+          <button class="opt-btn" onclick="selectRadio('o4',this)"><span class="radio-dot"></span>20–50%</button>
+          <button class="opt-btn" onclick="selectRadio('o4',this)"><span class="radio-dot"></span>50–80%</button>
+          <button class="opt-btn" onclick="selectRadio('o4',this)"><span class="radio-dot"></span>Više od 80%</button>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-label"><span class="q-num">5</span>Koliko vremena tjedno provedete na administraciju prodaje (narudžbe, dostava, fakture)?</div>
+        <div class="radio-group" id="o5">
+          <button class="opt-btn" onclick="selectRadio('o5',this)"><span class="radio-dot"></span>Manje od 2 sata</button>
+          <button class="opt-btn" onclick="selectRadio('o5',this)"><span class="radio-dot"></span>2–5 sati</button>
+          <button class="opt-btn" onclick="selectRadio('o5',this)"><span class="radio-dot"></span>5–10 sati</button>
+          <button class="opt-btn" onclick="selectRadio('o5',this)"><span class="radio-dot"></span>Više od 10 sati</button>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-label"><span class="q-num">6</span>Koliko otprilike potrošite mjesečno na prodajne troškove (naknade tržnice, prijevoz, posrednici)?</div>
+        <div class="radio-group" id="o6a">
+          <button class="opt-btn" onclick="selectRadio('o6a',this)"><span class="radio-dot"></span>Manje od 20 €/mj</button>
+          <button class="opt-btn" onclick="selectRadio('o6a',this)"><span class="radio-dot"></span>20–50 €/mj</button>
+          <button class="opt-btn" onclick="selectRadio('o6a',this)"><span class="radio-dot"></span>50–100 €/mj</button>
+          <button class="opt-btn" onclick="selectRadio('o6a',this)"><span class="radio-dot"></span>Više od 100 €/mj</button>
+        </div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-label"><span class="q-num">7</span>Koliko ste zadovoljni trenutnim načinom prodaje i distribucije? (1 = nezadovoljan, 5 = potpuno zadovoljan)</div>
+        <div class="scale-row" id="o7">
+          <button class="scale-btn" onclick="selectScale('o7',this)">1</button>
+          <button class="scale-btn" onclick="selectScale('o7',this)">2</button>
+          <button class="scale-btn" onclick="selectScale('o7',this)">3</button>
+          <button class="scale-btn" onclick="selectScale('o7',this)">4</button>
+          <button class="scale-btn" onclick="selectScale('o7',this)">5</button>
+        </div>
+        <div class="scale-labels"><span>1 = Nisko</span><span>5 = Visoko</span></div>
+      </div>
+    </div>
+
+    <!-- GROUP 3 -->
+    <div class="group">
+      <div class="group-title">Najveći problemi (Pain points)</div>
+
+      <div class="q-card">
+        <div class="q-label"><span class="q-num">8</span>Koji su vaši najveći problemi u prodaji i distribuciji? (može više odgovora)</div>
+        <div class="check-group" id="o8">
+          <button class="opt-btn" onclick="selectCheck('o8',this)"><span class="check-box"></span>Teško pronalazim nove kupce</button>
+          <button class="opt-btn" onclick="selectCheck('o8',this)"><span class="check-box"></span>Preveliki posrednici koji uzimaju veliku proviziju</button>
+          <button class="opt-btn" onclick="selectCheck('o8',this)"><span class="check-box"></span>Logistika i dostava je skupa/komplicirana</button>
+          <button class="opt-btn" onclick="selectCheck('o8',this)"><span class="check-box"></span>Administracija oduzima previše vremena</button>
+          <button class="opt-btn" onclick="selectCheck('o8',this)"><span class="check-box"></span>Nepredvidiva potražnja — ne znam koliko će se prodati</button>
+          <button class="opt-btn" onclick="selectCheck('o8',this)"><span class="check-box"></span>Kupci ne plaćaju na vrijeme</button>
+          <button class="opt-btn" onclick="selectCheck('o8',this)"><span class="check-box"></span>Ne mogu prodati sve što proizvedem</button>
+          <button class="opt-btn" onclick="selectCheck('o8',this)"><span class="check-box"></span>Nedostatak digitalnih vještina/alata</button>
+          <button class="opt-btn" onclick="selectCheck('o8',this)"><span class="check-box"></span>Sezonalnost — velika kolebanja</button>
+          <button class="opt-btn" onclick="selectCheck('o8',this)" data-ostalo="o8_ostalo"><span class="check-box"></span>Ostalo</button>
+        </div>
+        <div class="ostalo-box hidden" id="o8_ostalo"><input type="text" placeholder="Molimo opišite..." id="o8_ostalo_val"></div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-label"><span class="q-num">9</span>Koliko vam je teško pronaći stabilne, pouzdane kupce? (1 = nimalo, 5 = izuzetno teško)</div>
+        <div class="scale-row" id="o9">
+          <button class="scale-btn" onclick="selectScale('o9',this)">1</button>
+          <button class="scale-btn" onclick="selectScale('o9',this)">2</button>
+          <button class="scale-btn" onclick="selectScale('o9',this)">3</button>
+          <button class="scale-btn" onclick="selectScale('o9',this)">4</button>
+          <button class="scale-btn" onclick="selectScale('o9',this)">5</button>
+        </div>
+        <div class="scale-labels"><span>1 = Nisko</span><span>5 = Visoko</span></div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-label"><span class="q-num">10</span>Opišite nam jednu konkretnu situaciju koja vam je nedavno stvorila problem u prodaji ili distribuciji.</div>
+        <textarea id="o10" placeholder="npr. Imao sam višak rajčice, nije je nitko htio preuzeti, sve je propalo..."></textarea>
+      </div>
+    </div>
+
+    <!-- GROUP 4 -->
+    <div class="group">
+      <div class="group-title">Digitalni alati i platforme</div>
+
+      <div class="q-card">
+        <div class="q-label"><span class="q-num">11</span>Koristite li trenutno neku digitalnu platformu za prodaju?</div>
+        <div class="radio-group" id="o11">
+          <button class="opt-btn" onclick="selectRadioPlatform('o11',this)" data-show-platform="true"><span class="radio-dot"></span>Da, aktivno koristim</button>
+          <button class="opt-btn" onclick="selectRadioPlatform('o11',this)" data-show-platform="true"><span class="radio-dot"></span>Da, ali rijetko</button>
+          <button class="opt-btn" onclick="selectRadioPlatform('o11',this)" data-show-platform="true"><span class="radio-dot"></span>Probao/la sam ali odustao/la</button>
+          <button class="opt-btn" onclick="selectRadioPlatform('o11',this)" data-show-platform="false"><span class="radio-dot"></span>Ne, nikad nisam probao/la</button>
+        </div>
+        <div class="platform-box hidden" id="o11_platform"><input type="text" placeholder="Koju platformu koristite / ste koristili?" id="o11_platform_val"></div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-label"><span class="q-num">12</span>Što vas je odvratilo ili bi vas odvratilo od korištenja digitalne platforme?</div>
+        <div class="check-group" id="o12">
+          <button class="opt-btn" onclick="selectCheck('o12',this)"><span class="check-box"></span>Previše komplicirana za korištenje</button>
+          <button class="opt-btn" onclick="selectCheck('o12',this)"><span class="check-box"></span>Skupa naknada/provizija</button>
+          <button class="opt-btn" onclick="selectCheck('o12',this)"><span class="check-box"></span>Ne vjerujem da bi funkcioniralo</button>
+          <button class="opt-btn" onclick="selectCheck('o12',this)"><span class="check-box"></span>Nemam vremena za učenje novog alata</button>
+          <button class="opt-btn" onclick="selectCheck('o12',this)"><span class="check-box"></span>Loša iskustva u prošlosti</button>
+          <button class="opt-btn" onclick="selectCheck('o12',this)"><span class="check-box"></span>Ništa — otvoren/a sam za isprobavanje</button>
+          <button class="opt-btn" onclick="selectCheck('o12',this)" data-ostalo="o12_ostalo"><span class="check-box"></span>Ostalo</button>
+        </div>
+        <div class="ostalo-box hidden" id="o12_ostalo"><input type="text" placeholder="Molimo opišite..." id="o12_ostalo_val"></div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-label"><span class="q-num">13</span>Koje funkcionalnosti bi vam bile najkorisnije u digitalnoj platformi?</div>
+        <div class="check-group" id="o13">
+          <button class="opt-btn" onclick="selectCheck('o13',this)"><span class="check-box"></span>Jednostavno upravljanje narudžbama</button>
+          <button class="opt-btn" onclick="selectCheck('o13',this)"><span class="check-box"></span>Direktna veza s kupcima (restorani, privatnici)</button>
+          <button class="opt-btn" onclick="selectCheck('o13',this)"><span class="check-box"></span>Pregled zaliha i planiranje</button>
+          <button class="opt-btn" onclick="selectCheck('o13',this)"><span class="check-box"></span>Automatske fakture i plaćanje</button>
+          <button class="opt-btn" onclick="selectCheck('o13',this)"><span class="check-box"></span>Analitika i uvid u prodaju</button>
+          <button class="opt-btn" onclick="selectCheck('o13',this)"><span class="check-box"></span>Marketing i promocija</button>
+          <button class="opt-btn" onclick="selectCheck('o13',this)"><span class="check-box"></span>Zajednička dostava s drugim OPG-ovima</button>
+          <button class="opt-btn" onclick="selectCheck('o13',this)" data-ostalo="o13_ostalo"><span class="check-box"></span>Ostalo</button>
+        </div>
+        <div class="ostalo-box hidden" id="o13_ostalo"><input type="text" placeholder="Molimo opišite..." id="o13_ostalo_val"></div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-label"><span class="q-num">14</span>Koliko biste platili za platformu koja vam uštedi 5+ sati tjedno i poveća prodaju?</div>
+        <div class="radio-group" id="o14">
+          <button class="opt-btn" onclick="selectRadio('o14',this)"><span class="radio-dot"></span>Ništa — ne bi platio/la</button>
+          <button class="opt-btn" onclick="selectRadio('o14',this)"><span class="radio-dot"></span>Do 50 kn/mj (6,6€)</button>
+          <button class="opt-btn" onclick="selectRadio('o14',this)"><span class="radio-dot"></span>50–150 kn/mj (6,6–20€)</button>
+          <button class="opt-btn" onclick="selectRadio('o14',this)"><span class="radio-dot"></span>150–300 kn/mj (20–40€)</button>
+          <button class="opt-btn" onclick="selectRadio('o14',this)"><span class="radio-dot"></span>Više od 300 kn/mj ako se isplati</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- GROUP 5 -->
+    <div class="group">
+      <div class="group-title">Konkurencija i tržište</div>
+
+      <div class="q-card">
+        <div class="q-label"><span class="q-num">15</span>Koje platforme ili servise znate ili koristite za prodaju?</div>
+        <div class="check-group" id="o15">
+          <button class="opt-btn" onclick="selectCheck('o15',this)"><span class="check-box"></span>OPG Tržnica</button>
+          <button class="opt-btn" onclick="selectCheck('o15',this)"><span class="check-box"></span>Njuškalo / Oglasnik</button>
+          <button class="opt-btn" onclick="selectCheck('o15',this)"><span class="check-box"></span>Vlastita web stranica</button>
+          <button class="opt-btn" onclick="selectCheck('o15',this)"><span class="check-box"></span>Facebook Marketplace</button>
+          <button class="opt-btn" onclick="selectCheck('o15',this)"><span class="check-box"></span>Lokalne dostavljačke službe</button>
+          <button class="opt-btn" onclick="selectCheck('o15',this)"><span class="check-box"></span>Direktni kontakt s restoranima</button>
+          <button class="opt-btn" onclick="selectCheck('o15',this)"><span class="check-box"></span>Ništa od navedenog</button>
+          <button class="opt-btn" onclick="selectCheck('o15',this)" data-ostalo="o15_ostalo"><span class="check-box"></span>Ostalo</button>
+        </div>
+        <div class="ostalo-box hidden" id="o15_ostalo"><input type="text" placeholder="Molimo opišite..." id="o15_ostalo_val"></div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-label"><span class="q-num">16</span>Koliko bi vam bila vrijedna platforma koja automatski spaja vaš OPG s lokalnim restoranima i kupcima? (1 = nimalo, 5 = jako vrijedna)</div>
+        <div class="scale-row" id="o16">
+          <button class="scale-btn" onclick="selectScale('o16',this)">1</button>
+          <button class="scale-btn" onclick="selectScale('o16',this)">2</button>
+          <button class="scale-btn" onclick="selectScale('o16',this)">3</button>
+          <button class="scale-btn" onclick="selectScale('o16',this)">4</button>
+          <button class="scale-btn" onclick="selectScale('o16',this)">5</button>
+        </div>
+        <div class="scale-labels"><span>1 = Nisko</span><span>5 = Visoko</span></div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-label"><span class="q-num">17</span>Što trenutno nijedna platforma ne nudi, a vi biste stvarno trebali?</div>
+        <textarea id="o17" placeholder="Vaš slobodni odgovor..."></textarea>
+      </div>
+    </div>
+
+    <!-- EMAIL -->
+    <div class="email-section">
+      <div class="email-label">📬 Zainteresirani ste za projekt? Ostavite email! (opcionalno)</div>
+      <div class="email-sublabel">Obavijestit ćemo vas o lansiranju platforme i pozivamo vas na testiranje.</div>
+      <input type="email" id="email" placeholder="vasa@adresa.hr">
+    </div>
+
+    <button class="submit-btn" id="submitBtn" onclick="submitSurvey()">Pošalji odgovore →</button>
+    <p id="sendingMsg" class="sending-msg hidden">⏳ Šaljemo vaše odgovore...</p>
+    <p class="note">Vaši odgovori su anonimni i koristit će se isključivo za poboljšanje platforme za OPG-ove.<br>Hvala na vremenu! 🌱</p>
+  </div>
+</div>
+
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwpKv5aXrkB6X5NqN7P85cjFZlhAli4jejOdFh8Eo_LLDb0x8S7uRPmHWjW4NL89rHU/exec";
+
+const answers = {};
+
+function selectRadio(id, btn) {
+  document.querySelectorAll('#' + id + ' .opt-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  answers[id] = btn.textContent.trim();
+  // handle ostalo
+  const ostaloId = btn.getAttribute('data-ostalo');
+  document.querySelectorAll('[id$="_ostalo"]').forEach(el => {
+    if (el.id.startsWith(id + '_ostalo')) el.classList.add('hidden');
+  });
+  if (ostaloId) document.getElementById(ostaloId).classList.remove('hidden');
+}
+
+function selectRadioPlatform(id, btn) {
+  document.querySelectorAll('#' + id + ' .opt-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  answers[id] = btn.textContent.trim();
+  const showPlatform = btn.getAttribute('data-show-platform') === 'true';
+  const platformBox = document.getElementById(id + '_platform');
+  if (platformBox) {
+    showPlatform ? platformBox.classList.remove('hidden') : platformBox.classList.add('hidden');
+  }
+}
+
+function selectCheck(id, btn) {
+  btn.classList.toggle('selected');
+  const checked = btn.classList.contains('selected');
+  const box = btn.querySelector('.check-box');
+  box.textContent = checked ? '✓' : '';
+  // collect all selected
+  const selected = [];
+  document.querySelectorAll('#' + id + ' .opt-btn.selected').forEach(b => selected.push(b.textContent.trim()));
+  answers[id] = selected;
+  // handle ostalo
+  const ostaloId = btn.getAttribute('data-ostalo');
+  if (ostaloId) {
+    checked ? document.getElementById(ostaloId).classList.remove('hidden') : document.getElementById(ostaloId).classList.add('hidden');
+  }
+}
+
+function selectScale(id, btn) {
+  document.querySelectorAll('#' + id + ' .scale-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  answers[id] = parseInt(btn.textContent.trim());
+}
+
+async function submitSurvey() {
+  const btn = document.getElementById('submitBtn');
+  const msg = document.getElementById('sendingMsg');
+  btn.disabled = true;
+  msg.classList.remove('hidden');
+
+  // collect textarea / input answers
+  ['o10','o17'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) answers[id] = el.value;
+  });
+  // ostalo values
+  document.querySelectorAll('[id$="_ostalo_val"]').forEach(el => {
+    answers[el.id.replace('_val','')] = el.value;
+  });
+  // platform value
+  const platVal = document.getElementById('o11_platform_val');
+  if (platVal) answers['o11_platforma'] = platVal.value;
+
+  const email = document.getElementById('email').value;
+
+  try {
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'opg', answers, email })
+    });
+  } catch(e) { console.error(e); }
+
+  document.getElementById('survey').style.display = 'none';
+  document.getElementById('success').style.display = 'block';
+}
+</script>
+</body>
+</html>
