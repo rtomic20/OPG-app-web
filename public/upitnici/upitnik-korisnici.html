@@ -84,7 +84,7 @@
       <div class="section-icon">🛒</div>
       <div>
         <h2>Upitnik za kupce</h2>
-        <p>16 pitanja · ~8 minuta</p>
+        <p>17 pitanja · ~8 minuta</p>
       </div>
     </div>
 
@@ -93,7 +93,35 @@
       <div class="group-title">O vama</div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">1</span>Tko ste vi kao kupac lokalnih proizvoda?</div>
+  <div class="q-label"><span class="q-num">1</span>Iz koje županije dolazite?</div>
+  <select id="zupanija" style="width:100%;padding:10px 12px;border:1.5px solid #D4C9B8;border-radius:8px;font-family:'Source Sans 3',sans-serif;font-size:13px;color:#1A1A1A;outline:none;background:white;appearance:none;">
+    <option value="">— Odaberite županiju —</option>
+    <option value="Grad Zagreb">Grad Zagreb</option>
+    <option value="Zagrebačka">Zagrebačka</option>
+    <option value="Krapinsko-zagorska">Krapinsko-zagorska</option>
+    <option value="Sisačko-moslavačka">Sisačko-moslavačka</option>
+    <option value="Karlovačka">Karlovačka</option>
+    <option value="Varaždinska">Varaždinska</option>
+    <option value="Koprivničko-križevačka">Koprivničko-križevačka</option>
+    <option value="Bjelovarsko-bilogorska">Bjelovarsko-bilogorska</option>
+    <option value="Primorsko-goranska">Primorsko-goranska</option>
+    <option value="Ličko-senjska">Ličko-senjska</option>
+    <option value="Virovitičko-podravska">Virovitičko-podravska</option>
+    <option value="Požeško-slavonska">Požeško-slavonska</option>
+    <option value="Brodsko-posavska">Brodsko-posavska</option>
+    <option value="Zadarska">Zadarska</option>
+    <option value="Osječko-baranjska">Osječko-baranjska</option>
+    <option value="Šibensko-kninska">Šibensko-kninska</option>
+    <option value="Vukovarsko-srijemska">Vukovarsko-srijemska</option>
+    <option value="Splitsko-dalmatinska">Splitsko-dalmatinska</option>
+    <option value="Istarska">Istarska</option>
+    <option value="Dubrovačko-neretvanska">Dubrovačko-neretvanska</option>
+    <option value="Međimurska">Međimurska</option>
+  </select>
+</div>
+
+      <div class="q-card">
+        <div class="q-label"><span class="q-num">2</span>Tko ste vi kao kupac lokalnih proizvoda?</div>
         <div class="radio-group" id="k1">
           <button class="opt-btn" onclick="selectRadio('k1',this)"><span class="radio-dot"></span>Privatna osoba / kućanstvo</button>
           <button class="opt-btn" onclick="selectRadio('k1',this)"><span class="radio-dot"></span>Restoran ili kafić</button>
@@ -106,7 +134,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">2</span>Koliko često kupujete lokalne prehrambene proizvode direktno od proizvođača?</div>
+        <div class="q-label"><span class="q-num">3</span>Koliko često kupujete lokalne prehrambene proizvode direktno od proizvođača?</div>
         <div class="radio-group" id="k2">
           <button class="opt-btn" onclick="selectRadio('k2',this)"><span class="radio-dot"></span>Svaki tjedan</button>
           <button class="opt-btn" onclick="selectRadio('k2',this)"><span class="radio-dot"></span>Nekoliko puta mjesečno</button>
@@ -117,7 +145,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">3</span>Što vas motivira da kupujete od lokalnih OPG-ova? (može više odgovora)</div>
+        <div class="q-label"><span class="q-num">4</span>Što vas motivira da kupujete od lokalnih OPG-ova? (može više odgovora)</div>
         <div class="check-group" id="k3">
           <button class="opt-btn" onclick="selectCheck('k3',this)"><span class="check-box"></span>Svježina i kvaliteta proizvoda</button>
           <button class="opt-btn" onclick="selectCheck('k3',this)"><span class="check-box"></span>Podrška lokalnoj ekonomiji</button>
@@ -137,7 +165,7 @@
       <div class="group-title">Trenutni način nabave</div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">4</span>Gdje trenutno kupujete lokalne proizvode? (može više odgovora)</div>
+        <div class="q-label"><span class="q-num">5</span>Gdje trenutno kupujete lokalne proizvode? (može više odgovora)</div>
         <div class="check-group" id="k4">
           <button class="opt-btn" onclick="selectCheck('k4',this)"><span class="check-box"></span>Zelena tržnica</button>
           <button class="opt-btn" onclick="selectCheck('k4',this)"><span class="check-box"></span>Direktno na OPG-u</button>
@@ -151,7 +179,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">5</span>Koliko ste zadovoljni trenutnim načinom nabave lokalnih proizvoda? (1 = nezadovoljan, 5 = potpuno zadovoljan)</div>
+        <div class="q-label"><span class="q-num">6</span>Koliko ste zadovoljni trenutnim načinom nabave lokalnih proizvoda? (1 = nezadovoljan, 5 = potpuno zadovoljan)</div>
         <div class="scale-row" id="k5">
           <button class="scale-btn" onclick="selectScale('k5',this)">1</button>
           <button class="scale-btn" onclick="selectScale('k5',this)">2</button>
@@ -163,7 +191,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">6</span>Koliko vam je važna dostava na kućnu adresu?</div>
+        <div class="q-label"><span class="q-num">7</span>Koliko vam je važna dostava na kućnu adresu?</div>
         <div class="radio-group" id="k6">
           <button class="opt-btn" onclick="selectRadio('k6',this)"><span class="radio-dot"></span>Iznimno važno — bez dostave ne kupujem online</button>
           <button class="opt-btn" onclick="selectRadio('k6',this)"><span class="radio-dot"></span>Važno, ali i sam/a mogu preuzeti</button>
@@ -173,7 +201,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">7</span>Koliko ste daleko spremni otići preuzeti narudžbu od lokalnog OPG-a?</div>
+        <div class="q-label"><span class="q-num">8</span>Koliko ste daleko spremni otići preuzeti narudžbu od lokalnog OPG-a?</div>
         <div class="radio-group" id="k6b">
           <button class="opt-btn" onclick="selectRadio('k6b',this)"><span class="radio-dot"></span>Do 5 km</button>
           <button class="opt-btn" onclick="selectRadio('k6b',this)"><span class="radio-dot"></span>Do 10 km</button>
@@ -188,7 +216,7 @@
       <div class="group-title">Problemi i frustracije</div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">8</span>Što vas najčešće frustrira pri kupnji od lokalnih OPG-ova? (može više odgovora)</div>
+        <div class="q-label"><span class="q-num">9</span>Što vas najčešće frustrira pri kupnji od lokalnih OPG-ova? (može više odgovora)</div>
         <div class="check-group" id="k7">
           <button class="opt-btn" onclick="selectCheck('k7',this)"><span class="check-box"></span>Teško je pronaći pouzdanog dobavljača</button>
           <button class="opt-btn" onclick="selectCheck('k7',this)"><span class="check-box"></span>Nepredvidiva dostupnost — ne znam što ima</button>
@@ -205,7 +233,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">9</span>Koliko vam je teško naći novog, pouzdanog lokalnog dobavljača? (1 = lako, 5 = jako teško)</div>
+        <div class="q-label"><span class="q-num">10</span>Koliko vam je teško naći novog, pouzdanog lokalnog dobavljača? (1 = lako, 5 = jako teško)</div>
         <div class="scale-row" id="k8">
           <button class="scale-btn" onclick="selectScale('k8',this)">1</button>
           <button class="scale-btn" onclick="selectScale('k8',this)">2</button>
@@ -217,7 +245,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">10</span>Ako pronađete OPG koji vam se sviđa kroz aplikaciju, nastavili biste naručivati kroz aplikaciju ili biste ih kontaktirali direktno?</div>
+        <div class="q-label"><span class="q-num">11</span>Ako pronađete OPG koji vam se sviđa kroz aplikaciju, nastavili biste naručivati kroz aplikaciju ili biste ih kontaktirali direktno?</div>
         <div class="radio-group" id="k9b">
           <button class="opt-btn" onclick="selectRadio('k9b',this)"><span class="radio-dot"></span>Uvijek kroz aplikaciju — lakše mi je</button>
           <button class="opt-btn" onclick="selectRadio('k9b',this)"><span class="radio-dot"></span>Vjerojatno kroz aplikaciju</button>
@@ -227,7 +255,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">11</span>Opišite nam jednu situaciju kad vas je kupnja od OPG-a razočarala ili zakomplicirala stvari.</div>
+        <div class="q-label"><span class="q-num">12</span>Opišite nam jednu situaciju kad vas je kupnja od OPG-a razočarala ili zakomplicirala stvari.</div>
         <textarea id="k10" placeholder="npr. Naručio/la sam, ali nisu imali zaliha, saznao/la sam dan uoči dostave..."></textarea>
       </div>
     </div>
@@ -237,7 +265,7 @@
       <div class="group-title">Digitalna platforma</div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">12</span>Što bi vam platforma za kupnju od OPG-ova trebala nužno imati?</div>
+        <div class="q-label"><span class="q-num">13</span>Što bi vam platforma za kupnju od OPG-ova trebala nužno imati?</div>
         <div class="check-group" id="k11">
           <button class="opt-btn" onclick="selectCheck('k11',this)"><span class="check-box"></span>Pregled dostupnih proizvoda u realnom vremenu</button>
           <button class="opt-btn" onclick="selectCheck('k11',this)"><span class="check-box"></span>Jednostavno online naručivanje</button>
@@ -255,7 +283,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">13</span>Koliko je vjerojatno da biste koristili aplikaciju koja vas spaja s lokalnim OPG-ovima za tjednu nabavu? (1 = malo vjerojatno, 5 = sigurno bih)</div>
+        <div class="q-label"><span class="q-num">14</span>Koliko je vjerojatno da biste koristili aplikaciju koja vas spaja s lokalnim OPG-ovima za tjednu nabavu? (1 = malo vjerojatno, 5 = sigurno bih)</div>
         <div class="scale-row" id="k12">
           <button class="scale-btn" onclick="selectScale('k12',this)">1</button>
           <button class="scale-btn" onclick="selectScale('k12',this)">2</button>
@@ -272,7 +300,7 @@
       <div class="group-title">Konkurencija i usporedba</div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">14</span>Koje platforme ili servise ste koristili za nabavu lokalne hrane?</div>
+        <div class="q-label"><span class="q-num">15</span>Koje platforme ili servise ste koristili za nabavu lokalne hrane?</div>
         <div class="check-group" id="k13">
           <button class="opt-btn" onclick="selectCheck('k13',this)"><span class="check-box"></span>OPG Tržnica</button>
           <button class="opt-btn" onclick="selectCheck('k13',this)"><span class="check-box"></span>Wolt / Bolt Food (lokalni OPG-ovi)</button>
@@ -286,7 +314,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">15</span>Što vam nedostaje u platformama koje ste koristili?</div>
+        <div class="q-label"><span class="q-num">16</span>Što vam nedostaje u platformama koje ste koristili?</div>
         <div class="check-group" id="k14">
           <button class="opt-btn" onclick="selectCheck('k14',this)"><span class="check-box"></span>Premali izbor OPG-ova</button>
           <button class="opt-btn" onclick="selectCheck('k14',this)"><span class="check-box"></span>Loša dostava</button>
@@ -301,7 +329,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">16</span>Što bi vas uvjerilo da redovito naručujete lokalnu hranu putem jedne platforme?</div>
+        <div class="q-label"><span class="q-num">17</span>Što bi vas uvjerilo da redovito naručujete lokalnu hranu putem jedne platforme?</div>
         <textarea id="k16" placeholder="Vaš slobodni odgovor..."></textarea>
       </div>
     </div>
@@ -405,6 +433,8 @@ async function submitSurvey() {
   document.querySelectorAll('[id$="_ostalo_val"]').forEach(el => {
     answers[el.id.replace('_val','')] = el.value;
   });
+
+  answers['zupanija'] = document.getElementById('zupanija').value;
 
   const email = document.getElementById('email').value;
 

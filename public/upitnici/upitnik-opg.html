@@ -82,7 +82,7 @@
       <div class="section-icon">🌾</div>
       <div>
         <h2>Upitnik za OPG-ove</h2>
-        <p>17 pitanja · ~9 minuta</p>
+        <p>18 pitanja · ~9 minuta</p>
       </div>
     </div>
 
@@ -91,7 +91,35 @@
       <div class="group-title">O vašem OPG-u</div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">1</span>Koja je vaša primarna djelatnost?</div>
+  <div class="q-label"><span class="q-num">1</span>Iz koje županije dolazite?</div>
+  <select id="zupanija" style="width:100%;padding:10px 12px;border:1.5px solid #D4C9B8;border-radius:8px;font-family:'Source Sans 3',sans-serif;font-size:13px;color:#1A1A1A;outline:none;background:white;appearance:none;">
+    <option value="">— Odaberite županiju —</option>
+    <option value="Grad Zagreb">Grad Zagreb</option>
+    <option value="Zagrebačka">Zagrebačka</option>
+    <option value="Krapinsko-zagorska">Krapinsko-zagorska</option>
+    <option value="Sisačko-moslavačka">Sisačko-moslavačka</option>
+    <option value="Karlovačka">Karlovačka</option>
+    <option value="Varaždinska">Varaždinska</option>
+    <option value="Koprivničko-križevačka">Koprivničko-križevačka</option>
+    <option value="Bjelovarsko-bilogorska">Bjelovarsko-bilogorska</option>
+    <option value="Primorsko-goranska">Primorsko-goranska</option>
+    <option value="Ličko-senjska">Ličko-senjska</option>
+    <option value="Virovitičko-podravska">Virovitičko-podravska</option>
+    <option value="Požeško-slavonska">Požeško-slavonska</option>
+    <option value="Brodsko-posavska">Brodsko-posavska</option>
+    <option value="Zadarska">Zadarska</option>
+    <option value="Osječko-baranjska">Osječko-baranjska</option>
+    <option value="Šibensko-kninska">Šibensko-kninska</option>
+    <option value="Vukovarsko-srijemska">Vukovarsko-srijemska</option>
+    <option value="Splitsko-dalmatinska">Splitsko-dalmatinska</option>
+    <option value="Istarska">Istarska</option>
+    <option value="Dubrovačko-neretvanska">Dubrovačko-neretvanska</option>
+    <option value="Međimurska">Međimurska</option>
+  </select>
+</div>
+
+      <div class="q-card">
+        <div class="q-label"><span class="q-num">2</span>Koja je vaša primarna djelatnost?</div>
         <div class="radio-group" id="o1">
           <button class="opt-btn" onclick="selectRadio('o1',this)"><span class="radio-dot"></span>Voće i povrće</button>
           <button class="opt-btn" onclick="selectRadio('o1',this)"><span class="radio-dot"></span>Mliječni proizvodi</button>
@@ -105,7 +133,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">2</span>Koliko dugo poslujete kao OPG?</div>
+        <div class="q-label"><span class="q-num">3</span>Koliko dugo poslujete kao OPG?</div>
         <div class="radio-group" id="o2">
           <button class="opt-btn" onclick="selectRadio('o2',this)"><span class="radio-dot"></span>Manje od 2 godine</button>
           <button class="opt-btn" onclick="selectRadio('o2',this)"><span class="radio-dot"></span>2–5 godina</button>
@@ -120,7 +148,7 @@
       <div class="group-title">Prodaja i distribucija</div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">3</span>Kroz koje kanale trenutno prodajete svoje proizvode? (može više odgovora)</div>
+        <div class="q-label"><span class="q-num">4</span>Kroz koje kanale trenutno prodajete svoje proizvode? (može više odgovora)</div>
         <div class="check-group" id="o3">
           <button class="opt-btn" onclick="selectCheck('o3',this)"><span class="check-box"></span>Direktna prodaja na OPG-u</button>
           <button class="opt-btn" onclick="selectCheck('o3',this)"><span class="check-box"></span>Zelena tržnica</button>
@@ -135,7 +163,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">4</span>Koliki udio prihoda dolazi od direktne prodaje krajnjim kupcima?</div>
+        <div class="q-label"><span class="q-num">5</span>Koliki udio prihoda dolazi od direktne prodaje krajnjim kupcima?</div>
         <div class="radio-group" id="o4">
           <button class="opt-btn" onclick="selectRadio('o4',this)"><span class="radio-dot"></span>Manje od 20%</button>
           <button class="opt-btn" onclick="selectRadio('o4',this)"><span class="radio-dot"></span>20–50%</button>
@@ -145,7 +173,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">5</span>Koliko vremena tjedno provedete na administraciju prodaje (narudžbe, dostava, fakture)?</div>
+        <div class="q-label"><span class="q-num">6</span>Koliko vremena tjedno provedete na administraciju prodaje (narudžbe, dostava, fakture)?</div>
         <div class="radio-group" id="o5">
           <button class="opt-btn" onclick="selectRadio('o5',this)"><span class="radio-dot"></span>Manje od 2 sata</button>
           <button class="opt-btn" onclick="selectRadio('o5',this)"><span class="radio-dot"></span>2–5 sati</button>
@@ -155,7 +183,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">6</span>Koliko otprilike potrošite mjesečno na prodajne troškove (naknade tržnice, prijevoz, posrednici)?</div>
+        <div class="q-label"><span class="q-num">7</span>Koliko otprilike potrošite mjesečno na prodajne troškove (naknade tržnice, prijevoz, posrednici)?</div>
         <div class="radio-group" id="o6a">
           <button class="opt-btn" onclick="selectRadio('o6a',this)"><span class="radio-dot"></span>Manje od 20 €/mj</button>
           <button class="opt-btn" onclick="selectRadio('o6a',this)"><span class="radio-dot"></span>20–50 €/mj</button>
@@ -165,7 +193,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">7</span>Koliko ste zadovoljni trenutnim načinom prodaje i distribucije? (1 = nezadovoljan, 5 = potpuno zadovoljan)</div>
+        <div class="q-label"><span class="q-num">8</span>Koliko ste zadovoljni trenutnim načinom prodaje i distribucije? (1 = nezadovoljan, 5 = potpuno zadovoljan)</div>
         <div class="scale-row" id="o7">
           <button class="scale-btn" onclick="selectScale('o7',this)">1</button>
           <button class="scale-btn" onclick="selectScale('o7',this)">2</button>
@@ -182,7 +210,7 @@
       <div class="group-title">Najveći problemi (Pain points)</div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">8</span>Koji su vaši najveći problemi u prodaji i distribuciji? (može više odgovora)</div>
+        <div class="q-label"><span class="q-num">9</span>Koji su vaši najveći problemi u prodaji i distribuciji? (može više odgovora)</div>
         <div class="check-group" id="o8">
           <button class="opt-btn" onclick="selectCheck('o8',this)"><span class="check-box"></span>Teško pronalazim nove kupce</button>
           <button class="opt-btn" onclick="selectCheck('o8',this)"><span class="check-box"></span>Preveliki posrednici koji uzimaju veliku proviziju</button>
@@ -199,7 +227,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">9</span>Koliko vam je teško pronaći stabilne, pouzdane kupce? (1 = nimalo, 5 = izuzetno teško)</div>
+        <div class="q-label"><span class="q-num">10</span>Koliko vam je teško pronaći stabilne, pouzdane kupce? (1 = nimalo, 5 = izuzetno teško)</div>
         <div class="scale-row" id="o9">
           <button class="scale-btn" onclick="selectScale('o9',this)">1</button>
           <button class="scale-btn" onclick="selectScale('o9',this)">2</button>
@@ -211,7 +239,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">10</span>Opišite nam jednu konkretnu situaciju koja vam je nedavno stvorila problem u prodaji ili distribuciji.</div>
+        <div class="q-label"><span class="q-num">11</span>Opišite nam jednu konkretnu situaciju koja vam je nedavno stvorila problem u prodaji ili distribuciji.</div>
         <textarea id="o10" placeholder="npr. Imao sam višak rajčice, nije je nitko htio preuzeti, sve je propalo..."></textarea>
       </div>
     </div>
@@ -221,7 +249,7 @@
       <div class="group-title">Digitalni alati i platforme</div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">11</span>Koristite li trenutno neku digitalnu platformu za prodaju?</div>
+        <div class="q-label"><span class="q-num">12</span>Koristite li trenutno neku digitalnu platformu za prodaju?</div>
         <div class="radio-group" id="o11">
           <button class="opt-btn" onclick="selectRadioPlatform('o11',this)" data-show-platform="true"><span class="radio-dot"></span>Da, aktivno koristim</button>
           <button class="opt-btn" onclick="selectRadioPlatform('o11',this)" data-show-platform="true"><span class="radio-dot"></span>Da, ali rijetko</button>
@@ -232,7 +260,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">12</span>Što vas je odvratilo ili bi vas odvratilo od korištenja digitalne platforme?</div>
+        <div class="q-label"><span class="q-num">13</span>Što vas je odvratilo ili bi vas odvratilo od korištenja digitalne platforme?</div>
         <div class="check-group" id="o12">
           <button class="opt-btn" onclick="selectCheck('o12',this)"><span class="check-box"></span>Previše komplicirana za korištenje</button>
           <button class="opt-btn" onclick="selectCheck('o12',this)"><span class="check-box"></span>Skupa naknada/provizija</button>
@@ -246,7 +274,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">13</span>Koje funkcionalnosti bi vam bile najkorisnije u digitalnoj platformi?</div>
+        <div class="q-label"><span class="q-num">14</span>Koje funkcionalnosti bi vam bile najkorisnije u digitalnoj platformi?</div>
         <div class="check-group" id="o13">
           <button class="opt-btn" onclick="selectCheck('o13',this)"><span class="check-box"></span>Jednostavno upravljanje narudžbama</button>
           <button class="opt-btn" onclick="selectCheck('o13',this)"><span class="check-box"></span>Direktna veza s kupcima (restorani, privatnici)</button>
@@ -261,7 +289,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">14</span>Koliko biste platili za platformu koja vam uštedi 5+ sati tjedno i poveća prodaju?</div>
+        <div class="q-label"><span class="q-num">15</span>Koliko biste platili za platformu koja vam uštedi 5+ sati tjedno i poveća prodaju?</div>
         <div class="radio-group" id="o14">
           <button class="opt-btn" onclick="selectRadio('o14',this)"><span class="radio-dot"></span>Ništa — ne bi platio/la</button>
           <button class="opt-btn" onclick="selectRadio('o14',this)"><span class="radio-dot"></span>Do 50 kn/mj (6,6€)</button>
@@ -277,7 +305,7 @@
       <div class="group-title">Konkurencija i tržište</div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">15</span>Koje platforme ili servise znate ili koristite za prodaju?</div>
+        <div class="q-label"><span class="q-num">16</span>Koje platforme ili servise znate ili koristite za prodaju?</div>
         <div class="check-group" id="o15">
           <button class="opt-btn" onclick="selectCheck('o15',this)"><span class="check-box"></span>OPG Tržnica</button>
           <button class="opt-btn" onclick="selectCheck('o15',this)"><span class="check-box"></span>Njuškalo / Oglasnik</button>
@@ -292,7 +320,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">16</span>Koliko bi vam bila vrijedna platforma koja automatski spaja vaš OPG s lokalnim restoranima i kupcima? (1 = nimalo, 5 = jako vrijedna)</div>
+        <div class="q-label"><span class="q-num">17</span>Koliko bi vam bila vrijedna platforma koja automatski spaja vaš OPG s lokalnim restoranima i kupcima? (1 = nimalo, 5 = jako vrijedna)</div>
         <div class="scale-row" id="o16">
           <button class="scale-btn" onclick="selectScale('o16',this)">1</button>
           <button class="scale-btn" onclick="selectScale('o16',this)">2</button>
@@ -304,7 +332,7 @@
       </div>
 
       <div class="q-card">
-        <div class="q-label"><span class="q-num">17</span>Što trenutno nijedna platforma ne nudi, a vi biste stvarno trebali?</div>
+        <div class="q-label"><span class="q-num">18</span>Što trenutno nijedna platforma ne nudi, a vi biste stvarno trebali?</div>
         <textarea id="o17" placeholder="Vaš slobodni odgovor..."></textarea>
       </div>
     </div>
@@ -390,6 +418,8 @@ async function submitSurvey() {
   // platform value
   const platVal = document.getElementById('o11_platform_val');
   if (platVal) answers['o11_platforma'] = platVal.value;
+
+  answers['zupanija'] = document.getElementById('zupanija').value;
 
   const email = document.getElementById('email').value;
 
