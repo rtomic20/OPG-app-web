@@ -8,6 +8,8 @@ import RegisterPage from './pages/RegisterPage'
 import ProfilePage from './pages/ProfilePage'
 import ForgotPasswordPage from './pages/ForgotPasswordPage'
 import ResetPasswordPage from './pages/ResetPasswordPage'
+import AnketaOPGPage from './pages/AnketaOPGPage'
+import AnketaKupciPage from './pages/AnketaKupciPage'
 import './index.css'
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -27,6 +29,8 @@ function AppRoutes() {
       <Route path="/profil" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
       <Route path="/zaboravili-lozinku" element={<ForgotPasswordPage />} />
       <Route path="/reset-lozinka" element={<ResetPasswordPage />} />
+      <Route path="/anketa-opg" element={<AnketaOPGPage />} />
+      <Route path="/anketa-kupci" element={<AnketaKupciPage />} />
       <Route path="*" element={<LandingPage />} />
     </Routes>
   )
