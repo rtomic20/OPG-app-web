@@ -114,7 +114,7 @@ export default function VendorProfilePage() {
           {vendor.cover_image && (
             <>
               <img src={vendor.cover_image} alt="" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-transparent" />
             </>
           )}
         </div>
@@ -128,9 +128,9 @@ export default function VendorProfilePage() {
               )}
             </div>
             <div className="pb-2 flex-1 min-w-0">
-              <h1 className="text-2xl font-bold text-gray-900 break-words">{vendor.name}</h1>
+              <h1 className={`text-2xl font-bold break-words ${vendor.cover_image ? 'text-white [text-shadow:0_1px_4px_rgba(0,0,0,0.8)]' : 'text-gray-900'}`}>{vendor.name}</h1>
               <div className="flex flex-wrap items-center gap-3 mt-1">
-                <span className="text-sm text-gray-500">📍 {vendor.location}</span>
+                <span className={`text-sm ${vendor.cover_image ? 'text-white/80' : 'text-gray-500'}`}>📍 {vendor.location}</span>
                 {vendor.avg_rating && (
                   <span className="text-sm">
                     <span className="text-yellow-400">{stars(vendor.avg_rating)}</span>
