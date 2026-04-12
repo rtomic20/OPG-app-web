@@ -311,7 +311,7 @@ export default function AnketaKupciPage() {
               }}>🛒</div>
               <div>
                 <div style={{ fontSize: 20, color: '#2D5016', fontWeight: 700, lineHeight: 1.2 }}>Upitnik za kupce</div>
-                <div style={{ fontSize: 13, color: '#6B6B6B', marginTop: 2 }}>11 pitanja · ~5 minuta</div>
+                <div style={{ fontSize: 13, color: '#6B6B6B', marginTop: 2 }}>12 pitanja · ~5 minuta</div>
               </div>
             </div>
 
@@ -418,7 +418,16 @@ export default function AnketaKupciPage() {
                 ]} />
               </QCard>
 
-              <QCard num={9} label="Ako pronađete OPG koji vam se sviđa kroz aplikaciju, nastavili biste naručivati kroz aplikaciju ili biste ih kontaktirali direktno?">
+              <QCard num={9} label="Ako imate 30 sekundi — opišite situaciju kad vas je kupnja od OPG-a razočarala ili zakomplicirala stvari. (opcionalno)">
+                <textarea
+                  style={{ width: '100%', padding: '10px 12px', border: '1.5px solid #D4C9B8', borderRadius: 8, fontSize: 13, color: '#1A1A1A', outline: 'none', background: 'white', fontFamily: 'inherit', minHeight: 90, resize: 'vertical', display: 'block' }}
+                  placeholder="npr. Naručio/la sam, ali nisu imali zaliha, saznao/la sam dan uoči dostave..."
+                  value={(answers['k10'] as string) || ''}
+                  onChange={e => setAnswers(a => ({ ...a, k10: e.target.value }))}
+                />
+              </QCard>
+
+              <QCard num={10} label="Ako pronađete OPG koji vam se sviđa kroz aplikaciju, nastavili biste naručivati kroz aplikaciju ili biste ih kontaktirali direktno?">
                 <RadioGroup id="k9b" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Uvijek kroz aplikaciju — lakše mi je' },
                   { label: 'Vjerojatno kroz aplikaciju' },
@@ -427,7 +436,7 @@ export default function AnketaKupciPage() {
                 ]} />
               </QCard>
 
-              <QCard num={10} label="Što bi vam platforma za kupnju od OPG-ova trebala nužno imati?">
+              <QCard num={11} label="Što bi vam platforma za kupnju od OPG-ova trebala nužno imati?">
                 <CheckGroup id="k11" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Pregled dostupnih proizvoda u realnom vremenu' },
                   { label: 'Jednostavno online naručivanje' },
@@ -441,7 +450,7 @@ export default function AnketaKupciPage() {
                 ]} />
               </QCard>
 
-              <QCard num={11} label="Koliko je vjerojatno da biste koristili aplikaciju koja vas spaja s lokalnim OPG-ovima za tjednu nabavu? (1 = malo vjerojatno, 5 = sigurno bih)">
+              <QCard num={12} label="Koliko je vjerojatno da biste koristili aplikaciju koja vas spaja s lokalnim OPG-ovima za tjednu nabavu? (1 = malo vjerojatno, 5 = sigurno bih)">
                 <ScaleGroup id="k12" answers={answers} setAnswers={setAnswers} lowLabel="1 = Malo vjerojatno" highLabel="5 = Sigurno bih" />
               </QCard>
             </div>

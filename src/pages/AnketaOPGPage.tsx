@@ -306,7 +306,7 @@ export default function AnketaOPGPage() {
               }}>🌾</div>
               <div>
                 <div style={{ fontSize: 20, color: '#2D5016', fontWeight: 700, lineHeight: 1.2 }}>Upitnik za OPG-ove</div>
-                <div style={{ fontSize: 13, color: '#6B6B6B', marginTop: 2 }}>11 pitanja · ~5 minuta</div>
+                <div style={{ fontSize: 13, color: '#6B6B6B', marginTop: 2 }}>12 pitanja · ~5 minuta</div>
               </div>
             </div>
 
@@ -449,7 +449,21 @@ export default function AnketaOPGPage() {
             <div style={{ marginBottom: 28 }}>
               <GroupHeader title="Vrijednost platforme" />
 
-              <QCard num={11} label="Koliko bi vam bila vrijedna platforma koja automatski spaja vaš OPG s lokalnim kupcima? (1 = nimalo, 5 = jako vrijedna)">
+              <QCard num={11} label="Ako imate 30 sekundi — opišite jednu konkretnu situaciju koja vam je nedavno stvorila problem u prodaji ili distribuciji. (opcionalno)">
+                <textarea
+                  style={{ width: '100%', padding: '10px 12px', border: '1.5px solid #D4C9B8', borderRadius: 8, fontSize: 13, color: '#1A1A1A', outline: 'none', background: 'white', fontFamily: 'inherit', minHeight: 90, resize: 'vertical', display: 'block' }}
+                  placeholder="npr. Imao sam višak rajčice, nije je nitko htio preuzeti, sve je propalo..."
+                  value={(answers['o10'] as string) || ''}
+                  onChange={e => setAnswers(a => ({ ...a, o10: e.target.value }))}
+                />
+              </QCard>
+            </div>
+
+            {/* GROUP 6 */}
+            <div style={{ marginBottom: 28 }}>
+              <GroupHeader title="Vrijednost platforme" />
+
+              <QCard num={12} label="Koliko bi vam bila vrijedna platforma koja automatski spaja vaš OPG s lokalnim kupcima? (1 = nimalo, 5 = jako vrijedna)">
                 <ScaleGroup id="o16" answers={answers} setAnswers={setAnswers} lowLabel="1 = Nimalo" highLabel="5 = Jako vrijedna" />
               </QCard>
             </div>
