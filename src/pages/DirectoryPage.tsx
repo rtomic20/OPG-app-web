@@ -41,10 +41,12 @@ export default function DirectoryPage() {
   const [followEmail, setFollowEmail] = useState('')
   const [followStatus, setFollowStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle')
 
+  const showTest = new URLSearchParams(window.location.search).get('show_test') === '1'
+
   useEffect(() => {
     Promise.all([
-      api.get('/vendors/').then((r) => setVendors((r.data as Vendor[]).filter((v) => !v.slug.startsWith('test-')))),
-      api.get('/vendors/feed/').then((r) => setPosts((r.data as Post[]).filter((p) => !p.vendor_slug.startsWith('test-')))).catch(() => {}),
+      api.get('/vendors/').then((r) => setVendors((r.data as Vendor[]).filter((v) => showTest || !v.slug.startsWith('test-')))),
+      api.get('/vendors/feed/').then((r) => setPosts((r.data as Post[]).filter((p) => showTest || !p.vendor_slug.startsWith('test-')))).catch(() => {}),
     ]).finally(() => setLoading(false))
   }, [])
 

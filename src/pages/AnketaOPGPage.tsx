@@ -219,14 +219,38 @@ function GroupHeader({ title }: { title: string }) {
   )
 }
 
+const REQUIRED_OPG = [
+  { key: 'o1',  q: 2,  label: 'Primarna djelatnost' },
+  { key: 'o2',  q: 3,  label: 'Duljina poslovanja' },
+  { key: 'o3',  q: 4,  label: 'Kanali prodaje' },
+  { key: 'o4',  q: 5,  label: 'Udio direktne prodaje' },
+  { key: 'o8',  q: 7,  label: 'Problemi u prodaji' },
+  { key: 'o11', q: 8,  label: 'Korištenje digitalne platforme' },
+  { key: 'o14', q: 10, label: 'Model naplate' },
+  { key: 'o16', q: 12, label: 'Vrijednost platforme (ocjena)' },
+]
+
 export default function AnketaOPGPage() {
   const [answers, setAnswers] = useState<Answers>({})
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [sending, setSending] = useState(false)
   const [error, setError] = useState('')
+  const [validationErrors, setValidationErrors] = useState<typeof REQUIRED_OPG>([])
 
   const handleSubmit = async () => {
+    const missing = REQUIRED_OPG.filter(r => {
+      const val = answers[r.key]
+      if (!val) return true
+      if (Array.isArray(val)) return (val as string[]).length === 0
+      return false
+    })
+    if (missing.length > 0) {
+      setValidationErrors(missing)
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+      return
+    }
+    setValidationErrors([])
     setSending(true)
     setError('')
     try {
@@ -442,6 +466,19 @@ export default function AnketaOPGPage() {
                   { label: 'Provizija po narudžbi — 5–10% od prodane vrijednosti' },
                   { label: 'Prihvatio/la bih i više od 10% ako platforma donosi kupce' },
                 ]} />
+                {answers['o14'] && answers['o14'] !== 'Ne bih platio/la ništa' && (
+                  <div style={{ marginTop: 12 }}>
+                    <div style={{ fontSize: 12, color: '#6B6B6B', marginBottom: 6 }}>
+                      Koji bi bio prihvatljiv maksimalni iznos naplate na <strong>mjesečnoj razini</strong>? (opcionalno)
+                    </div>
+                    <input
+                      style={inputStyle}
+                      placeholder="npr. 30 €/mj"
+                      value={(answers['o14_monthly'] as string) || ''}
+                      onChange={e => setAnswers(a => ({ ...a, o14_monthly: e.target.value }))}
+                    />
+                  </div>
+                )}
               </QCard>
             </div>
 
@@ -468,6 +505,29 @@ export default function AnketaOPGPage() {
               </QCard>
             </div>
 
+            {/* CTA — isprobajte platformu */}
+            <div style={{
+              background: 'linear-gradient(135deg, #2D5016 0%, #4a7c20 100%)',
+              borderRadius: 14, padding: '22px 20px', marginBottom: 24,
+            }}>
+              <div style={{ fontSize: 17, fontWeight: 700, color: 'white', marginBottom: 6 }}>
+                🧪 Isprobajte Tržnjak odmah!
+              </div>
+              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', marginBottom: 16, lineHeight: 1.6 }}>
+                Registrirajte se kao OPG, dodajte svoje proizvode i pogledajte kako platforma funkcionira — demo je besplatan.
+              </div>
+              <a
+                href="http://46.224.189.114"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'inline-block', background: 'white', color: '#2D5016',
+                  padding: '10px 22px', borderRadius: 8, textDecoration: 'none',
+                  fontWeight: 700, fontSize: 13, transition: 'opacity 0.15s',
+                }}
+              >Otvori platformu →</a>
+            </div>
+
             {/* Email */}
             <div style={{
               background: 'white', borderRadius: 12, padding: 18, marginBottom: 12, border: '1px solid #D4C9B8',
@@ -486,6 +546,24 @@ export default function AnketaOPGPage() {
                 onChange={e => setEmail(e.target.value)}
               />
             </div>
+
+            {validationErrors.length > 0 && (
+              <div style={{
+                background: '#FEF2F2', border: '1.5px solid #FECACA', borderRadius: 10,
+                padding: '14px 16px', marginBottom: 16,
+              }}>
+                <div style={{ fontSize: 13, fontWeight: 700, color: '#DC2626', marginBottom: 8 }}>
+                  ⚠️ Molimo odgovorite na obavezna pitanja prije slanja:
+                </div>
+                <ul style={{ margin: 0, paddingLeft: 18 }}>
+                  {validationErrors.map(e => (
+                    <li key={e.key} style={{ fontSize: 13, color: '#DC2626', marginBottom: 3 }}>
+                      Pitanje {e.q} — {e.label}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             <button
               type="button"
