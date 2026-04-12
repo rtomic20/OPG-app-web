@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../components/Logo'
 
@@ -191,7 +191,7 @@ function ScaleGroup({ id, answers, setAnswers, lowLabel = '1 = Nisko', highLabel
   )
 }
 
-function QCard({ num, label, children }: { num: number; label: string; children: React.ReactNode }) {
+function QCard({ num, label, children, required }: { num: number; label: string; children: React.ReactNode; required?: boolean }) {
   return (
     <div style={{
       background: 'white', borderRadius: 12, padding: 18, marginBottom: 12,
@@ -201,9 +201,10 @@ function QCard({ num, label, children }: { num: number; label: string; children:
         <span style={{
           display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
           width: 22, height: 22, borderRadius: '50%', background: '#E8F0D8',
-          color: '#2D5016', fontSize: 11, fontWeight: 700, marginRight: 8,
+          color: '#2D5016', fontSize: 11, fontWeight: 700, marginRight: 8, flexShrink: 0,
         }}>{num}</span>
         {label}
+        {required && <span style={{ color: '#DC2626', marginLeft: 4, fontWeight: 700 }}>*</span>}
       </div>
       {children}
     </div>
@@ -237,6 +238,7 @@ export default function AnketaKupciPage() {
   const [sending, setSending] = useState(false)
   const [error, setError] = useState('')
   const [validationErrors, setValidationErrors] = useState<typeof REQUIRED_KUPCI>([])
+  const errorRef = useRef<HTMLDivElement>(null)
 
   const handleSubmit = async () => {
     const missing = REQUIRED_KUPCI.filter(r => {
@@ -247,7 +249,7 @@ export default function AnketaKupciPage() {
     })
     if (missing.length > 0) {
       setValidationErrors(missing)
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+      setTimeout(() => errorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 50)
       return
     }
     setValidationErrors([])
@@ -351,7 +353,7 @@ export default function AnketaKupciPage() {
                 </select>
               </QCard>
 
-              <QCard num={2} label="Tko ste vi kao kupac lokalnih proizvoda?">
+              <QCard num={2} label="Tko ste vi kao kupac lokalnih proizvoda?" required>
                 <RadioGroup id="k1" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Privatna osoba / kućanstvo' },
                   { label: 'Restoran ili kafić' },
@@ -362,7 +364,7 @@ export default function AnketaKupciPage() {
                 ]} />
               </QCard>
 
-              <QCard num={3} label="Koliko često kupujete lokalne prehrambene proizvode direktno od proizvođača?">
+              <QCard num={3} label="Koliko često kupujete lokalne prehrambene proizvode direktno od proizvođača?" required>
                 <RadioGroup id="k2" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Svaki tjedan' },
                   { label: 'Nekoliko puta mjesečno' },
@@ -390,7 +392,7 @@ export default function AnketaKupciPage() {
             <div style={{ marginBottom: 28 }}>
               <GroupHeader title="Trenutni način nabave" />
 
-              <QCard num={5} label="Gdje trenutno kupujete lokalne proizvode? (može više odgovora)">
+              <QCard num={5} label="Gdje trenutno kupujete lokalne proizvode? (može više odgovora)" required>
                 <CheckGroup id="k4" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Zelena tržnica' },
                   { label: 'Direktno na OPG-u' },
@@ -425,7 +427,7 @@ export default function AnketaKupciPage() {
             <div style={{ marginBottom: 28 }}>
               <GroupHeader title="Problemi i platforma" />
 
-              <QCard num={8} label="Što vas najčešće frustrira pri kupnji od lokalnih OPG-ova? (može više odgovora)">
+              <QCard num={8} label="Što vas najčešće frustrira pri kupnji od lokalnih OPG-ova? (može više odgovora)" required>
                 <CheckGroup id="k7" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Teško je pronaći pouzdanog dobavljača' },
                   { label: 'Nepredvidiva dostupnost — ne znam što ima' },
@@ -448,7 +450,7 @@ export default function AnketaKupciPage() {
                 />
               </QCard>
 
-              <QCard num={10} label="Ako pronađete OPG koji vam se sviđa kroz aplikaciju, nastavili biste naručivati kroz aplikaciju ili biste ih kontaktirali direktno?">
+              <QCard num={10} label="Ako pronađete OPG koji vam se sviđa kroz aplikaciju, nastavili biste naručivati kroz aplikaciju ili biste ih kontaktirali direktno?" required>
                 <RadioGroup id="k9b" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Uvijek kroz aplikaciju — lakše mi je' },
                   { label: 'Vjerojatno kroz aplikaciju' },
@@ -471,7 +473,7 @@ export default function AnketaKupciPage() {
                 ]} />
               </QCard>
 
-              <QCard num={12} label="Koliko je vjerojatno da biste koristili aplikaciju koja vas spaja s lokalnim OPG-ovima za tjednu nabavu? (1 = malo vjerojatno, 5 = sigurno bih)">
+              <QCard num={12} label="Koliko je vjerojatno da biste koristili aplikaciju koja vas spaja s lokalnim OPG-ovima za tjednu nabavu? (1 = malo vjerojatno, 5 = sigurno bih)" required>
                 <ScaleGroup id="k12" answers={answers} setAnswers={setAnswers} lowLabel="1 = Malo vjerojatno" highLabel="5 = Sigurno bih" />
               </QCard>
             </div>
@@ -567,12 +569,12 @@ export default function AnketaKupciPage() {
             </div>
 
             {validationErrors.length > 0 && (
-              <div style={{
+              <div ref={errorRef} style={{
                 background: '#FEF2F2', border: '1.5px solid #FECACA', borderRadius: 10,
                 padding: '14px 16px', marginBottom: 16,
               }}>
                 <div style={{ fontSize: 13, fontWeight: 700, color: '#DC2626', marginBottom: 8 }}>
-                  ⚠️ Molimo odgovorite na obavezna pitanja prije slanja:
+                  ⚠️ Molimo odgovorite na označena pitanja (*) prije slanja:
                 </div>
                 <ul style={{ margin: 0, paddingLeft: 18 }}>
                   {validationErrors.map(e => (

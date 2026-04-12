@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../components/Logo'
 
@@ -191,7 +191,7 @@ function ScaleGroup({ id, answers, setAnswers, lowLabel = '1 = Nisko', highLabel
   )
 }
 
-function QCard({ num, label, children }: { num: number; label: string; children: React.ReactNode }) {
+function QCard({ num, label, children, required }: { num: number; label: string; children: React.ReactNode; required?: boolean }) {
   return (
     <div style={{
       background: 'white', borderRadius: 12, padding: 18, marginBottom: 12,
@@ -201,9 +201,10 @@ function QCard({ num, label, children }: { num: number; label: string; children:
         <span style={{
           display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
           width: 22, height: 22, borderRadius: '50%', background: '#E8F0D8',
-          color: '#2D5016', fontSize: 11, fontWeight: 700, marginRight: 8,
+          color: '#2D5016', fontSize: 11, fontWeight: 700, marginRight: 8, flexShrink: 0,
         }}>{num}</span>
         {label}
+        {required && <span style={{ color: '#DC2626', marginLeft: 4, fontWeight: 700 }}>*</span>}
       </div>
       {children}
     </div>
@@ -237,6 +238,7 @@ export default function AnketaOPGPage() {
   const [sending, setSending] = useState(false)
   const [error, setError] = useState('')
   const [validationErrors, setValidationErrors] = useState<typeof REQUIRED_OPG>([])
+  const errorRef = useRef<HTMLDivElement>(null)
 
   const handleSubmit = async () => {
     const missing = REQUIRED_OPG.filter(r => {
@@ -247,7 +249,7 @@ export default function AnketaOPGPage() {
     })
     if (missing.length > 0) {
       setValidationErrors(missing)
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+      setTimeout(() => errorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 50)
       return
     }
     setValidationErrors([])
@@ -348,7 +350,7 @@ export default function AnketaOPGPage() {
                 </select>
               </QCard>
 
-              <QCard num={2} label="Koja je vaša primarna djelatnost?">
+              <QCard num={2} label="Koja je vaša primarna djelatnost?" required>
                 <RadioGroup id="o1" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Voće i povrće' },
                   { label: 'Mliječni proizvodi' },
@@ -360,7 +362,7 @@ export default function AnketaOPGPage() {
                 ]} />
               </QCard>
 
-              <QCard num={3} label="Koliko dugo poslujete kao OPG?">
+              <QCard num={3} label="Koliko dugo poslujete kao OPG?" required>
                 <RadioGroup id="o2" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Manje od 2 godine' },
                   { label: '2–5 godina' },
@@ -374,7 +376,7 @@ export default function AnketaOPGPage() {
             <div style={{ marginBottom: 28 }}>
               <GroupHeader title="Prodaja i distribucija" />
 
-              <QCard num={4} label="Kroz koje kanale trenutno prodajete svoje proizvode? (može više odgovora)">
+              <QCard num={4} label="Kroz koje kanale trenutno prodajete svoje proizvode? (može više odgovora)" required>
                 <CheckGroup id="o3" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Direktna prodaja na OPG-u' },
                   { label: 'Zelena tržnica' },
@@ -387,7 +389,7 @@ export default function AnketaOPGPage() {
                 ]} />
               </QCard>
 
-              <QCard num={5} label="Koliki udio prihoda dolazi od direktne prodaje krajnjim kupcima?">
+              <QCard num={5} label="Koliki udio prihoda dolazi od direktne prodaje krajnjim kupcima?" required>
                 <RadioGroup id="o4" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Manje od 20%' },
                   { label: '20–50%' },
@@ -410,7 +412,7 @@ export default function AnketaOPGPage() {
             <div style={{ marginBottom: 28 }}>
               <GroupHeader title="Najveći problemi" />
 
-              <QCard num={7} label="Koji su vaši najveći problemi u prodaji i distribuciji? (može više odgovora)">
+              <QCard num={7} label="Koji su vaši najveći problemi u prodaji i distribuciji? (može više odgovora)" required>
                 <CheckGroup id="o8" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Teško pronalazim nove kupce' },
                   { label: 'Preveliki posrednici koji uzimaju veliku proviziju' },
@@ -428,7 +430,7 @@ export default function AnketaOPGPage() {
             <div style={{ marginBottom: 28 }}>
               <GroupHeader title="Digitalni alati i platforme" />
 
-              <QCard num={8} label="Koristite li trenutno neku digitalnu platformu za prodaju?">
+              <QCard num={8} label="Koristite li trenutno neku digitalnu platformu za prodaju?" required>
                 <RadioGroup id="o11" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Da, aktivno koristim' },
                   { label: 'Da, ali rijetko' },
@@ -457,7 +459,7 @@ export default function AnketaOPGPage() {
                 ]} />
               </QCard>
 
-              <QCard num={10} label="Koji model naplate biste radije prihvatili za digitalnu platformu?">
+              <QCard num={10} label="Koji model naplate biste radije prihvatili za digitalnu platformu?" required>
                 <RadioGroup id="o14" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Ne bih platio/la ništa' },
                   { label: 'Fiksna pretplata (npr. 10–20 €/mj)' },
@@ -499,7 +501,7 @@ export default function AnketaOPGPage() {
             <div style={{ marginBottom: 28 }}>
               <GroupHeader title="Vrijednost platforme" />
 
-              <QCard num={12} label="Koliko bi vam bila vrijedna platforma koja automatski spaja vaš OPG s lokalnim kupcima? (1 = nimalo, 5 = jako vrijedna)">
+              <QCard num={12} label="Koliko bi vam bila vrijedna platforma koja automatski spaja vaš OPG s lokalnim kupcima? (1 = nimalo, 5 = jako vrijedna)" required>
                 <ScaleGroup id="o16" answers={answers} setAnswers={setAnswers} lowLabel="1 = Nimalo" highLabel="5 = Jako vrijedna" />
               </QCard>
             </div>
@@ -547,12 +549,12 @@ export default function AnketaOPGPage() {
             </div>
 
             {validationErrors.length > 0 && (
-              <div style={{
+              <div ref={errorRef} style={{
                 background: '#FEF2F2', border: '1.5px solid #FECACA', borderRadius: 10,
                 padding: '14px 16px', marginBottom: 16,
               }}>
                 <div style={{ fontSize: 13, fontWeight: 700, color: '#DC2626', marginBottom: 8 }}>
-                  ⚠️ Molimo odgovorite na obavezna pitanja prije slanja:
+                  ⚠️ Molimo odgovorite na označena pitanja (*) prije slanja:
                 </div>
                 <ul style={{ margin: 0, paddingLeft: 18 }}>
                   {validationErrors.map(e => (
