@@ -257,7 +257,6 @@ export default function AnketaOPGPage() {
       await fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type: 'opg', answers, email }),
       })
       setSubmitted(true)
@@ -517,7 +516,7 @@ export default function AnketaOPGPage() {
                 Registrirajte se kao OPG, dodajte svoje proizvode i pogledajte kako platforma funkcionira — demo je besplatan.
               </div>
               <a
-                href="http://46.224.189.114"
+                href="https://trznjak.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{

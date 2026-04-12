@@ -257,7 +257,6 @@ export default function AnketaKupciPage() {
       await fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ type: 'korisnici', answers, email, device, os }),
       })
       setSubmitted(true)
