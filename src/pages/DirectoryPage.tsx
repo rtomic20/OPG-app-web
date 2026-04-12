@@ -43,8 +43,8 @@ export default function DirectoryPage() {
 
   useEffect(() => {
     Promise.all([
-      api.get('/vendors/').then((r) => setVendors(r.data)),
-      api.get('/vendors/feed/').then((r) => setPosts(r.data)).catch(() => {}),
+      api.get('/vendors/').then((r) => setVendors((r.data as Vendor[]).filter((v) => !v.slug.startsWith('test-')))),
+      api.get('/vendors/feed/').then((r) => setPosts((r.data as Post[]).filter((p) => !p.vendor_slug.startsWith('test-')))).catch(() => {}),
     ]).finally(() => setLoading(false))
   }, [])
 
