@@ -19,9 +19,6 @@ const inputStyle: React.CSSProperties = {
   borderRadius: 8, fontSize: 13, color: '#1A1A1A', outline: 'none',
   background: 'white', fontFamily: 'inherit',
 }
-const textareaStyle: React.CSSProperties = {
-  ...inputStyle, minHeight: 90, resize: 'vertical', display: 'block',
-}
 
 function RadioGroup({ id, options, answers, setAnswers }: {
   id: string
@@ -281,7 +278,7 @@ export default function AnketaOPGPage() {
           Pomozite nam razumjeti<br />vaše potrebe
         </h1>
         <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 15, fontWeight: 300, position: 'relative', zIndex: 1 }}>
-          Anketa za OPG-ove · ~9 minuta
+          Anketa za OPG-ove · ~5 minuta
         </p>
       </div>
 
@@ -309,7 +306,7 @@ export default function AnketaOPGPage() {
               }}>🌾</div>
               <div>
                 <div style={{ fontSize: 20, color: '#2D5016', fontWeight: 700, lineHeight: 1.2 }}>Upitnik za OPG-ove</div>
-                <div style={{ fontSize: 13, color: '#6B6B6B', marginTop: 2 }}>18 pitanja · ~9 minuta</div>
+                <div style={{ fontSize: 13, color: '#6B6B6B', marginTop: 2 }}>11 pitanja · ~5 minuta</div>
               </div>
             </div>
 
@@ -317,7 +314,6 @@ export default function AnketaOPGPage() {
             <div style={{ marginBottom: 28 }}>
               <GroupHeader title="O vašem OPG-u" />
 
-              {/* Q1 - Županija */}
               <QCard num={1} label="Iz koje županije dolazite?">
                 <select
                   value={(answers['zupanija'] as string) || ''}
@@ -329,7 +325,6 @@ export default function AnketaOPGPage() {
                 </select>
               </QCard>
 
-              {/* Q2 - Primarna djelatnost */}
               <QCard num={2} label="Koja je vaša primarna djelatnost?">
                 <RadioGroup id="o1" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Voće i povrće' },
@@ -342,7 +337,6 @@ export default function AnketaOPGPage() {
                 ]} />
               </QCard>
 
-              {/* Q3 - Starost OPG-a */}
               <QCard num={3} label="Koliko dugo poslujete kao OPG?">
                 <RadioGroup id="o2" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Manje od 2 godine' },
@@ -357,7 +351,6 @@ export default function AnketaOPGPage() {
             <div style={{ marginBottom: 28 }}>
               <GroupHeader title="Prodaja i distribucija" />
 
-              {/* Q4 - Kanali prodaje */}
               <QCard num={4} label="Kroz koje kanale trenutno prodajete svoje proizvode? (može više odgovora)">
                 <CheckGroup id="o3" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Direktna prodaja na OPG-u' },
@@ -371,7 +364,6 @@ export default function AnketaOPGPage() {
                 ]} />
               </QCard>
 
-              {/* Q5 - Udio direktne prodaje */}
               <QCard num={5} label="Koliki udio prihoda dolazi od direktne prodaje krajnjim kupcima?">
                 <RadioGroup id="o4" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Manje od 20%' },
@@ -381,18 +373,7 @@ export default function AnketaOPGPage() {
                 ]} />
               </QCard>
 
-              {/* Q6 - Administracija */}
-              <QCard num={6} label="Koliko vremena tjedno provedete na administraciju prodaje (narudžbe, dostava, fakture)?">
-                <RadioGroup id="o5" answers={answers} setAnswers={setAnswers} options={[
-                  { label: 'Manje od 2 sata' },
-                  { label: '2–5 sati' },
-                  { label: '5–10 sati' },
-                  { label: 'Više od 10 sati' },
-                ]} />
-              </QCard>
-
-              {/* Q7 - Troškovi prodaje */}
-              <QCard num={7} label="Koliko otprilike potrošite mjesečno na prodajne troškove (naknade tržnice, prijevoz, posrednici)?">
+              <QCard num={6} label="Koliko otprilike potrošite mjesečno na prodajne troškove (naknade tržnice, prijevoz, posrednici)?">
                 <RadioGroup id="o6a" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Manje od 20 €/mj' },
                   { label: '20–50 €/mj' },
@@ -400,46 +381,23 @@ export default function AnketaOPGPage() {
                   { label: 'Više od 100 €/mj' },
                 ]} />
               </QCard>
-
-              {/* Q8 - Zadovoljstvo */}
-              <QCard num={8} label="Koliko ste zadovoljni trenutnim načinom prodaje i distribucije? (1 = nezadovoljan, 5 = potpuno zadovoljan)">
-                <ScaleGroup id="o7" answers={answers} setAnswers={setAnswers} />
-              </QCard>
             </div>
 
             {/* GROUP 3 */}
             <div style={{ marginBottom: 28 }}>
-              <GroupHeader title="Najveći problemi (Pain points)" />
+              <GroupHeader title="Najveći problemi" />
 
-              {/* Q9 - Problemi */}
-              <QCard num={9} label="Koji su vaši najveći problemi u prodaji i distribuciji? (može više odgovora)">
+              <QCard num={7} label="Koji su vaši najveći problemi u prodaji i distribuciji? (može više odgovora)">
                 <CheckGroup id="o8" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Teško pronalazim nove kupce' },
                   { label: 'Preveliki posrednici koji uzimaju veliku proviziju' },
                   { label: 'Logistika i dostava je skupa/komplicirana' },
                   { label: 'Administracija oduzima previše vremena' },
                   { label: 'Nepredvidiva potražnja — ne znam koliko će se prodati' },
-                  { label: 'Kupci ne plaćaju na vrijeme' },
                   { label: 'Ne mogu prodati sve što proizvedem' },
                   { label: 'Nedostatak digitalnih vještina/alata' },
-                  { label: 'Sezonalnost — velika kolebanja' },
                   { label: 'Ostalo', hasOther: true },
                 ]} />
-              </QCard>
-
-              {/* Q10 - Pronalazak kupaca */}
-              <QCard num={10} label="Koliko vam je teško pronaći stabilne, pouzdane kupce? (1 = nimalo, 5 = izuzetno teško)">
-                <ScaleGroup id="o9" answers={answers} setAnswers={setAnswers} />
-              </QCard>
-
-              {/* Q11 - Slobodan odgovor */}
-              <QCard num={11} label="Opišite nam jednu konkretnu situaciju koja vam je nedavno stvorila problem u prodaji ili distribuciji.">
-                <textarea
-                  style={textareaStyle}
-                  placeholder="npr. Imao sam višak rajčice, nije je nitko htio preuzeti, sve je propalo..."
-                  value={(answers['o10'] as string) || ''}
-                  onChange={e => setAnswers(a => ({ ...a, o10: e.target.value }))}
-                />
               </QCard>
             </div>
 
@@ -447,8 +405,7 @@ export default function AnketaOPGPage() {
             <div style={{ marginBottom: 28 }}>
               <GroupHeader title="Digitalni alati i platforme" />
 
-              {/* Q12 - Digitalna platforma */}
-              <QCard num={12} label="Koristite li trenutno neku digitalnu platformu za prodaju?">
+              <QCard num={8} label="Koristite li trenutno neku digitalnu platformu za prodaju?">
                 <RadioGroup id="o11" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Da, aktivno koristim' },
                   { label: 'Da, ali rijetko' },
@@ -465,8 +422,7 @@ export default function AnketaOPGPage() {
                 )}
               </QCard>
 
-              {/* Q13 - Prepreke */}
-              <QCard num={13} label="Što vas je odvratilo ili bi vas odvratilo od korištenja digitalne platforme?">
+              <QCard num={9} label="Što vas je odvratilo ili bi vas odvratilo od korištenja digitalne platforme?">
                 <CheckGroup id="o12" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Previše komplicirana za korištenje' },
                   { label: 'Skupa naknada/provizija' },
@@ -478,63 +434,23 @@ export default function AnketaOPGPage() {
                 ]} />
               </QCard>
 
-              {/* Q14 - Funkcionalnosti */}
-              <QCard num={14} label="Koje funkcionalnosti bi vam bile najkorisnije u digitalnoj platformi?">
-                <CheckGroup id="o13" answers={answers} setAnswers={setAnswers} options={[
-                  { label: 'Jednostavno upravljanje narudžbama' },
-                  { label: 'Direktna veza s kupcima (restorani, privatnici)' },
-                  { label: 'Pregled zaliha i planiranje' },
-                  { label: 'Automatske fakture i plaćanje' },
-                  { label: 'Analitika i uvid u prodaju' },
-                  { label: 'Marketing i promocija' },
-                  { label: 'Zajednička dostava s drugim OPG-ovima' },
-                  { label: 'Ostalo', hasOther: true },
-                ]} />
-              </QCard>
-
-              {/* Q15 - Cijena */}
-              <QCard num={15} label="Koliko biste platili za platformu koja vam uštedi 5+ sati tjedno i poveća prodaju?">
+              <QCard num={10} label="Koji model naplate biste radije prihvatili za digitalnu platformu?">
                 <RadioGroup id="o14" answers={answers} setAnswers={setAnswers} options={[
-                  { label: 'Ništa — ne bi platio/la' },
-                  { label: 'Do 50 kn/mj (6,6€)' },
-                  { label: '50–150 kn/mj (6,6–20€)' },
-                  { label: '150–300 kn/mj (20–40€)' },
-                  { label: 'Više od 300 kn/mj ako se isplati' },
+                  { label: 'Ne bih platio/la ništa' },
+                  { label: 'Fiksna pretplata (npr. 10–20 €/mj)' },
+                  { label: 'Provizija po narudžbi — do 5% od prodane vrijednosti' },
+                  { label: 'Provizija po narudžbi — 5–10% od prodane vrijednosti' },
+                  { label: 'Prihvatio/la bih i više od 10% ako platforma donosi kupce' },
                 ]} />
               </QCard>
             </div>
 
             {/* GROUP 5 */}
             <div style={{ marginBottom: 28 }}>
-              <GroupHeader title="Konkurencija i tržište" />
+              <GroupHeader title="Vrijednost platforme" />
 
-              {/* Q16 - Platforme koje znaju */}
-              <QCard num={16} label="Koje platforme ili servise znate ili koristite za prodaju?">
-                <CheckGroup id="o15" answers={answers} setAnswers={setAnswers} options={[
-                  { label: 'OPG Tržnica' },
-                  { label: 'Njuškalo / Oglasnik' },
-                  { label: 'Vlastita web stranica' },
-                  { label: 'Facebook Marketplace' },
-                  { label: 'Lokalne dostavljačke službe' },
-                  { label: 'Direktni kontakt s restoranima' },
-                  { label: 'Ništa od navedenog' },
-                  { label: 'Ostalo', hasOther: true },
-                ]} />
-              </QCard>
-
-              {/* Q17 - Vrijednost platforme */}
-              <QCard num={17} label="Koliko bi vam bila vrijedna platforma koja automatski spaja vaš OPG s lokalnim restoranima i kupcima? (1 = nimalo, 5 = jako vrijedna)">
-                <ScaleGroup id="o16" answers={answers} setAnswers={setAnswers} />
-              </QCard>
-
-              {/* Q18 - Slobodan odgovor */}
-              <QCard num={18} label="Što trenutno nijedna platforma ne nudi, a vi biste stvarno trebali?">
-                <textarea
-                  style={textareaStyle}
-                  placeholder="Vaš slobodni odgovor..."
-                  value={(answers['o17'] as string) || ''}
-                  onChange={e => setAnswers(a => ({ ...a, o17: e.target.value }))}
-                />
+              <QCard num={11} label="Koliko bi vam bila vrijedna platforma koja automatski spaja vaš OPG s lokalnim kupcima? (1 = nimalo, 5 = jako vrijedna)">
+                <ScaleGroup id="o16" answers={answers} setAnswers={setAnswers} lowLabel="1 = Nimalo" highLabel="5 = Jako vrijedna" />
               </QCard>
             </div>
 

@@ -19,9 +19,6 @@ const inputStyle: React.CSSProperties = {
   borderRadius: 8, fontSize: 13, color: '#1A1A1A', outline: 'none',
   background: 'white', fontFamily: 'inherit',
 }
-const textareaStyle: React.CSSProperties = {
-  ...inputStyle, minHeight: 90, resize: 'vertical', display: 'block',
-}
 
 function RadioGroup({ id, options, answers, setAnswers }: {
   id: string
@@ -286,7 +283,7 @@ export default function AnketaKupciPage() {
           Pomozite nam razumjeti<br />vaše potrebe
         </h1>
         <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: 15, fontWeight: 300, position: 'relative', zIndex: 1 }}>
-          Anketa za kupce lokalnih proizvoda · ~8 minuta
+          Anketa za kupce lokalnih proizvoda · ~5 minuta
         </p>
       </div>
 
@@ -314,7 +311,7 @@ export default function AnketaKupciPage() {
               }}>🛒</div>
               <div>
                 <div style={{ fontSize: 20, color: '#2D5016', fontWeight: 700, lineHeight: 1.2 }}>Upitnik za kupce</div>
-                <div style={{ fontSize: 13, color: '#6B6B6B', marginTop: 2 }}>17 pitanja · ~8 minuta</div>
+                <div style={{ fontSize: 13, color: '#6B6B6B', marginTop: 2 }}>11 pitanja · ~5 minuta</div>
               </div>
             </div>
 
@@ -322,7 +319,6 @@ export default function AnketaKupciPage() {
             <div style={{ marginBottom: 28 }}>
               <GroupHeader title="O vama" />
 
-              {/* Q1 - Županija */}
               <QCard num={1} label="Iz koje županije dolazite?">
                 <select
                   value={(answers['zupanija'] as string) || ''}
@@ -334,7 +330,6 @@ export default function AnketaKupciPage() {
                 </select>
               </QCard>
 
-              {/* Q2 - Tko ste */}
               <QCard num={2} label="Tko ste vi kao kupac lokalnih proizvoda?">
                 <RadioGroup id="k1" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Privatna osoba / kućanstvo' },
@@ -346,7 +341,6 @@ export default function AnketaKupciPage() {
                 ]} />
               </QCard>
 
-              {/* Q3 - Frekvencija */}
               <QCard num={3} label="Koliko često kupujete lokalne prehrambene proizvode direktno od proizvođača?">
                 <RadioGroup id="k2" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Svaki tjedan' },
@@ -357,7 +351,6 @@ export default function AnketaKupciPage() {
                 ]} />
               </QCard>
 
-              {/* Q4 - Motivacija */}
               <QCard num={4} label="Što vas motivira da kupujete od lokalnih OPG-ova? (može više odgovora)">
                 <CheckGroup id="k3" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Svježina i kvaliteta proizvoda' },
@@ -376,7 +369,6 @@ export default function AnketaKupciPage() {
             <div style={{ marginBottom: 28 }}>
               <GroupHeader title="Trenutni način nabave" />
 
-              {/* Q5 - Gdje kupuju */}
               <QCard num={5} label="Gdje trenutno kupujete lokalne proizvode? (može više odgovora)">
                 <CheckGroup id="k4" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Zelena tržnica' },
@@ -389,13 +381,7 @@ export default function AnketaKupciPage() {
                 ]} />
               </QCard>
 
-              {/* Q6 - Zadovoljstvo */}
-              <QCard num={6} label="Koliko ste zadovoljni trenutnim načinom nabave lokalnih proizvoda? (1 = nezadovoljan, 5 = potpuno zadovoljan)">
-                <ScaleGroup id="k5" answers={answers} setAnswers={setAnswers} />
-              </QCard>
-
-              {/* Q7 - Dostava */}
-              <QCard num={7} label="Koliko vam je važna dostava na kućnu adresu?">
+              <QCard num={6} label="Koliko vam je važna dostava na kućnu adresu?">
                 <RadioGroup id="k6" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Iznimno važno — bez dostave ne kupujem online' },
                   { label: 'Važno, ali i sam/a mogu preuzeti' },
@@ -404,8 +390,7 @@ export default function AnketaKupciPage() {
                 ]} />
               </QCard>
 
-              {/* Q8 - Udaljenost */}
-              <QCard num={8} label="Koliko ste daleko spremni otići preuzeti narudžbu od lokalnog OPG-a?">
+              <QCard num={7} label="Koliko ste daleko spremni otići preuzeti narudžbu od lokalnog OPG-a?">
                 <RadioGroup id="k6b" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Do 5 km' },
                   { label: 'Do 10 km' },
@@ -417,10 +402,9 @@ export default function AnketaKupciPage() {
 
             {/* GROUP 3 */}
             <div style={{ marginBottom: 28 }}>
-              <GroupHeader title="Problemi i frustracije" />
+              <GroupHeader title="Problemi i platforma" />
 
-              {/* Q9 - Frustracije */}
-              <QCard num={9} label="Što vas najčešće frustrira pri kupnji od lokalnih OPG-ova? (može više odgovora)">
+              <QCard num={8} label="Što vas najčešće frustrira pri kupnji od lokalnih OPG-ova? (može više odgovora)">
                 <CheckGroup id="k7" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Teško je pronaći pouzdanog dobavljača' },
                   { label: 'Nepredvidiva dostupnost — ne znam što ima' },
@@ -428,20 +412,13 @@ export default function AnketaKupciPage() {
                   { label: 'Nejasne cijene' },
                   { label: 'Loša komunikacija / nema odgovora' },
                   { label: 'Dostava je skupa ili ne postoji' },
-                  { label: 'Kvaliteta varira od narudžbe do narudžbe' },
                   { label: 'Ne postoji jedna platforma gdje se sve nalazi' },
                   { label: 'Nema recenzija ni ocjena' },
                   { label: 'Ostalo', hasOther: true },
                 ]} />
               </QCard>
 
-              {/* Q10 - Teškoća pronalaska */}
-              <QCard num={10} label="Koliko vam je teško naći novog, pouzdanog lokalnog dobavljača? (1 = lako, 5 = jako teško)">
-                <ScaleGroup id="k8" answers={answers} setAnswers={setAnswers} />
-              </QCard>
-
-              {/* Q11 - Retention */}
-              <QCard num={11} label="Ako pronađete OPG koji vam se sviđa kroz aplikaciju, nastavili biste naručivati kroz aplikaciju ili biste ih kontaktirali direktno?">
+              <QCard num={9} label="Ako pronađete OPG koji vam se sviđa kroz aplikaciju, nastavili biste naručivati kroz aplikaciju ili biste ih kontaktirali direktno?">
                 <RadioGroup id="k9b" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Uvijek kroz aplikaciju — lakše mi je' },
                   { label: 'Vjerojatno kroz aplikaciju' },
@@ -450,83 +427,22 @@ export default function AnketaKupciPage() {
                 ]} />
               </QCard>
 
-              {/* Q12 - Slobodan odgovor */}
-              <QCard num={12} label="Opišite nam jednu situaciju kad vas je kupnja od OPG-a razočarala ili zakomplicirala stvari.">
-                <textarea
-                  style={textareaStyle}
-                  placeholder="npr. Naručio/la sam, ali nisu imali zaliha, saznao/la sam dan uoči dostave..."
-                  value={(answers['k10'] as string) || ''}
-                  onChange={e => setAnswers(a => ({ ...a, k10: e.target.value }))}
-                />
-              </QCard>
-            </div>
-
-            {/* GROUP 4 */}
-            <div style={{ marginBottom: 28 }}>
-              <GroupHeader title="Digitalna platforma" />
-
-              {/* Q13 - Potrebne funkcionalnosti */}
-              <QCard num={13} label="Što bi vam platforma za kupnju od OPG-ova trebala nužno imati?">
+              <QCard num={10} label="Što bi vam platforma za kupnju od OPG-ova trebala nužno imati?">
                 <CheckGroup id="k11" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Pregled dostupnih proizvoda u realnom vremenu' },
                   { label: 'Jednostavno online naručivanje' },
                   { label: 'Dostava na kućnu adresu' },
-                  { label: 'Pretplata / redovita tjedna kutija' },
                   { label: 'Recenzije i ocjene OPG-ova' },
-                  { label: 'Informacije o načinu uzgoja' },
                   { label: 'Plaćanje karticom online' },
                   { label: 'Chat s proizvođačem' },
-                  { label: 'Prijedlozi recepata uz narudžbu' },
+                  { label: 'Pretplata / redovita tjedna kutija' },
                   { label: 'Grupna narudžba s prijateljima / susjedima' },
                   { label: 'Ostalo', hasOther: true },
                 ]} />
               </QCard>
 
-              {/* Q14 - Vjerojatnost korištenja */}
-              <QCard num={14} label="Koliko je vjerojatno da biste koristili aplikaciju koja vas spaja s lokalnim OPG-ovima za tjednu nabavu? (1 = malo vjerojatno, 5 = sigurno bih)">
-                <ScaleGroup id="k12" answers={answers} setAnswers={setAnswers} />
-              </QCard>
-            </div>
-
-            {/* GROUP 5 */}
-            <div style={{ marginBottom: 28 }}>
-              <GroupHeader title="Konkurencija i usporedba" />
-
-              {/* Q15 - Korištene platforme */}
-              <QCard num={15} label="Koje platforme ili servise ste koristili za nabavu lokalne hrane?">
-                <CheckGroup id="k13" answers={answers} setAnswers={setAnswers} options={[
-                  { label: 'OPG Tržnica' },
-                  { label: 'Wolt / Bolt Food (lokalni OPG-ovi)' },
-                  { label: 'Lokalne Facebook grupe' },
-                  { label: 'Njuškalo' },
-                  { label: 'Direktan kontakt' },
-                  { label: 'Ništa od navedenog' },
-                  { label: 'Ostalo', hasOther: true },
-                ]} />
-              </QCard>
-
-              {/* Q16 - Što nedostaje */}
-              <QCard num={16} label="Što vam nedostaje u platformama koje ste koristili?">
-                <CheckGroup id="k14" answers={answers} setAnswers={setAnswers} options={[
-                  { label: 'Premali izbor OPG-ova' },
-                  { label: 'Loša dostava' },
-                  { label: 'Nema recenzija' },
-                  { label: 'Nije intuitivno za koristiti' },
-                  { label: 'Skupe naknade' },
-                  { label: 'Neredovita dostupnost proizvoda' },
-                  { label: 'Ništa — zadovoljan/na sam' },
-                  { label: 'Ostalo', hasOther: true },
-                ]} />
-              </QCard>
-
-              {/* Q17 - Slobodan odgovor */}
-              <QCard num={17} label="Što bi vas uvjerilo da redovito naručujete lokalnu hranu putem jedne platforme?">
-                <textarea
-                  style={textareaStyle}
-                  placeholder="Vaš slobodni odgovor..."
-                  value={(answers['k16'] as string) || ''}
-                  onChange={e => setAnswers(a => ({ ...a, k16: e.target.value }))}
-                />
+              <QCard num={11} label="Koliko je vjerojatno da biste koristili aplikaciju koja vas spaja s lokalnim OPG-ovima za tjednu nabavu? (1 = malo vjerojatno, 5 = sigurno bih)">
+                <ScaleGroup id="k12" answers={answers} setAnswers={setAnswers} lowLabel="1 = Malo vjerojatno" highLabel="5 = Sigurno bih" />
               </QCard>
             </div>
 
