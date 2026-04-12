@@ -150,7 +150,7 @@ export default function DirectoryPage() {
                     {v.logo ? (
                       <>
                         <img src={v.logo} alt={v.name} className="h-full w-full object-cover" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/10" />
                       </>
                     ) : (
                       <span className="text-5xl">🌿</span>
