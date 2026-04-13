@@ -47,7 +47,7 @@ export default function LoginPage() {
         panelTab?.close()
         setMfaSession(result.mfa_session!)
         setStep('mfa')
-      } else if (result.role === 'opg_owner' || result.role === 'admin') {
+      } else if (result.role === 'opg_owner' || result.role === 'admin' || result.role === 'customer_support') {
         await redirectToPanel(result.access!, result.refresh!, panelTab)
       } else {
         panelTab?.close()
@@ -71,7 +71,7 @@ export default function LoginPage() {
     try {
       const { data } = await api.post('/auth/mfa/verify/', { mfa_session: mfaSession, code: mfaCode })
       const result = await loginWithTokens(data.access, data.refresh)
-      if (result.role === 'opg_owner' || result.role === 'admin') {
+      if (result.role === 'opg_owner' || result.role === 'admin' || result.role === 'customer_support') {
         await redirectToPanel(result.access, result.refresh, panelTab)
       } else {
         panelTab?.close()
