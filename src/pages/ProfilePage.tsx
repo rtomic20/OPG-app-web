@@ -67,6 +67,7 @@ export default function ProfilePage() {
   const [supportSending, setSupportSending] = useState(false)
   const supportPollRef = useRef<ReturnType<typeof setInterval> | null>(null)
   const supportEndRef = useRef<HTMLDivElement>(null)
+  const prevMsgCountRef = useRef(0)
 
   useEffect(() => {
     if (user) {
@@ -105,7 +106,10 @@ export default function ProfilePage() {
   }, [tab])
 
   useEffect(() => {
-    supportEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    if (supportMessages.length > prevMsgCountRef.current) {
+      supportEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    }
+    prevMsgCountRef.current = supportMessages.length
   }, [supportMessages])
 
   const handleSupportSend = async (e: React.FormEvent) => {
