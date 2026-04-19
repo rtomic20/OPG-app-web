@@ -55,8 +55,8 @@ export default function Footer() {
         <div className="border-t border-green-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-sm text-green-500">
           <span>© {year} Tržnjak. Sva prava pridržana.</span>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-green-300 transition-colors">Privatnost</a>
-            <a href="#" className="hover:text-green-300 transition-colors">Uvjeti korištenja</a>
+            <Link to="/privatnost" className="hover:text-green-300 transition-colors">Privatnost</Link>
+            <Link to="/uvjeti" className="hover:text-green-300 transition-colors">Uvjeti korištenja</Link>
           </div>
         </div>
       </div>
