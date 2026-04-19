@@ -15,6 +15,7 @@ export default function RegisterPage() {
   const [confirm, setConfirm] = useState('')
   const [passVisible, setPassVisible] = useState(false)
   const [confirmVisible, setConfirmVisible] = useState(false)
+  const [privacyAccepted, setPrivacyAccepted] = useState(false)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -35,10 +36,14 @@ export default function RegisterPage() {
       setError('Lozinke se ne podudaraju.')
       return
     }
+    if (!privacyAccepted) {
+      setError('Morate prihvatiti Pravila privatnosti.')
+      return
+    }
     setLoading(true)
     setError('')
     try {
-      await api.post('/auth/register/customer/', form)
+      await api.post('/auth/register/customer/', { ...form, privacy_accepted: true })
       navigate('/prijava', { state: { message: 'Registracija uspješna! Prijavi se.' } })
     } catch (err: any) {
       const data = err?.response?.data
@@ -169,8 +174,28 @@ export default function RegisterPage() {
                 <input value={form.delivery_address} onChange={set('delivery_address')} placeholder="Ulica i broj, grad"
                   className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-300" />
               </div>
+              <div className="flex items-start gap-2 pt-1">
+                <input
+                  id="privacy"
+                  type="checkbox"
+                  checked={privacyAccepted}
+                  onChange={e => setPrivacyAccepted(e.target.checked)}
+                  className="mt-0.5 accent-green-600"
+                />
+                <label htmlFor="privacy" className="text-xs text-gray-600">
+                  Prihvaćam{' '}
+                  <a
+                    href="/privatnost"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-green-600 underline hover:text-green-700"
+                  >
+                    Pravila privatnosti
+                  </a>
+                </label>
+              </div>
               {error && <p className="text-red-600 text-sm">{error}</p>}
-              <button type="submit" disabled={loading}
+              <button type="submit" disabled={loading || !privacyAccepted}
                 className="w-full bg-green-600 text-white py-2.5 rounded-lg font-medium hover:bg-green-700 disabled:opacity-50 transition-colors mt-2">
                 {loading ? 'Kreiranje računa...' : 'Kreiraj račun'}
               </button>
