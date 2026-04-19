@@ -13,6 +13,7 @@ export default function Navbar() {
   const dropdownRef = useRef<HTMLDivElement>(null)
   const isLanding = location.pathname === '/'
   const isAuth = ['/prijava', '/registracija'].includes(location.pathname)
+  const isLegal = ['/privatnost', '/uvjeti'].includes(location.pathname)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -58,7 +59,7 @@ export default function Navbar() {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-6">
-            {!isAuth && (
+            {!isAuth && !isLegal && (
               <Link to="/opgovi" className="text-green-800 hover:text-green-600 font-medium transition-colors">
                 OPG-ovi
               </Link>
@@ -89,7 +90,7 @@ export default function Navbar() {
                 </button>
 
                 {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-1 z-50">
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-1 z-[9999]">
                     <div className="px-4 py-2 border-b border-gray-100">
                       <p className="text-xs text-gray-400 truncate">{user.email}</p>
                     </div>
@@ -150,7 +151,7 @@ export default function Navbar() {
 
         {menuOpen && (
           <div className="md:hidden bg-white border-t border-green-100 py-4 space-y-1">
-            {!isAuth && <Link to="/opgovi" className="block px-4 py-2.5 text-green-800 font-medium" onClick={() => setMenuOpen(false)}>OPG-ovi</Link>}
+            {!isAuth && !isLegal && <Link to="/opgovi" className="block px-4 py-2.5 text-green-800 font-medium" onClick={() => setMenuOpen(false)}>OPG-ovi</Link>}
             {user ? (
               <>
                 <div className="px-4 py-2 border-b border-gray-100 mb-1">
