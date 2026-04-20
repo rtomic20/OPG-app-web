@@ -1,14 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
 
 const categories = [
-  { icon: '🍅', name: 'Voće i povrće', desc: 'Rajčice, tikvice, paprika, jabuke, jagode...' },
-  { icon: '🍯', name: 'Med i pčelinji proizvodi', desc: 'Med, propolis, vosak, matična mliječ' },
-  { icon: '🥚', name: 'Jaja', desc: 'Svježa jaja slobodnih kokoši, domaća perad' },
-  { icon: '🥛', name: 'Mliječni proizvodi', desc: 'Svježe mlijeko, sir, jogurt, vrhnje, skuta' },
-  { icon: '🥩', name: 'Meso i mesne prerađevine', desc: 'Janjetina, svinjetina, kobasice, pršut, slanina' },
-  { icon: '🫒', name: 'Maslinovo ulje', desc: 'Extra djevičansko ulje, masline, paste' },
-  { icon: '🍷', name: 'Vino', desc: 'Domaće vino, bijelo, crno, rosé, prošek' },
-  { icon: '🍞', name: 'Pekarski proizvodi', desc: 'Domaći kruh, pogača, kolači, štrukli' },
+  { icon: '🍎', name: 'Voće',                      desc: 'Jabuke, kruške, jagode, trešnje, smokve...' },
+  { icon: '🥦', name: 'Povrće',                    desc: 'Rajčice, tikvice, paprika, mrkva, luk...' },
+  { icon: '🥩', name: 'Meso',                      desc: 'Janjetina, svinjetina, teletina, perad' },
+  { icon: '🫙', name: 'Mesne prerađevine',         desc: 'Kobasice, pršut, slanina, paštete, salame' },
+  { icon: '🐟', name: 'Riba',                      desc: 'Svježa riba, školjke, lignje, brancin...' },
+  { icon: '🐠', name: 'Riblji proizvodi',          desc: 'Sušena riba, riblje konzerve, marinade' },
+  { icon: '🧀', name: 'Sirni proizvodi',           desc: 'Domaći sir, skuta, vrhnje, polumasni sirevi' },
+  { icon: '🥚', name: 'Jaja',                      desc: 'Svježa jaja slobodnih kokoši, domaća perad' },
+  { icon: '🍯', name: 'Med i pčelinji proizvodi',  desc: 'Med, propolis, vosak, matična mliječ' },
+  { icon: '🫒', name: 'Maslinovo ulje',            desc: 'Extra djevičansko ulje, masline, paste' },
+  { icon: '🍷', name: 'Vino',                      desc: 'Domaće vino, bijelo, crno, rosé, prošek' },
+  { icon: '🍞', name: 'Pekarski proizvodi',        desc: 'Domaći kruh, pogača, kolači, štrukli' },
   { icon: '🌿', name: 'Začini i biljni proizvodi', desc: 'Lavanda, ružmarin, bazilika, origano, čajevi' },
   { icon: '🍓', name: 'Džemovi, sokovi i zimnica', desc: 'Domaći džemovi, voćni sokovi, ajvar, ukiseljeno' },
 ]
@@ -34,7 +38,7 @@ export default function Categories() {
             Što možeš naručiti
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-green-950 mb-4">
-            10 kategorija domaćih proizvoda
+            14 kategorija domaćih proizvoda
           </h2>
           <p className="text-green-700 text-lg max-w-xl mx-auto">
             Od povrća do vina — sve što treba jednoj zdravoj, lokalno ukorijenjnoj kuhinji.
