@@ -38,7 +38,7 @@ export default function Categories() {
             Što možeš naručiti
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-green-950 mb-4">
-            14 kategorija domaćih proizvoda
+            Svježi lokalni proizvodi
           </h2>
           <p className="text-green-700 text-lg max-w-xl mx-auto">
             Od povrća do vina — sve što treba jednoj zdravoj, lokalno ukorijenjnoj kuhinji.
@@ -46,7 +46,7 @@ export default function Categories() {
         </div>
 
         <div className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 ${visible ? 'section-visible' : ''}`}>
-          {categories.map((cat, i) => (
+          {categories.slice(0, 10).map((cat, i) => (
             <div
               key={cat.name}
               className={`animate-fade-in animate-delay-${Math.min((i % 5 + 1) * 100, 500)} group bg-white rounded-2xl p-5 text-center shadow-sm border border-green-100 hover:border-green-300 hover:shadow-md transition-all cursor-default`}
@@ -62,8 +62,8 @@ export default function Categories() {
 
         {/* Bottom note */}
         <div className="text-center mt-10">
-          <p className="text-green-600 text-sm">
-            + mnogo više kategorija u planu — sugestije su dobrodošle!
+          <p className="text-green-600 text-sm font-medium">
+            + još više kategorija dostupno u aplikaciji 📱
           </p>
         </div>
       </div>
