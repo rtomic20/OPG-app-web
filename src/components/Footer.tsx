@@ -47,6 +47,11 @@ export default function Footer() {
                   infotrznjak@gmail.com
                 </a>
               </li>
+              <li>
+                <a href="tel:+385996319003" className="hover:text-white transition-colors">
+                  +385 99 631 9003
+                </a>
+              </li>
               <li className="text-green-400">Hrvatska</li>
             </ul>
           </div>
