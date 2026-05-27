@@ -3,24 +3,27 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwhtdOZvVYio4FkDLbqx
 const answers = {};
 
 function selectRadio(id, btn) {
-  document.querySelectorAll('#' + id + ' .opt-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('#' + id + ' .opt-btn').forEach(function(b) {
+    b.classList.remove('selected');
+  });
   btn.classList.add('selected');
   answers[id] = btn.textContent.trim();
 
   if (id === 'q8') {
-    const napomena = document.getElementById('q8_napomena');
-    const showNapomena = btn.textContent.includes('Da,') || btn.textContent.includes('mogu napraviti') || btn.textContent.includes('trebam razmisliti');
-    showNapomena ? napomena.classList.remove('hidden') : napomena.classList.add('hidden');
+    var napomena = document.getElementById('q8_napomena');
+    var text = btn.textContent;
+    var show = text.includes('Da,') || text.includes('mogu napraviti') || text.includes('trebam razmisliti');
+    show ? napomena.classList.remove('hidden') : napomena.classList.add('hidden');
   }
 }
 
 async function submitForm() {
-  const btn = document.getElementById('submitBtn');
-  const msg = document.getElementById('sendingMsg');
+  var btn = document.getElementById('submitBtn');
+  var msg = document.getElementById('sendingMsg');
   btn.disabled = true;
   msg.style.display = 'block';
 
-  const payload = {
+  var payload = {
     opg_naziv:       document.getElementById('opg_naziv').value.trim(),
     kontakt_ime:     document.getElementById('kontakt_ime').value.trim(),
     kontakt_email:   document.getElementById('kontakt_email').value.trim(),
@@ -51,3 +54,13 @@ async function submitForm() {
   document.getElementById('success').style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('#q8 .opt-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      selectRadio('q8', btn);
+    });
+  });
+
+  document.getElementById('submitBtn').addEventListener('click', submitForm);
+});
