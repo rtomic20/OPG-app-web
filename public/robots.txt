@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /prijava
+Disallow: /registracija
+Disallow: /profil
+Disallow: /zaboravili-lozinku
+Disallow: /reset-lozinka
+
+Sitemap: https://trznjak.com/sitemap.xml

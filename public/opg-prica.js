@@ -1,4 +1,4 @@
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwhtdOZvVYio4FkDLbqxMGeZw9px0efzxwDYH8e-KZYWeXSuEPmpzpHuWqmprK6v9-GnA/exec";
+const API_URL = "https://api.trznjak.com/api/auth/opg-prica/";
 
 const answers = {};
 
@@ -40,11 +40,10 @@ async function submitForm() {
   };
 
   try {
-    await fetch(SCRIPT_URL, {
+    await fetch(API_URL, {
       method: 'POST',
-      mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'prica', ...payload })
+      body: JSON.stringify(payload)
     });
   } catch(e) {
     console.error(e);
@@ -55,12 +54,10 @@ async function submitForm() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('#q8 .opt-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      selectRadio('q8', btn);
-    });
+document.querySelectorAll('#q8 .opt-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    selectRadio('q8', btn);
   });
-
-  document.getElementById('submitBtn').addEventListener('click', submitForm);
 });
+
+document.getElementById('submitBtn').addEventListener('click', submitForm);
