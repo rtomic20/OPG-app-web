@@ -1,4 +1,5 @@
 name = "opg-app-web"
+account_id = "9a3891f3cbdfe81d27d28f519445acd7"
 compatibility_date = "2024-01-01"
 
 [assets]
