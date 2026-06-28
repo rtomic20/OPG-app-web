@@ -49,6 +49,7 @@ export default function LoginPage() {
         setStep('mfa')
       } else if (result.role === 'opg_owner' || result.role === 'admin' || result.role === 'customer_support') {
         await redirectToPanel(result.access!, result.refresh!, panelTab)
+        if (panelTab) navigate('/', { replace: true })
       } else {
         panelTab?.close()
         navigate(from === '/' ? '/profil' : from, { replace: true })
@@ -73,6 +74,7 @@ export default function LoginPage() {
       const result = await loginWithTokens(data.access, data.refresh)
       if (result.role === 'opg_owner' || result.role === 'admin' || result.role === 'customer_support') {
         await redirectToPanel(result.access, result.refresh, panelTab)
+        if (panelTab) navigate('/', { replace: true })
       } else {
         panelTab?.close()
         navigate(from === '/' ? '/profil' : from, { replace: true })

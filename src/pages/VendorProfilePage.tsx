@@ -63,9 +63,6 @@ export default function VendorProfilePage() {
   const [posts, setPosts] = useState<Post[]>([])
   const [loading, setLoading] = useState(true)
   const [tab, setTab] = useState<'products' | 'posts' | 'reviews'>('products')
-  const [followEmail, setFollowEmail] = useState('')
-  const [followStatus, setFollowStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle')
-
   useEffect(() => {
     if (!slug) return
     Promise.allSettled([
@@ -80,17 +77,6 @@ export default function VendorProfilePage() {
       if (po.status === 'fulfilled') setPosts(po.value.data)
     }).finally(() => setLoading(false))
   }, [slug])
-
-  const handleFollow = async () => {
-    if (!followEmail || !slug) return
-    setFollowStatus('loading')
-    try {
-      await api.post(`/vendors/${slug}/follow/`, { email: followEmail })
-      setFollowStatus('done')
-    } catch {
-      setFollowStatus('error')
-    }
-  }
 
   if (loading) return (
     <div className="min-h-screen bg-[#FAF7F2]">
@@ -161,35 +147,6 @@ export default function VendorProfilePage() {
           {vendor.description && (
             <p className="text-[#555] text-sm pb-4">{vendor.description}</p>
           )}
-
-          {/* Follow */}
-          <div className="bg-white rounded-lg border border-[#E8E8E8] p-4 mb-6">
-            <p className="text-sm font-semibold text-[#111] mb-1">Prati ovaj OPG</p>
-            <p className="text-xs text-[#888] mb-3">Dobivaj obavijesti o novim proizvodima i objavama</p>
-            {followStatus === 'done' ? (
-              <p className="text-sm text-[#2D5016] font-medium">✓ Pratitelj si ovog OPG-a!</p>
-            ) : (
-              <div className="flex gap-2">
-                <input
-                  type="email"
-                  placeholder="tvoj@email.hr"
-                  value={followEmail}
-                  onChange={(e) => setFollowEmail(e.target.value)}
-                  className="flex-1 px-3 py-2 border border-[#D8D8D8] rounded text-sm text-[#111] focus:outline-none focus:ring-2 focus:ring-[#2D5016]/20 focus:border-[#2D5016] transition-colors"
-                  onKeyDown={(e) => e.key === 'Enter' && handleFollow()}
-                />
-                <button
-                  onClick={handleFollow}
-                  disabled={followStatus === 'loading' || !followEmail}
-                  className="px-4 py-2 bg-[#2D5016] hover:bg-[#3D6A1F] text-white text-sm font-medium disabled:opacity-50 transition-colors"
-                  style={{ borderRadius: '4px' }}
-                >
-                  Prati
-                </button>
-              </div>
-            )}
-            {followStatus === 'error' && <p className="text-xs text-red-500 mt-1">Greška. Pokušaj ponovno.</p>}
-          </div>
 
           {/* Tabs */}
           <div className="flex gap-1 border-b border-[#E8E8E8] mb-6">
