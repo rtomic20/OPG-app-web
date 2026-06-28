@@ -85,7 +85,7 @@ export default function UvjetiPage() {
 
         </section>
 
-        <p className="mt-16 text-sm text-gray-400 italic">Tržnjak — svježa lokalna hrana, direktno od farmera.</p>
+        <p className="mt-16 text-sm text-gray-400 italic">Tržnjak - svježa lokalna hrana, direktno od farmera.</p>
       </main>
       <Footer />
     </div>

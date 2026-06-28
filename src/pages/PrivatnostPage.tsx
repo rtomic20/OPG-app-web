@@ -32,11 +32,11 @@ export default function PrivatnostPage() {
             <ul className="list-disc list-inside space-y-1 mb-4">
               <li>Povijest narudžbi i poruka s OPG prodavačima</li>
               <li>Ocjene i recenzije koje ostavite</li>
-              <li>Lokacija uređaja (samo kada tražite OPG-ove u blizini — ne pohranjujemo je trajno)</li>
+              <li>Lokacija uređaja (samo kada tražite OPG-ove u blizini - ne pohranjujemo je trajno)</li>
               <li>FCM token uređaja (za slanje push obavijesti)</li>
             </ul>
             <p className="font-medium mb-1">Podaci koje ne prikupljamo:</p>
-            <p>Podatke o platnoj kartici — platni promet obrađuje Stripe kao zasebni procesor u skladu s PCI DSS standardima. Mi nikada ne vidimo niti pohranjujemo vaše kartične podatke.</p>
+            <p>Podatke o platnoj kartici - platni promet obrađuje Stripe kao zasebni procesor u skladu s PCI DSS standardima. Mi nikada ne vidimo niti pohranjujemo vaše kartične podatke.</p>
           </div>
 
           <div>
@@ -75,7 +75,7 @@ export default function PrivatnostPage() {
               <li><strong>Narudžbe:</strong> 11 godina od datuma narudžbe (obveza prema poreznim propisima RH)</li>
               <li><strong>Poruke u narudžbi:</strong> 2 godine od datuma narudžbe</li>
               <li><strong>FCM token:</strong> do odjave s uređaja ili brisanja računa</li>
-              <li><strong>Lokacija:</strong> ne pohranjujemo trajno — koristi se samo u trenutku pretrage</li>
+              <li><strong>Lokacija:</strong> ne pohranjujemo trajno - koristi se samo u trenutku pretrage</li>
             </ul>
           </div>
 
@@ -83,9 +83,9 @@ export default function PrivatnostPage() {
             <h2 className="text-xl font-semibold text-gray-900 mb-3">5. S kim dijelimo vaše podatke</h2>
             <p className="mb-3">Vaše osobne podatke ne prodajemo trećim stranama. Dijelimo ih isključivo s pružateljima usluga nužnih za rad platforme:</p>
             <ul className="list-disc list-inside space-y-2">
-              <li><strong>Stripe Inc.</strong> — obrada plaćanja</li>
-              <li><strong>Google LLC / Firebase</strong> — push obavijesti i autentifikacija</li>
-              <li><strong>Pružatelj email usluge</strong> — slanje transakcijskih emailova (potvrde narudžbi, reset lozinke)</li>
+              <li><strong>Stripe Inc.</strong> - obrada plaćanja</li>
+              <li><strong>Google LLC / Firebase</strong> - push obavijesti i autentifikacija</li>
+              <li><strong>Pružatelj email usluge</strong> - slanje transakcijskih emailova (potvrde narudžbi, reset lozinke)</li>
             </ul>
             <p className="mt-3">Sve treće strane obvezane su ugovorom o obradi podataka i ne smiju koristiti vaše podatke u vlastite svrhe.</p>
           </div>
@@ -94,12 +94,12 @@ export default function PrivatnostPage() {
             <h2 className="text-xl font-semibold text-gray-900 mb-3">6. Vaša prava</h2>
             <p className="mb-3">Kao korisnik imate sljedeća prava prema GDPR-u:</p>
             <ul className="list-disc list-inside space-y-2">
-              <li><strong>Pravo na pristup</strong> — možete zatražiti kopiju osobnih podataka koje čuvamo o vama</li>
-              <li><strong>Pravo na ispravak</strong> — možete ispraviti netočne ili nepotpune podatke</li>
-              <li><strong>Pravo na brisanje</strong> — možete zatražiti brisanje računa i osobnih podataka (uz napomenu da neke podatke moramo čuvati zbog zakonskih obveza)</li>
-              <li><strong>Pravo na prenosivost</strong> — možete zatražiti vaše podatke u strojno čitljivom formatu</li>
-              <li><strong>Pravo na prigovor</strong> — možete se usprotiviti određenim vrstama obrade</li>
-              <li><strong>Pravo na povlačenje privole</strong> — za obradu temeljenu na privoli (push obavijesti), možete je povući u bilo kojem trenutku bez posljedica</li>
+              <li><strong>Pravo na pristup</strong> - možete zatražiti kopiju osobnih podataka koje čuvamo o vama</li>
+              <li><strong>Pravo na ispravak</strong> - možete ispraviti netočne ili nepotpune podatke</li>
+              <li><strong>Pravo na brisanje</strong> - možete zatražiti brisanje računa i osobnih podataka (uz napomenu da neke podatke moramo čuvati zbog zakonskih obveza)</li>
+              <li><strong>Pravo na prenosivost</strong> - možete zatražiti vaše podatke u strojno čitljivom formatu</li>
+              <li><strong>Pravo na prigovor</strong> - možete se usprotiviti određenim vrstama obrade</li>
+              <li><strong>Pravo na povlačenje privole</strong> - za obradu temeljenu na privoli (push obavijesti), možete je povući u bilo kojem trenutku bez posljedica</li>
             </ul>
             <p className="mt-3">Za ostvarivanje bilo kojeg od ovih prava pišite na: <a href="mailto:tomic.rino@gmail.com" className="text-green-600 underline">tomic.rino@gmail.com</a><br />Na vaš zahtjev odgovoriti ćemo u roku od 30 dana.</p>
           </div>
@@ -107,7 +107,7 @@ export default function PrivatnostPage() {
           <div>
             <h2 className="text-xl font-semibold text-gray-900 mb-3">7. Pravo prigovora nadzornom tijelu</h2>
             <p>Ako smatrate da vaše podatke obrađujemo na nezakonit način, imate pravo podnijeti prigovor Agenciji za zaštitu osobnih podataka (AZOP):</p>
-            <p className="mt-2"><strong>AZOP — Agencija za zaštitu osobnih podataka</strong><br />
+            <p className="mt-2"><strong>AZOP - Agencija za zaštitu osobnih podataka</strong><br />
               Web: <a href="https://azop.hr" target="_blank" rel="noopener noreferrer" className="text-green-600 underline">azop.hr</a><br />
               Email: <a href="mailto:azop@azop.hr" className="text-green-600 underline">azop@azop.hr</a>
             </p>
@@ -136,7 +136,7 @@ export default function PrivatnostPage() {
 
         </section>
 
-        <p className="mt-16 text-sm text-gray-400 italic">Tržnjak — svježa lokalna hrana, direktno od farmera.</p>
+        <p className="mt-16 text-sm text-gray-400 italic">Tržnjak - svježa lokalna hrana, direktno od farmera.</p>
       </main>
       <Footer />
     </div>

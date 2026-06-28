@@ -52,22 +52,22 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
 
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 text-green-700 font-bold text-xl">
+          <Link to="/" className="flex items-center gap-2 no-underline">
             <Logo size={30} />
-            <span>Tržnjak</span>
+            <span className="playfair font-bold text-xl text-[#2D5016]">Tržnjak</span>
           </Link>
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-6">
             {!isAuth && !isLegal && (
-              <Link to="/opgovi" className="text-green-800 hover:text-green-600 font-medium transition-colors">
+              <Link to="/opgovi" className="text-[#2D5016] hover:text-[#5A8B35] font-medium transition-colors">
                 OPG-ovi
               </Link>
             )}
             {isLanding && (
               <>
-                <a href="#kako-radi" className="text-green-800 hover:text-green-600 font-medium transition-colors">Kako radi</a>
-                <a href="#prednosti" className="text-green-800 hover:text-green-600 font-medium transition-colors">Prednosti</a>
+                <a href="#kako-radi" className="text-[#2D5016] hover:text-[#5A8B35] font-medium transition-colors">Kako radi</a>
+                <a href="#prednosti" className="text-[#2D5016] hover:text-[#5A8B35] font-medium transition-colors">Prednosti</a>
               </>
             )}
           </div>
@@ -78,28 +78,28 @@ export default function Navbar() {
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="flex items-center gap-2 pl-1 pr-3 py-1 rounded-full hover:bg-green-50 transition-colors"
+                  className="flex items-center gap-2 pl-1 pr-3 py-1 rounded-full hover:bg-[#EAF2E0] transition-colors"
                 >
-                  <div className="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-[#2D5016] flex items-center justify-center">
                     <span className="text-white text-sm font-semibold">{initials}</span>
                   </div>
-                  <span className="text-sm font-medium text-gray-700">{user.first_name || user.email}</span>
-                  <svg className={`w-4 h-4 text-gray-400 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <span className="text-sm font-medium text-[#333]">{user.first_name || user.email}</span>
+                  <svg className={`w-4 h-4 text-[#888] transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
 
                 {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-1 z-[9999]">
-                    <div className="px-4 py-2 border-b border-gray-100">
-                      <p className="text-xs text-gray-400 truncate">{user.email}</p>
+                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-[#E8E8E8] py-1 z-[9999]">
+                    <div className="px-4 py-2 border-b border-[#E8E8E8]">
+                      <p className="text-xs text-[#888] truncate">{user.email}</p>
                     </div>
                     <Link
                       to="/profil"
                       onClick={() => setDropdownOpen(false)}
-                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                      className="flex items-center gap-2 px-4 py-2.5 text-sm text-[#333] hover:bg-[#FAF7F2] transition-colors"
                     >
-                      <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <svg className="w-4 h-4 text-[#888]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                       </svg>
                       Moj profil
@@ -118,10 +118,14 @@ export default function Navbar() {
               </div>
             ) : (
               <>
-                <Link to="/prijava" className="text-green-700 font-medium hover:text-green-600 transition-colors text-sm">
+                <Link to="/prijava" className="text-[#2D5016] hover:text-[#5A8B35] font-medium transition-colors text-sm">
                   Prijava
                 </Link>
-                <Link to="/registracija" className="bg-green-600 hover:bg-green-700 text-white font-semibold px-4 py-2 rounded-lg transition-colors text-sm">
+                <Link
+                  to="/registracija"
+                  className="bg-[#2D5016] hover:bg-[#3D6A1F] text-white font-semibold px-4 py-2 transition-colors text-sm"
+                  style={{ borderRadius: '4px' }}
+                >
                   Registracija
                 </Link>
               </>
@@ -131,11 +135,11 @@ export default function Navbar() {
           {/* Mobile */}
           <div className="md:hidden flex items-center gap-2">
             {user && (
-              <div className="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center">
+              <div className="w-8 h-8 rounded-full bg-[#2D5016] flex items-center justify-center">
                 <span className="text-white text-sm font-semibold">{initials}</span>
               </div>
             )}
-            <button className="text-green-800 p-2" onClick={() => setMenuOpen(!menuOpen)}>
+            <button className="text-[#2D5016] p-2" onClick={() => setMenuOpen(!menuOpen)}>
               {menuOpen ? (
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -150,22 +154,31 @@ export default function Navbar() {
         </div>
 
         {menuOpen && (
-          <div className="md:hidden bg-white border-t border-green-100 py-4 space-y-1">
-            {!isAuth && !isLegal && <Link to="/opgovi" className="block px-4 py-2.5 text-green-800 font-medium" onClick={() => setMenuOpen(false)}>OPG-ovi</Link>}
+          <div className="md:hidden bg-white border-t border-[#EAF2E0] py-4 space-y-1">
+            {!isAuth && !isLegal && (
+              <Link to="/opgovi" className="block px-4 py-2.5 text-[#2D5016] font-medium" onClick={() => setMenuOpen(false)}>
+                OPG-ovi
+              </Link>
+            )}
             {user ? (
               <>
-                <div className="px-4 py-2 border-b border-gray-100 mb-1">
-                  <p className="text-sm font-semibold text-gray-900">{user.first_name || user.email}</p>
-                  <p className="text-xs text-gray-400">{user.email}</p>
+                <div className="px-4 py-2 border-b border-[#E8E8E8] mb-1">
+                  <p className="text-sm font-semibold text-[#111]">{user.first_name || user.email}</p>
+                  <p className="text-xs text-[#888]">{user.email}</p>
                 </div>
-                <Link to="/profil" className="block px-4 py-2.5 text-gray-700 font-medium" onClick={() => setMenuOpen(false)}>Moj profil</Link>
+                <Link to="/profil" className="block px-4 py-2.5 text-[#333] font-medium" onClick={() => setMenuOpen(false)}>Moj profil</Link>
                 <button onClick={handleLogout} className="block w-full text-left px-4 py-2.5 text-red-500 font-medium">Odjava</button>
               </>
             ) : (
               <>
-                <Link to="/prijava" className="block px-4 py-2.5 text-green-800 font-medium" onClick={() => setMenuOpen(false)}>Prijava</Link>
+                <Link to="/prijava" className="block px-4 py-2.5 text-[#2D5016] font-medium" onClick={() => setMenuOpen(false)}>Prijava</Link>
                 <div className="px-4 pt-1">
-                  <Link to="/registracija" className="block text-center bg-green-600 text-white font-semibold px-5 py-2 rounded-lg" onClick={() => setMenuOpen(false)}>
+                  <Link
+                    to="/registracija"
+                    className="block text-center bg-[#2D5016] text-white font-semibold px-5 py-2"
+                    style={{ borderRadius: '4px' }}
+                    onClick={() => setMenuOpen(false)}
+                  >
                     Registracija
                   </Link>
                 </div>

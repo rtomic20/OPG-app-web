@@ -39,12 +39,12 @@ export default function Problem() {
           <span className="inline-block bg-red-50 text-red-600 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
             Problem koji rješavamo
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 mb-4">
+          <h2 className="playfair text-3xl sm:text-4xl font-bold text-[#111111] mb-4">
             Lokalna hrana postoji, ali je teška za naći
           </h2>
-          <p className="text-stone-600 text-lg max-w-2xl mx-auto">
+          <p className="text-[#555] text-lg max-w-2xl mx-auto">
             Hrvatska ima više od 150.000 OPG-ova, a većina kupaca ne zna gdje ih naći.
-            Sustav je broken — mi ga popravljamo.
+            Sustav je broken. Mi ga popravljamo.
           </p>
         </div>
 
@@ -52,21 +52,21 @@ export default function Problem() {
           {problems.map((p, i) => (
             <div
               key={p.title}
-              className={`animate-fade-in animate-delay-${(i + 1) * 100} bg-red-50 border border-red-100 rounded-2xl p-8 text-center`}
+              className={`animate-fade-in animate-delay-${(i + 1) * 100} bg-red-50 border border-red-100 rounded-lg p-8 text-center`}
             >
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-red-100 mb-5">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-lg bg-red-100 mb-5">
                 <p.Icon className="w-7 h-7 text-red-500" strokeWidth={1.5} />
               </div>
-              <h3 className="text-xl font-bold text-stone-900 mb-3">{p.title}</h3>
-              <p className="text-stone-700 leading-relaxed">{p.desc}</p>
+              <h3 className="playfair text-xl font-bold text-[#111111] mb-3">{p.title}</h3>
+              <p className="text-[#555] leading-relaxed">{p.desc}</p>
             </div>
           ))}
         </div>
 
         {/* VS banner */}
-        <div className="mt-14 rounded-2xl overflow-hidden grid md:grid-cols-2">
+        <div className="mt-14 rounded-lg overflow-hidden grid md:grid-cols-2">
           <div className="bg-red-50 p-8">
-            <h3 className="font-bold text-red-800 mb-4 text-lg flex items-center gap-2">
+            <h3 className="playfair font-bold text-red-800 mb-4 text-lg flex items-center gap-2">
               <X className="w-5 h-5 text-red-500" /> Bez Tržnjaka
             </h3>
             <ul className="space-y-2 text-red-700">
@@ -82,14 +82,14 @@ export default function Problem() {
               ))}
             </ul>
           </div>
-          <div className="bg-green-50 p-8">
-            <h3 className="font-bold text-green-800 mb-4 text-lg flex items-center gap-2">
-              <Check className="w-5 h-5 text-green-600" /> S Tržnjakom
+          <div className="bg-[#EAF2E0] p-8">
+            <h3 className="playfair font-bold text-[#2D5016] mb-4 text-lg flex items-center gap-2">
+              <Check className="w-5 h-5 text-[#2D5016]" /> S Tržnjakom
             </h3>
-            <ul className="space-y-2 text-green-700">
+            <ul className="space-y-2 text-[#3D6A1F]">
               {[
                 'Naruči od lokalnog OPG-a za nekoliko minuta',
-                'Pravedna cijena — direktno od proizvođača',
+                'Pravedna cijena, direktno od proizvođača',
                 'Hrana ubrana isti ili prethodni dan',
                 'Znaš ime i priču iza svake farme',
               ].map(item => (

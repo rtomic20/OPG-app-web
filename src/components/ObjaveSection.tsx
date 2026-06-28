@@ -55,11 +55,11 @@ export default function ObjaveSection() {
           <span className="inline-block bg-amber-100 text-amber-800 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
             Iz naše zajednice
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 mb-4">
+          <h2 className="playfair text-3xl sm:text-4xl font-bold text-[#111111] mb-4">
             Što se događa na hrvatskim farmama
           </h2>
-          <p className="text-stone-600 text-lg max-w-xl mx-auto">
-            Prati aktualna događanja — sve direktno od OPG vlasnika.
+          <p className="text-[#555] text-lg max-w-xl mx-auto">
+            Prati aktualna događanja, direktno od OPG vlasnika.
           </p>
         </div>
 
@@ -68,7 +68,7 @@ export default function ObjaveSection() {
             <a
               key={post.id}
               href={`/opgovi/${post.vendor_slug}`}
-              className={`animate-fade-in animate-delay-${Math.min((i % 3 + 1) * 100, 300)} group bg-white rounded-2xl border border-stone-200 overflow-hidden hover:border-green-300 hover:shadow-md transition-all`}
+              className={`animate-fade-in animate-delay-${Math.min((i % 3 + 1) * 100, 300)} group bg-white rounded-lg border border-[#E8E8E8] overflow-hidden hover:border-[#5A8B35] hover:shadow-md transition-all`}
             >
               {post.image && (
                 <div className="aspect-video overflow-hidden">
@@ -90,16 +90,16 @@ export default function ObjaveSection() {
                       loading="lazy"
                     />
                   ) : (
-                    <div className="w-9 h-9 rounded-full bg-green-600 flex items-center justify-center flex-shrink-0">
+                    <div className="w-9 h-9 rounded-full bg-[#2D5016] flex items-center justify-center flex-shrink-0">
                       <span className="text-white text-xs font-bold">{vendorInitials(post.vendor_name)}</span>
                     </div>
                   )}
                   <div className="min-w-0">
-                    <p className="font-semibold text-stone-900 text-sm truncate">{post.vendor_name}</p>
-                    <p className="text-stone-400 text-xs">{relativeDate(post.created_at)}</p>
+                    <p className="font-semibold text-[#111] text-sm truncate">{post.vendor_name}</p>
+                    <p className="text-[#888] text-xs">{relativeDate(post.created_at)}</p>
                   </div>
                 </div>
-                <p className="text-stone-700 text-sm leading-relaxed line-clamp-3">{post.content}</p>
+                <p className="text-[#555] text-sm leading-relaxed line-clamp-3">{post.content}</p>
               </div>
             </a>
           ))}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { MapPin, Leaf, Search } from 'lucide-react'
 import api from '../services/api'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -19,38 +20,35 @@ interface Vendor {
   review_count: number
 }
 
-interface Post {
-  id: number
-  content: string
-  image: string | null
-  created_at: string
-  vendor_name: string
-  vendor_slug: string
-  vendor_logo: string | null
-}
+const starRating = (n: number) =>
+  Array.from({ length: 5 }, (_, i) => (i < Math.round(n) ? '★' : '☆')).join('')
 
-const stars = (n: number) => '★'.repeat(Math.round(n)) + '☆'.repeat(5 - Math.round(n))
-const normalize = (s: string) => s.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase()
+const normalize = (s: string) =>
+  s.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase()
+
+const dmSans: React.CSSProperties = { fontFamily: "'DM Sans', sans-serif" }
+const playfair: React.CSSProperties = { fontFamily: "'Playfair Display', serif" }
 
 export default function DirectoryPage() {
   const [vendors, setVendors] = useState<Vendor[]>([])
-  const [posts, setPosts] = useState<Post[]>([])
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
+  const [searchFocused, setSearchFocused] = useState(false)
   const [Map, setMap] = useState<React.ComponentType<any> | null>(null)
-  const [followEmail, setFollowEmail] = useState('')
-  const [followStatus, setFollowStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle')
 
   const showTest = new URLSearchParams(window.location.search).get('show_test') === '1'
 
   useEffect(() => {
-    Promise.all([
-      api.get('/vendors/').then((r) => setVendors((r.data as Vendor[]).filter((v) => showTest || !v.slug.startsWith('test-')))),
-      api.get('/vendors/feed/').then((r) => setPosts((r.data as Post[]).filter((p) => showTest || !p.vendor_slug.startsWith('test-')))).catch(() => {}),
-    ]).finally(() => setLoading(false))
+    api
+      .get('/vendors/')
+      .then((r) =>
+        setVendors(
+          (r.data as Vendor[]).filter((v) => showTest || !v.slug.startsWith('test-'))
+        )
+      )
+      .finally(() => setLoading(false))
   }, [])
 
-  // Lazy load Leaflet map
   useEffect(() => {
     import('./VendorMap').then((m) => setMap(() => m.default))
   }, [])
@@ -58,172 +56,281 @@ export default function DirectoryPage() {
   const q = normalize(search)
   const filtered = search
     ? vendors.filter(
-        (v) =>
-          normalize(v.name).includes(q) ||
-          normalize(v.location).includes(q)
+        (v) => normalize(v.name).includes(q) || normalize(v.location).includes(q)
       )
     : vendors
 
   const withCoords = vendors.filter((v) => v.latitude && v.longitude)
 
-  const handleFollow = async () => {
-    if (!followEmail) return
-    setFollowStatus('loading')
-    // Platform-level newsletter — just store interest (no backend for this yet, show success)
-    setTimeout(() => setFollowStatus('done'), 800)
-  }
-
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#FAF7F2', ...dmSans }}>
       <Navbar />
+
       <div className="flex-1 pt-20 pb-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Header */}
-          <div className="py-8">
-            <h1 className="text-3xl font-bold text-gray-900">OPG-ovi na Tržnjaku</h1>
-            <p className="text-gray-500 mt-2">Pronađi lokalne proizvođače u tvojoj blizini</p>
-          </div>
-
-          {/* Prati Tržnjak — newsletter CTA */}
-          <div className="bg-green-700 rounded-2xl p-6 mb-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <div className="flex-1">
-              <p className="text-white font-semibold text-lg">Prati Tržnjak</p>
-              <p className="text-green-200 text-sm mt-0.5">Dobivaj obavijesti o novim OPG-ovima, sezonskim proizvodima i akcijama</p>
-            </div>
-            {followStatus === 'done' ? (
-              <p className="text-green-100 font-medium text-sm bg-green-600 px-4 py-2 rounded-xl">Prijavljeni ste!</p>
-            ) : (
-              <div className="flex gap-2 w-full sm:w-auto">
-                <input
-                  type="email"
-                  placeholder="tvoj@email.hr"
-                  value={followEmail}
-                  onChange={(e) => setFollowEmail(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && handleFollow()}
-                  className="flex-1 sm:w-52 px-3 py-2 rounded-lg text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-green-300"
-                />
-                <button
-                  onClick={handleFollow}
-                  disabled={followStatus === 'loading' || !followEmail}
-                  className="px-4 py-2 bg-white text-green-700 font-semibold text-sm rounded-lg hover:bg-green-50 disabled:opacity-50 transition-colors whitespace-nowrap"
-                >
-                  Prati
-                </button>
-              </div>
-            )}
+          <div className="py-10">
+            <p
+              style={{
+                ...dmSans,
+                fontSize: '10px',
+                fontWeight: 600,
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                color: '#2D5016',
+                marginBottom: '10px',
+              }}
+            >
+              Lokalni proizvođači
+            </p>
+            <h1
+              style={{
+                ...playfair,
+                fontSize: 'clamp(28px, 5vw, 42px)',
+                fontWeight: 700,
+                lineHeight: 1.2,
+                color: '#111111',
+                marginBottom: '10px',
+              }}
+            >
+              OPG-ovi na Tržnjaku
+            </h1>
+            <p style={{ ...dmSans, fontSize: '15px', lineHeight: '26px', color: '#555' }}>
+              Svježi lokalni proizvodi direktno od farmera iz tvoje regije
+            </p>
           </div>
 
           {/* Search */}
-          <div className="mb-6">
-            <input
-              type="text"
-              placeholder="Pretraži po imenu ili gradu..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full max-w-md px-4 py-2.5 border border-gray-200 rounded-xl bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-green-300"
-            />
+          <div className="mb-8 max-w-md">
+            <div className="relative">
+              <Search
+                size={17}
+                className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
+                style={{ color: '#2D5016' }}
+              />
+              <input
+                type="text"
+                placeholder="Pretraži po imenu ili gradu..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                onFocus={() => setSearchFocused(true)}
+                onBlur={() => setSearchFocused(false)}
+                style={{
+                  ...dmSans,
+                  width: '100%',
+                  height: '44px',
+                  paddingLeft: '40px',
+                  paddingRight: '16px',
+                  fontSize: '14px',
+                  color: '#111',
+                  backgroundColor: '#fff',
+                  border: `1.5px solid ${searchFocused ? '#2D5016' : '#D8D8D8'}`,
+                  borderRadius: '4px',
+                  outline: 'none',
+                  transition: 'border-color 0.15s',
+                }}
+              />
+            </div>
           </div>
 
-          {/* Karta */}
+          {/* Map */}
           {Map && withCoords.length > 0 && (
-            <div className="mb-8 rounded-2xl overflow-hidden shadow-sm border border-gray-200 h-72">
+            <div
+              className="mb-8 overflow-hidden"
+              style={{ height: '288px', borderRadius: '8px', border: '1px solid #EAF2E0' }}
+            >
               <Map vendors={withCoords} />
             </div>
           )}
 
-          {/* Grid OPG-ova */}
+          {/* Vendor grid */}
           {loading ? (
-            <div className="text-gray-500 py-12 text-center">Učitavanje OPG-ova...</div>
+            <div
+              className="py-16 text-center"
+              style={{ ...dmSans, fontSize: '15px', color: '#888' }}
+            >
+              Učitavanje OPG-ova...
+            </div>
           ) : filtered.length === 0 ? (
-            <div className="text-center py-16 text-gray-400">
-              <p className="text-5xl mb-4">🔍</p>
-              <p className="text-lg font-medium">Nema rezultata za "{search}"</p>
+            <div className="py-20 text-center">
+              <div
+                className="mx-auto mb-4 flex items-center justify-center"
+                style={{ width: '48px', height: '48px' }}
+              >
+                <Search size={36} style={{ color: '#CDA274' }} />
+              </div>
+              <p style={{ ...playfair, fontSize: '20px', color: '#333', marginBottom: '8px' }}>
+                Nema rezultata za „{search}"
+              </p>
+              <p style={{ ...dmSans, fontSize: '14px', color: '#888' }}>
+                Pokušaj s drugim pojmom ili gradom
+              </p>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
               {filtered.map((v) => (
-                <Link
-                  key={v.id}
-                  to={`/opgovi/${v.slug}`}
-                  className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-md transition-shadow group"
-                >
-                  <div className="h-36 bg-gradient-to-br from-green-100 to-emerald-50 flex items-center justify-center relative overflow-hidden">
-                    {v.logo ? (
-                      <>
-                        <img src={v.logo} alt={v.name} className="h-full w-full object-cover" />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-black/10" />
-                      </>
-                    ) : (
-                      <span className="text-5xl">🌿</span>
-                    )}
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-bold text-gray-900 group-hover:text-green-700 transition-colors">{v.name}</h3>
-                    <p className="text-sm text-gray-500 mt-0.5">📍 {v.location || 'Hrvatska'}</p>
-                    {v.description && (
-                      <p className="text-sm text-gray-600 mt-2 line-clamp-2">{v.description}</p>
-                    )}
-                    <div className="flex items-center justify-between mt-3">
-                      <div className="flex items-center gap-1">
-                        {v.avg_rating ? (
-                          <>
-                            <span className="text-yellow-400 text-sm">{stars(v.avg_rating)}</span>
-                            <span className="text-xs text-gray-500">({v.review_count})</span>
-                          </>
-                        ) : (
-                          <span className="text-xs text-gray-400">Nema recenzija</span>
-                        )}
-                      </div>
-                      <div className="flex gap-1">
-                        {v.delivery && <span className="text-xs bg-green-50 text-green-700 px-2 py-0.5 rounded-full">Dostava</span>}
-                        {v.pickup && <span className="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full">Preuzimanje</span>}
-                      </div>
-                    </div>
-                  </div>
-                </Link>
+                <VendorCard key={v.id} vendor={v} />
               ))}
-            </div>
-          )}
-
-          {/* Feed objava */}
-          {!search && (
-            <div className="mt-4">
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Zadnje od OPG-ova</h2>
-              {posts.length === 0 ? (
-                <p className="text-gray-400 text-center py-8">Nema objava.</p>
-              ) : (
-                <div className="space-y-4">
-                  {posts.map((p) => (
-                    <div key={p.id} className="bg-white rounded-2xl border border-gray-200 p-4 flex gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center flex-shrink-0 overflow-hidden">
-                        {p.vendor_logo
-                          ? <img src={p.vendor_logo} alt={p.vendor_name} className="w-full h-full object-cover" />
-                          : <span className="text-xl">🌿</span>
-                        }
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between gap-2 mb-1">
-                          <Link to={`/opgovi/${p.vendor_slug}`} className="font-semibold text-sm text-gray-900 hover:text-green-700">
-                            {p.vendor_name}
-                          </Link>
-                          <span className="text-xs text-gray-400 whitespace-nowrap">
-                            {new Date(p.created_at).toLocaleDateString('hr-HR', { day: 'numeric', month: 'short' })}
-                          </span>
-                        </div>
-                        <p className="text-sm text-gray-700 whitespace-pre-wrap">{p.content}</p>
-                        {p.image && <img src={p.image} alt="" className="mt-2 rounded-xl max-h-48 object-cover" />}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
           )}
 
         </div>
       </div>
+
       <Footer />
     </div>
+  )
+}
+
+function VendorCard({ vendor: v }: { vendor: Vendor }) {
+  const [hovered, setHovered] = useState(false)
+  const dmSans: React.CSSProperties = { fontFamily: "'DM Sans', sans-serif" }
+  const playfair: React.CSSProperties = { fontFamily: "'Playfair Display', serif" }
+
+  return (
+    <Link
+      to={`/opgovi/${v.slug}`}
+      style={{
+        display: 'block',
+        textDecoration: 'none',
+        backgroundColor: '#fff',
+        borderRadius: '8px',
+        border: `1px solid ${hovered ? '#C8DFB8' : '#E8E8E8'}`,
+        overflow: 'hidden',
+        boxShadow: hovered ? '0 4px 16px rgba(45,80,22,0.10)' : 'none',
+        transition: 'box-shadow 0.2s, border-color 0.2s',
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {/* Card image */}
+      <div
+        style={{
+          height: '144px',
+          backgroundColor: '#EAF2E0',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        {v.logo ? (
+          <>
+            <img
+              src={v.logo}
+              alt={v.name}
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                background: 'linear-gradient(to top, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.04) 100%)',
+              }}
+            />
+          </>
+        ) : (
+          <Leaf size={38} style={{ color: '#5A8B35' }} />
+        )}
+      </div>
+
+      {/* Card body */}
+      <div style={{ padding: '16px' }}>
+        <h3
+          style={{
+            ...playfair,
+            fontSize: '17px',
+            fontWeight: 600,
+            color: hovered ? '#2D5016' : '#111111',
+            marginBottom: '4px',
+            transition: 'color 0.15s',
+          }}
+        >
+          {v.name}
+        </h3>
+        <p
+          style={{
+            ...dmSans,
+            fontSize: '12px',
+            color: '#888',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '4px',
+            marginBottom: v.description ? '8px' : '12px',
+          }}
+        >
+          <MapPin size={12} style={{ color: '#2D5016', flexShrink: 0 }} />
+          {v.location || 'Hrvatska'}
+        </p>
+        {v.description && (
+          <p
+            className="line-clamp-2"
+            style={{
+              ...dmSans,
+              fontSize: '13px',
+              color: '#555',
+              lineHeight: '20px',
+              marginBottom: '12px',
+            }}
+          >
+            {v.description}
+          </p>
+        )}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            {v.avg_rating ? (
+              <>
+                <span style={{ color: '#D4652A', fontSize: '12px', letterSpacing: '1px' }}>
+                  {starRating(v.avg_rating)}
+                </span>
+                <span style={{ ...dmSans, fontSize: '11px', color: '#888' }}>
+                  ({v.review_count})
+                </span>
+              </>
+            ) : (
+              <span style={{ ...dmSans, fontSize: '11px', color: '#AAA' }}>Nema recenzija</span>
+            )}
+          </div>
+          <div style={{ display: 'flex', gap: '4px' }}>
+            {v.delivery && (
+              <span
+                style={{
+                  ...dmSans,
+                  fontSize: '10px',
+                  fontWeight: 600,
+                  letterSpacing: '0.06em',
+                  textTransform: 'uppercase',
+                  backgroundColor: '#EAF2E0',
+                  color: '#2D5016',
+                  padding: '3px 8px',
+                  borderRadius: '4px',
+                }}
+              >
+                Dostava
+              </span>
+            )}
+            {v.pickup && (
+              <span
+                style={{
+                  ...dmSans,
+                  fontSize: '10px',
+                  fontWeight: 600,
+                  letterSpacing: '0.06em',
+                  textTransform: 'uppercase',
+                  backgroundColor: '#FBF0E8',
+                  color: '#D4652A',
+                  padding: '3px 8px',
+                  borderRadius: '4px',
+                }}
+              >
+                Preuzimanje
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+    </Link>
   )
 }

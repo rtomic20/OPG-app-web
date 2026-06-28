@@ -25,12 +25,12 @@ const features = [
   {
     Icon: Smartphone,
     title: 'Sve na jednom mjestu',
-    desc: 'Web i mobilna aplikacija. Naruči, prati isporuku i ocijeni — sve u par klikova.',
+    desc: 'Web i mobilna aplikacija. Naruči, prati isporuku i ocijeni. Sve u par klikova.',
   },
   {
     Icon: ShieldCheck,
     title: 'Sigurno plaćanje',
-    desc: 'Online plaćanje karticom ili gotovinom pri preuzimanju — odabereš što ti odgovara.',
+    desc: 'Online plaćanje karticom ili gotovinom pri preuzimanju. Odabereš što ti odgovara.',
   },
   {
     Icon: Leaf,
@@ -40,7 +40,7 @@ const features = [
   {
     Icon: Star,
     title: 'Ocjene i recenzije',
-    desc: 'Transparentna zajednica — čitaj iskustva drugih kupaca i dijeli svoja.',
+    desc: 'Transparentna zajednica. Čitaj iskustva drugih kupaca i dijeli svoja.',
   },
 ]
 
@@ -61,13 +61,13 @@ export default function Features() {
     <section id="prednosti" className="py-20 bg-white" ref={ref}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-14">
-          <span className="inline-block bg-green-100 text-green-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+          <span className="inline-block bg-[#EAF2E0] text-[#2D5016] text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
             Zašto Tržnjak
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 mb-4">
+          <h2 className="playfair text-3xl sm:text-4xl font-bold text-[#111111] mb-4">
             Prednosti koje čine razliku
           </h2>
-          <p className="text-stone-600 text-lg max-w-xl mx-auto">
+          <p className="text-[#555] text-lg max-w-xl mx-auto">
             Dizajnirano da bude jednostavno za OPG-ove i ugodno za kupce.
           </p>
         </div>
@@ -76,13 +76,13 @@ export default function Features() {
           {features.map((f, i) => (
             <div
               key={f.title}
-              className={`animate-fade-in animate-delay-${Math.min((i % 4 + 1) * 100, 400)} group p-6 rounded-2xl border border-stone-100 hover:border-green-200 hover:shadow-md transition-all`}
+              className={`animate-fade-in animate-delay-${Math.min((i % 4 + 1) * 100, 400)} group p-6 rounded-lg border border-[#E8E8E8] hover:border-[#EAF2E0] hover:shadow-md transition-all`}
             >
-              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-green-50 mb-4 group-hover:bg-green-100 transition-colors">
-                <f.Icon className="w-6 h-6 text-green-600" strokeWidth={1.5} />
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-[#EAF2E0] mb-4 group-hover:bg-[#d4ecc0] transition-colors">
+                <f.Icon className="w-6 h-6 text-[#2D5016]" strokeWidth={1.5} />
               </div>
-              <h3 className="text-lg font-bold text-stone-900 mb-2">{f.title}</h3>
-              <p className="text-stone-600 text-sm leading-relaxed">{f.desc}</p>
+              <h3 className="text-lg font-bold text-[#111111] mb-2">{f.title}</h3>
+              <p className="text-[#555] text-sm leading-relaxed">{f.desc}</p>
             </div>
           ))}
         </div>

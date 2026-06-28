@@ -31,17 +31,17 @@ export default function Categories() {
   }, [])
 
   return (
-    <section id="kategorije" className="py-20 bg-green-50" ref={ref}>
+    <section id="kategorije" className="py-20 bg-[#EAF2E0]" ref={ref}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-14">
-          <span className="inline-block bg-lime-100 text-lime-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
+          <span className="inline-block bg-white text-[#2D5016] text-sm font-semibold px-4 py-1.5 rounded-full mb-4 border border-[#c8ddb8]">
             Što možeš naručiti
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-green-950 mb-4">
+          <h2 className="playfair text-3xl sm:text-4xl font-bold text-[#111111] mb-4">
             Svježi lokalni proizvodi
           </h2>
-          <p className="text-green-700 text-lg max-w-xl mx-auto">
-            Od povrća do vina — sve što treba jednoj zdravoj, lokalno ukorijenjnoj kuhinji.
+          <p className="text-[#2D5016] text-lg max-w-xl mx-auto">
+            Od povrća do vina, sve što treba jednoj zdravoj i lokalno ukorijenjnoj kuhinji.
           </p>
         </div>
 
@@ -49,21 +49,20 @@ export default function Categories() {
           {categories.slice(0, 10).map((cat, i) => (
             <div
               key={cat.name}
-              className={`animate-fade-in animate-delay-${Math.min((i % 5 + 1) * 100, 500)} group bg-white rounded-2xl p-5 text-center shadow-sm border border-green-100 hover:border-green-300 hover:shadow-md transition-all cursor-default`}
+              className={`animate-fade-in animate-delay-${Math.min((i % 5 + 1) * 100, 500)} group bg-white rounded-lg p-5 text-center shadow-sm border border-[#c8ddb8] hover:border-[#5A8B35] hover:shadow-md transition-all cursor-default`}
             >
               <div className="text-4xl mb-3 group-hover:scale-110 transition-transform inline-block">
                 {cat.icon}
               </div>
-              <h3 className="font-bold text-green-950 text-sm leading-tight mb-1">{cat.name}</h3>
-              <p className="text-green-600 text-xs leading-snug">{cat.desc}</p>
+              <h3 className="font-bold text-[#111111] text-sm leading-tight mb-1">{cat.name}</h3>
+              <p className="text-[#555] text-xs leading-snug">{cat.desc}</p>
             </div>
           ))}
         </div>
 
-        {/* Bottom note */}
         <div className="text-center mt-10">
-          <p className="text-green-600 text-sm font-medium">
-            + još više kategorija dostupno u aplikaciji 📱
+          <p className="text-[#2D5016] text-sm font-medium">
+            + još više kategorija dostupno u aplikaciji
           </p>
         </div>
       </div>
