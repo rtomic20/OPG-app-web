@@ -348,7 +348,7 @@ export default function AnketaKupciPage() {
                   onChange={e => setAnswers(a => ({ ...a, zupanija: e.target.value }))}
                   style={{ ...inputStyle, appearance: 'none' as React.CSSProperties['appearance'] }}
                 >
-                  <option value="">— Odaberite županiju —</option>
+                  <option value="">Odaberite županiju</option>
                   {ZUPANIJE.map(z => <option key={z} value={z}>{z}</option>)}
                 </select>
               </QCard>
@@ -406,7 +406,7 @@ export default function AnketaKupciPage() {
 
               <QCard num={6} label="Koliko vam je važna dostava na kućnu adresu?">
                 <RadioGroup id="k6" answers={answers} setAnswers={setAnswers} options={[
-                  { label: 'Iznimno važno — bez dostave ne kupujem online' },
+                  { label: 'Iznimno važno, bez dostave ne kupujem online' },
                   { label: 'Važno, ali i sam/a mogu preuzeti' },
                   { label: 'Svejedno mi je' },
                   { label: 'Radije sam preuzimam' },
@@ -418,7 +418,7 @@ export default function AnketaKupciPage() {
                   { label: 'Do 5 km' },
                   { label: 'Do 10 km' },
                   { label: 'Do 20 km' },
-                  { label: 'Ne bih preuzimao/la — jedino dostava na adresu' },
+                  { label: 'Ne bih preuzimao/la, jedino dostava na adresu' },
                 ]} />
               </QCard>
             </div>
@@ -430,7 +430,7 @@ export default function AnketaKupciPage() {
               <QCard num={8} label="Što vas najčešće frustrira pri kupnji od lokalnih OPG-ova? (može više odgovora)" required>
                 <CheckGroup id="k7" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Teško je pronaći pouzdanog dobavljača' },
-                  { label: 'Nepredvidiva dostupnost — ne znam što ima' },
+                  { label: 'Nepredvidiva dostupnost, ne znam što ima' },
                   { label: 'Nema online naručivanja, sve ide telefonom' },
                   { label: 'Nejasne cijene' },
                   { label: 'Loša komunikacija / nema odgovora' },
@@ -441,7 +441,7 @@ export default function AnketaKupciPage() {
                 ]} />
               </QCard>
 
-              <QCard num={9} label="Ako imate 30 sekundi — opišite situaciju kad vas je kupnja od OPG-a razočarala ili zakomplicirala stvari. (opcionalno)">
+              <QCard num={9} label="Ako imate 30 sekundi, opišite situaciju kad vas je kupnja od OPG-a razočarala ili zakomplicirala stvari. (opcionalno)">
                 <textarea
                   style={{ width: '100%', padding: '10px 12px', border: '1.5px solid #D4C9B8', borderRadius: 8, fontSize: 13, color: '#1A1A1A', outline: 'none', background: 'white', fontFamily: 'inherit', minHeight: 90, resize: 'vertical', display: 'block' }}
                   placeholder="npr. Naručio/la sam, ali nisu imali zaliha, saznao/la sam dan uoči dostave..."
@@ -452,9 +452,9 @@ export default function AnketaKupciPage() {
 
               <QCard num={10} label="Ako pronađete OPG koji vam se sviđa kroz aplikaciju, nastavili biste naručivati kroz aplikaciju ili biste ih kontaktirali direktno?" required>
                 <RadioGroup id="k9b" answers={answers} setAnswers={setAnswers} options={[
-                  { label: 'Uvijek kroz aplikaciju — lakše mi je' },
+                  { label: 'Uvijek kroz aplikaciju, lakše mi je' },
                   { label: 'Vjerojatno kroz aplikaciju' },
-                  { label: 'Kontaktirao/la bih direktno — jednostavnije je' },
+                  { label: 'Kontaktirao/la bih direktno, jednostavnije je' },
                   { label: 'Ovisno o situaciji' },
                 ]} />
               </QCard>
@@ -579,7 +579,7 @@ export default function AnketaKupciPage() {
                 <ul style={{ margin: 0, paddingLeft: 18 }}>
                   {validationErrors.map(e => (
                     <li key={e.key} style={{ fontSize: 13, color: '#DC2626', marginBottom: 3 }}>
-                      Pitanje {e.q} — {e.label}
+                      Pitanje {e.q}: {e.label}
                     </li>
                   ))}
                 </ul>

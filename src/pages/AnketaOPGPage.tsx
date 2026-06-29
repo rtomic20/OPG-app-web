@@ -345,7 +345,7 @@ export default function AnketaOPGPage() {
                   onChange={e => setAnswers(a => ({ ...a, zupanija: e.target.value }))}
                   style={{ ...inputStyle, appearance: 'none' as React.CSSProperties['appearance'] }}
                 >
-                  <option value="">— Odaberite županiju —</option>
+                  <option value="">Odaberite županiju</option>
                   {ZUPANIJE.map(z => <option key={z} value={z}>{z}</option>)}
                 </select>
               </QCard>
@@ -418,7 +418,7 @@ export default function AnketaOPGPage() {
                   { label: 'Preveliki posrednici koji uzimaju veliku proviziju' },
                   { label: 'Logistika i dostava je skupa/komplicirana' },
                   { label: 'Administracija oduzima previše vremena' },
-                  { label: 'Nepredvidiva potražnja — ne znam koliko će se prodati' },
+                  { label: 'Nepredvidiva potražnja, ne znam koliko će se prodati' },
                   { label: 'Ne mogu prodati sve što proizvedem' },
                   { label: 'Nedostatak digitalnih vještina/alata' },
                   { label: 'Ostalo', hasOther: true },
@@ -454,7 +454,7 @@ export default function AnketaOPGPage() {
                   { label: 'Ne vjerujem da bi funkcioniralo' },
                   { label: 'Nemam vremena za učenje novog alata' },
                   { label: 'Loša iskustva u prošlosti' },
-                  { label: 'Ništa — otvoren/a sam za isprobavanje' },
+                  { label: 'Ništa, otvoren/a sam za isprobavanje' },
                   { label: 'Ostalo', hasOther: true },
                 ]} />
               </QCard>
@@ -463,8 +463,8 @@ export default function AnketaOPGPage() {
                 <RadioGroup id="o14" answers={answers} setAnswers={setAnswers} options={[
                   { label: 'Ne bih platio/la ništa' },
                   { label: 'Fiksna pretplata (npr. 10–20 €/mj)' },
-                  { label: 'Provizija po narudžbi — do 5% od prodane vrijednosti' },
-                  { label: 'Provizija po narudžbi — 5–10% od prodane vrijednosti' },
+                  { label: 'Provizija po narudžbi, do 5% od prodane vrijednosti' },
+                  { label: 'Provizija po narudžbi, 5-10% od prodane vrijednosti' },
                   { label: 'Prihvatio/la bih i više od 10% ako platforma donosi kupce' },
                 ]} />
                 {answers['o14'] && answers['o14'] !== 'Ne bih platio/la ništa' && (
@@ -487,7 +487,7 @@ export default function AnketaOPGPage() {
             <div style={{ marginBottom: 28 }}>
               <GroupHeader title="Vrijednost platforme" />
 
-              <QCard num={11} label="Ako imate 30 sekundi — opišite jednu konkretnu situaciju koja vam je nedavno stvorila problem u prodaji ili distribuciji. (opcionalno)">
+              <QCard num={11} label="Ako imate 30 sekundi, opišite jednu konkretnu situaciju koja vam je nedavno stvorila problem u prodaji ili distribuciji. (opcionalno)">
                 <textarea
                   style={{ width: '100%', padding: '10px 12px', border: '1.5px solid #D4C9B8', borderRadius: 8, fontSize: 13, color: '#1A1A1A', outline: 'none', background: 'white', fontFamily: 'inherit', minHeight: 90, resize: 'vertical', display: 'block' }}
                   placeholder="npr. Imao sam višak rajčice, nije je nitko htio preuzeti, sve je propalo..."
@@ -515,7 +515,7 @@ export default function AnketaOPGPage() {
                 🧪 Isprobajte Tržnjak odmah!
               </div>
               <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.85)', marginBottom: 16, lineHeight: 1.6 }}>
-                Registrirajte se kao OPG, dodajte svoje proizvode i pogledajte kako platforma funkcionira — demo je besplatan.
+                Registrirajte se kao OPG, dodajte svoje proizvode i pogledajte kako platforma funkcionira. Demo je besplatan.
               </div>
               <a
                 href="https://trznjak.com/"
@@ -559,7 +559,7 @@ export default function AnketaOPGPage() {
                 <ul style={{ margin: 0, paddingLeft: 18 }}>
                   {validationErrors.map(e => (
                     <li key={e.key} style={{ fontSize: 13, color: '#DC2626', marginBottom: 3 }}>
-                      Pitanje {e.q} — {e.label}
+                      Pitanje {e.q}: {e.label}
                     </li>
                   ))}
                 </ul>

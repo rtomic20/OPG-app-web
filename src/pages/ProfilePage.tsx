@@ -398,7 +398,7 @@ export default function ProfilePage() {
                 {supportMessages.length === 0 && (
                   <div className="text-center py-12 text-gray-400 text-sm">
                     <p className="text-3xl mb-2">💬</p>
-                    <p>Pošalji nam poruku — odgovorit ćemo što prije.</p>
+                    <p>Pošalji nam poruku. Odgovorit ćemo što prije.</p>
                   </div>
                 )}
                 {supportMessages.map((m) => (
