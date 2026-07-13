@@ -123,7 +123,7 @@ export default function Navbar() {
                 </Link>
                 <Link
                   to="/registracija"
-                  className="bg-[#2D5016] hover:bg-[#3D6A1F] text-white font-semibold px-4 py-2 transition-colors text-sm"
+                  className="btn-press bg-[#2D5016] hover:brightness-90 text-white font-semibold px-4 py-2 text-sm"
                   style={{ borderRadius: '4px' }}
                 >
                   Registracija

@@ -86,7 +86,7 @@ export default function Problem() {
             <h3 className="playfair font-bold text-[#2D5016] mb-4 text-lg flex items-center gap-2">
               <Check className="w-5 h-5 text-[#2D5016]" /> S Tržnjakom
             </h3>
-            <ul className="space-y-2 text-[#3D6A1F]">
+            <ul className="space-y-2 text-[#2D5016]">
               {[
                 'Naruči od lokalnog OPG-a za nekoliko minuta',
                 'Pravedna cijena, direktno od proizvođača',

@@ -184,7 +184,7 @@ export default function RegisterPage() {
               </div>
               {error && <p className="text-red-600 text-sm">{error}</p>}
               <button type="submit" disabled={loading || !privacyAccepted}
-                className="w-full bg-[#2D5016] hover:bg-[#3D6A1F] text-white py-2.5 font-medium disabled:opacity-50 transition-colors mt-2"
+                className="w-full bg-[#2D5016] hover:brightness-90 text-white py-2.5 font-medium disabled:opacity-50 transition-colors mt-2"
                 style={{ borderRadius: '4px' }}>
                 {loading ? 'Kreiranje računa...' : 'Kreiraj račun'}
               </button>

@@ -122,7 +122,7 @@ export default function LoginPage() {
               </div>
               {error && <p className="text-red-600 text-sm">{error}</p>}
               <button type="submit" disabled={loading || mfaCode.length !== 6}
-                className="w-full bg-[#2D5016] hover:bg-[#3D6A1F] text-white py-2.5 font-medium disabled:opacity-50 transition-colors"
+                className="w-full bg-[#2D5016] hover:brightness-90 text-white py-2.5 font-medium disabled:opacity-50 transition-colors"
                 style={{ borderRadius: '4px' }}>
                 {loading ? 'Provjera...' : 'Potvrdi'}
               </button>
@@ -180,7 +180,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#2D5016] hover:bg-[#3D6A1F] text-white py-2.5 font-medium disabled:opacity-50 transition-colors"
+              className="w-full bg-[#2D5016] hover:brightness-90 text-white py-2.5 font-medium disabled:opacity-50 transition-colors"
               style={{ borderRadius: '4px' }}
             >
               {loading ? 'Prijava...' : 'Prijavi se'}

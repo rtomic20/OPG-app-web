@@ -57,3 +57,25 @@ body {
 .hero-animate-2 { animation: fadeInUp 0.6s ease-out 120ms both; }
 .hero-animate-3 { animation: fadeInUp 0.6s ease-out 240ms both; }
 .hero-animate-4 { animation: fadeInUp 0.6s ease-out 360ms both; }
+
+/* Respect OS-level reduced-motion preference — show content immediately, skip motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .hero-animate-1, .hero-animate-2, .hero-animate-3, .hero-animate-4,
+  .animate-delay-100, .animate-delay-200, .animate-delay-300, .animate-delay-400, .animate-delay-500 {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Press feedback for primary buttons */
+.btn-press {
+  transition: transform 0.15s ease-out, background-color 0.15s, filter 0.15s;
+}
+.btn-press:active {
+  transform: scale(0.96);
+}

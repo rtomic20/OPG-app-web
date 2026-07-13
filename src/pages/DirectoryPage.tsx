@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { MapPin, Leaf, Search } from 'lucide-react'
 import api from '../services/api'
@@ -35,6 +35,8 @@ export default function DirectoryPage() {
   const [search, setSearch] = useState('')
   const [searchFocused, setSearchFocused] = useState(false)
   const [Map, setMap] = useState<React.ComponentType<any> | null>(null)
+  const gridRef = useRef<HTMLDivElement>(null)
+  const [gridVisible, setGridVisible] = useState(false)
 
   const showTest = new URLSearchParams(window.location.search).get('show_test') === '1'
 

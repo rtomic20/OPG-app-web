@@ -128,7 +128,7 @@ export default function Hero() {
               <button
                 type="submit"
                 disabled={status === 'sending'}
-                className="bg-[#CDA274] hover:bg-[#BF9264] disabled:opacity-60 text-white font-semibold px-6 py-3 transition-colors whitespace-nowrap"
+                className="btn-press bg-[#CDA274] hover:bg-[#BF9264] disabled:opacity-60 text-white font-semibold px-6 py-3 whitespace-nowrap"
                 style={{ borderRadius: '4px' }}
               >
                 {status === 'sending' ? 'Šaljem...' : 'Prijavi me'}

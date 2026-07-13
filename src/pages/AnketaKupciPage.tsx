@@ -15,7 +15,7 @@ const ZUPANIJE = [
 type Answers = Record<string, string | number | string[]>
 
 const inputStyle: React.CSSProperties = {
-  width: '100%', padding: '10px 12px', border: '1.5px solid #D4C9B8',
+  width: '100%', padding: '10px 12px', border: '1.5px solid #CDA274',
   borderRadius: 8, fontSize: 13, color: '#1A1A1A', outline: 'none',
   background: 'white', fontFamily: 'inherit',
 }
@@ -45,7 +45,7 @@ function RadioGroup({ id, options, answers, setAnswers }: {
             onClick={() => select(opt.label, !!opt.hasOther)}
             style={{
               display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px',
-              borderRadius: 8, border: `1.5px solid ${isSelected ? '#7CB518' : '#D4C9B8'}`,
+              borderRadius: 8, border: `1.5px solid ${isSelected ? '#5A8B35' : '#CDA274'}`,
               background: isSelected ? '#E8F0D8' : 'white', cursor: 'pointer',
               fontSize: 13, color: isSelected ? '#2D5016' : '#1A1A1A',
               fontWeight: isSelected ? 500 : 400, textAlign: 'left', width: '100%',
@@ -54,8 +54,8 @@ function RadioGroup({ id, options, answers, setAnswers }: {
           >
             <span style={{
               width: 16, height: 16, borderRadius: '50%', flexShrink: 0,
-              border: `2px solid ${isSelected ? '#7CB518' : '#D4C9B8'}`,
-              background: isSelected ? '#7CB518' : 'white', position: 'relative',
+              border: `2px solid ${isSelected ? '#5A8B35' : '#CDA274'}`,
+              background: isSelected ? '#5A8B35' : 'white', position: 'relative',
               display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
             }}>
               {isSelected && <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'white' }} />}
@@ -116,7 +116,7 @@ function CheckGroup({ id, options, answers, setAnswers }: {
             onClick={() => toggle(opt.label, !!opt.hasOther)}
             style={{
               display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px',
-              borderRadius: 8, border: `1.5px solid ${checked ? '#7CB518' : '#D4C9B8'}`,
+              borderRadius: 8, border: `1.5px solid ${checked ? '#5A8B35' : '#CDA274'}`,
               background: checked ? '#E8F0D8' : 'white', cursor: 'pointer',
               fontSize: 13, color: checked ? '#2D5016' : '#1A1A1A',
               fontWeight: checked ? 500 : 400, textAlign: 'left', width: '100%',
@@ -125,8 +125,8 @@ function CheckGroup({ id, options, answers, setAnswers }: {
           >
             <span style={{
               width: 16, height: 16, borderRadius: 4, flexShrink: 0,
-              border: `2px solid ${checked ? '#7CB518' : '#D4C9B8'}`,
-              background: checked ? '#7CB518' : 'white', color: 'white',
+              border: `2px solid ${checked ? '#5A8B35' : '#CDA274'}`,
+              background: checked ? '#5A8B35' : 'white', color: 'white',
               fontSize: 10, display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
               {checked && '✓'}
@@ -174,7 +174,7 @@ function ScaleGroup({ id, answers, setAnswers, lowLabel = '1 = Nisko', highLabel
               onClick={() => setAnswers(a => ({ ...a, [id]: n }))}
               style={{
                 flex: 1, minWidth: 36, height: 40, borderRadius: 8,
-                border: `1.5px solid ${sel ? '#2D5016' : '#D4C9B8'}`,
+                border: `1.5px solid ${sel ? '#2D5016' : '#CDA274'}`,
                 background: sel ? '#2D5016' : 'white', cursor: 'pointer',
                 fontSize: 13, fontWeight: sel ? 600 : 500,
                 color: sel ? 'white' : '#6B6B6B', fontFamily: 'inherit',
@@ -195,7 +195,7 @@ function QCard({ num, label, children, required }: { num: number; label: string;
   return (
     <div style={{
       background: 'white', borderRadius: 12, padding: 18, marginBottom: 12,
-      border: '1px solid #D4C9B8',
+      border: '1px solid #CDA274',
     }}>
       <div style={{ fontSize: 14, fontWeight: 500, color: '#1A1A1A', marginBottom: 12, lineHeight: 1.4 }}>
         <span style={{
@@ -215,7 +215,7 @@ function GroupHeader({ title }: { title: string }) {
   return (
     <div style={{
       fontSize: 11, fontWeight: 600, letterSpacing: 2, textTransform: 'uppercase',
-      color: '#7CB518', marginBottom: 12, paddingBottom: 6, borderBottom: '1px solid #D4C9B8',
+      color: '#5A8B35', marginBottom: 12, paddingBottom: 6, borderBottom: '1px solid #CDA274',
     }}>{title}</div>
   )
 }
@@ -298,7 +298,7 @@ export default function AnketaKupciPage() {
           borderRadius: '50%', background: 'rgba(255,255,255,0.05)',
         }} />
         <div style={{
-          display: 'inline-block', background: '#7CB518', color: 'white',
+          display: 'inline-block', background: '#5A8B35', color: 'white',
           fontSize: 11, fontWeight: 600, letterSpacing: 2, textTransform: 'uppercase',
           padding: '4px 14px', borderRadius: 20, marginBottom: 16, position: 'relative', zIndex: 1,
         }}>Istraživanje tržišta · Kupci</div>
@@ -443,7 +443,7 @@ export default function AnketaKupciPage() {
 
               <QCard num={9} label="Ako imate 30 sekundi, opišite situaciju kad vas je kupnja od OPG-a razočarala ili zakomplicirala stvari. (opcionalno)">
                 <textarea
-                  style={{ width: '100%', padding: '10px 12px', border: '1.5px solid #D4C9B8', borderRadius: 8, fontSize: 13, color: '#1A1A1A', outline: 'none', background: 'white', fontFamily: 'inherit', minHeight: 90, resize: 'vertical', display: 'block' }}
+                  style={{ width: '100%', padding: '10px 12px', border: '1.5px solid #CDA274', borderRadius: 8, fontSize: 13, color: '#1A1A1A', outline: 'none', background: 'white', fontFamily: 'inherit', minHeight: 90, resize: 'vertical', display: 'block' }}
                   placeholder="npr. Naručio/la sam, ali nisu imali zaliha, saznao/la sam dan uoči dostave..."
                   value={(answers['k10'] as string) || ''}
                   onChange={e => setAnswers(a => ({ ...a, k10: e.target.value }))}
@@ -480,7 +480,7 @@ export default function AnketaKupciPage() {
 
             {/* CTA — isprobajte platformu */}
             <div style={{
-              background: 'linear-gradient(135deg, #2D5016 0%, #4a7c20 100%)',
+              background: 'linear-gradient(135deg, #2D5016 0%, #5A8B35 100%)',
               borderRadius: 14, padding: '22px 20px', marginBottom: 24,
             }}>
               <div style={{ fontSize: 17, fontWeight: 700, color: 'white', marginBottom: 6 }}>
@@ -503,7 +503,7 @@ export default function AnketaKupciPage() {
 
             {/* Device */}
             <div style={{
-              background: 'white', borderRadius: 12, padding: 18, marginBottom: 12, border: '1px solid #D4C9B8',
+              background: 'white', borderRadius: 12, padding: 18, marginBottom: 12, border: '1px solid #CDA274',
             }}>
               <div style={{ fontSize: 14, fontWeight: 500, color: '#1A1A1A', marginBottom: 8 }}>
                 📱 Na kojem uređaju najčešće kupujete online? (opcionalno)
@@ -516,7 +516,7 @@ export default function AnketaKupciPage() {
                     onClick={() => setDevice(d)}
                     style={{
                       flex: 1, minWidth: 100, padding: 10, borderRadius: 8,
-                      border: `1.5px solid ${device === d ? '#7CB518' : '#D4C9B8'}`,
+                      border: `1.5px solid ${device === d ? '#5A8B35' : '#CDA274'}`,
                       background: device === d ? '#E8F0D8' : 'white', cursor: 'pointer',
                       fontSize: 13, color: device === d ? '#2D5016' : '#1A1A1A',
                       fontWeight: device === d ? 600 : 400, fontFamily: 'inherit',
@@ -536,7 +536,7 @@ export default function AnketaKupciPage() {
                         onClick={() => setOs(o)}
                         style={{
                           flex: 1, minWidth: 100, padding: 10, borderRadius: 8,
-                          border: `1.5px solid ${os === o ? '#7CB518' : '#D4C9B8'}`,
+                          border: `1.5px solid ${os === o ? '#5A8B35' : '#CDA274'}`,
                           background: os === o ? '#E8F0D8' : 'white', cursor: 'pointer',
                           fontSize: 13, color: os === o ? '#2D5016' : '#1A1A1A',
                           fontWeight: os === o ? 600 : 400, fontFamily: 'inherit',
@@ -551,7 +551,7 @@ export default function AnketaKupciPage() {
 
             {/* Email */}
             <div style={{
-              background: 'white', borderRadius: 12, padding: 18, marginBottom: 12, border: '1px solid #D4C9B8',
+              background: 'white', borderRadius: 12, padding: 18, marginBottom: 12, border: '1px solid #CDA274',
             }}>
               <div style={{ fontSize: 14, fontWeight: 500, color: '#1A1A1A', marginBottom: 4 }}>
                 📬 Zainteresirani ste za projekt? Ostavite email! (opcionalno)
