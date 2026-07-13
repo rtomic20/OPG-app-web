@@ -64,6 +64,17 @@ export default function DirectoryPage() {
 
   const withCoords = vendors.filter((v) => v.latitude && v.longitude)
 
+  useEffect(() => {
+    if (loading || filtered.length === 0) return
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setGridVisible(true) },
+      { threshold: 0.1 }
+    )
+    if (gridRef.current) observer.observe(gridRef.current)
+    return () => observer.disconnect()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading, filtered.length])
+
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#FAF7F2', ...dmSans }}>
       <Navbar />
@@ -170,9 +181,12 @@ export default function DirectoryPage() {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
-              {filtered.map((v) => (
-                <VendorCard key={v.id} vendor={v} />
+            <div
+              ref={gridRef}
+              className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12 ${gridVisible ? 'section-visible' : ''}`}
+            >
+              {filtered.map((v, i) => (
+                <VendorCard key={v.id} vendor={v} index={i} />
               ))}
             </div>
           )}
@@ -185,7 +199,7 @@ export default function DirectoryPage() {
   )
 }
 
-function VendorCard({ vendor: v }: { vendor: Vendor }) {
+function VendorCard({ vendor: v, index }: { vendor: Vendor; index: number }) {
   const [hovered, setHovered] = useState(false)
   const dmSans: React.CSSProperties = { fontFamily: "'DM Sans', sans-serif" }
   const playfair: React.CSSProperties = { fontFamily: "'Playfair Display', serif" }
@@ -193,6 +207,7 @@ function VendorCard({ vendor: v }: { vendor: Vendor }) {
   return (
     <Link
       to={`/opgovi/${v.slug}`}
+      className={`animate-fade-in animate-delay-${Math.min((index % 4 + 1) * 100, 400)}`}
       style={{
         display: 'block',
         textDecoration: 'none',
