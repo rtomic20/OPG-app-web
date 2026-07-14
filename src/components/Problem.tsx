@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Search, Store, Package, X, Check } from 'lucide-react'
+import { IconSearch as Search, IconBuildingStore as Store, IconPackage as Package, IconX as X, IconCheck as Check } from '@tabler/icons-react'
 
 const problems = [
   {
@@ -55,7 +55,7 @@ export default function Problem() {
               className={`animate-fade-in animate-delay-${(i + 1) * 100} bg-red-50 border border-red-100 rounded-lg p-8 text-center`}
             >
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-lg bg-red-100 mb-5">
-                <p.Icon className="w-7 h-7 text-red-500" strokeWidth={1.5} />
+                <p.Icon className="w-7 h-7 text-red-500" stroke={1.5} />
               </div>
               <h3 className="playfair text-xl font-bold text-[#111111] mb-3">{p.title}</h3>
               <p className="text-[#555] leading-relaxed">{p.desc}</p>

@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
-import { Sprout, MapPin, Handshake, Banknote, Smartphone, ShieldCheck, Leaf, Star } from 'lucide-react'
+import {
+  IconSeedling as Sprout, IconMapPin as MapPin, IconHeartHandshake as Handshake, IconCash as Banknote,
+  IconDeviceMobile as Smartphone, IconShieldCheck as ShieldCheck, IconLeaf as Leaf, IconStar as Star,
+} from '@tabler/icons-react'
 
 const features = [
   {
@@ -15,7 +18,7 @@ const features = [
   {
     Icon: Handshake,
     title: 'Direktno od farmera',
-    desc: 'Znaš od koga kupuješ. Pročitaj priču iza farme i provjeri certifikate.',
+    desc: 'Znaš od koga kupuješ. Pročitaj priču iza farme koja stoji iza svakog proizvoda.',
   },
   {
     Icon: Banknote,
@@ -79,7 +82,7 @@ export default function Features() {
               className={`animate-fade-in animate-delay-${Math.min((i % 4 + 1) * 100, 400)} group p-6 rounded-lg border border-[#E8E8E8] hover:border-[#EAF2E0] hover:shadow-md transition-all`}
             >
               <div className="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-[#EAF2E0] mb-4 group-hover:bg-[#d4ecc0] transition-colors">
-                <f.Icon className="w-6 h-6 text-[#2D5016]" strokeWidth={1.5} />
+                <f.Icon className="w-6 h-6 text-[#2D5016]" stroke={1.5} />
               </div>
               <h3 className="text-lg font-bold text-[#111111] mb-2">{f.title}</h3>
               <p className="text-[#555] text-sm leading-relaxed">{f.desc}</p>

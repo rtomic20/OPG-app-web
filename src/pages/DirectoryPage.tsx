@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { MapPin, Leaf, Search } from 'lucide-react'
+import { IconMapPin as MapPin, IconLeaf as Leaf, IconSearch as Search } from '@tabler/icons-react'
 import api from '../services/api'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'

@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
-import { Wheat, ShoppingCart, FileText, ShoppingBasket, TrendingUp, Map, UtensilsCrossed } from 'lucide-react'
+import {
+  IconWheat as Wheat, IconShoppingCart as ShoppingCart, IconFileText as FileText,
+  IconBasket as ShoppingBasket, IconTrendingUp as TrendingUp, IconMap as Map, IconToolsKitchen as UtensilsCrossed,
+} from '@tabler/icons-react'
 
 const tabs = {
   opg: {
@@ -119,7 +122,7 @@ export default function HowItWorks() {
               <div className="flex items-center gap-3 mb-5">
                 <span className="text-3xl font-black text-[#E0E0E0]">{step.num}</span>
                 <div className="w-10 h-10 rounded-lg bg-[#EAF2E0] flex items-center justify-center">
-                  <step.Icon className="w-5 h-5 text-[#2D5016]" strokeWidth={1.5} />
+                  <step.Icon className="w-5 h-5 text-[#2D5016]" stroke={1.5} />
                 </div>
               </div>
               <h3 className="playfair text-xl font-bold text-[#111111] mb-3">{step.title}</h3>

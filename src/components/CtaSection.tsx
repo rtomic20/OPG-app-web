@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CircleCheck } from 'lucide-react'
+import { IconCircleCheck as CircleCheck } from '@tabler/icons-react'
 import api from '../services/api'
 import Logo from './Logo'
 

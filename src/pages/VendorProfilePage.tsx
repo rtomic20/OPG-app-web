@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { MapPin, Leaf, Sprout } from 'lucide-react'
+import { IconMapPin as MapPin, IconLeaf as Leaf, IconSeedling as Sprout } from '@tabler/icons-react'
 import api from '../services/api'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
