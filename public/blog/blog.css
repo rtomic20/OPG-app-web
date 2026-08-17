@@ -1,0 +1,328 @@
+/* Trznjak blog - static pages, same-origin CSS (strict CSP: no inline script, no remote font).
+   Deliberately no @import of Google Fonts: font-src is 'self', so a web font would not load.
+   Playfair Display / DM Sans are named first for local installs, Georgia and the system UI
+   stack carry the design on their own. */
+
+:root {
+  --paper: #faf7f2;
+  --ink: #111111;
+  --muted: #4f4f49;
+  --green: #2d5016;
+  --green-light: #5a8b35;
+  --mint: #eaf2e0;
+  --line: #e3ded4;
+  --dark: #111e0b;
+  --serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --sans: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --wrap: 72rem;
+  --measure: 42rem;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (min-width: 768px) { body { font-size: 18px; } }
+
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 1.25rem; }
+
+a { color: var(--green); }
+a:hover { color: var(--green-light); }
+
+:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--green);
+  color: #fff;
+  padding: 0.75rem 1rem;
+  z-index: 10;
+}
+.skip-link:focus { left: 0; color: #fff; }
+
+/* ---------------------------------------------------------------- header */
+
+.site-header {
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 64px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--green);
+  padding: 0.5rem 0;
+}
+
+.site-nav { display: flex; align-items: center; gap: 0.25rem; }
+
+.site-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 0.75rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--green);
+  transition: color 0.2s ease-out, background-color 0.2s ease-out;
+}
+.site-nav a:hover { color: var(--green-light); }
+.site-nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: 6px; }
+
+.site-nav .btn {
+  background: var(--green);
+  color: #fff;
+  border-radius: 4px;
+  font-weight: 600;
+  margin-left: 0.25rem;
+}
+.site-nav .btn:hover { background: var(--green-light); color: #fff; }
+
+@media (max-width: 26.25rem) {
+  .site-nav a { padding: 0 0.5rem; font-size: 0.95rem; }
+}
+
+/* ------------------------------------------------------------- blog index */
+
+.index-head {
+  padding: 3.5rem 0 2rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 2rem;
+}
+
+.index-head h1 {
+  font-family: var(--serif);
+  font-size: clamp(2.25rem, 6vw, 3.25rem);
+  line-height: 1.15;
+  margin: 0 0 0.75rem;
+  color: var(--green);
+}
+
+.lede {
+  margin: 0;
+  max-width: var(--measure);
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.cards { list-style: none; margin: 0 0 4rem; padding: 0; display: grid; gap: 1rem; }
+
+.card a {
+  display: block;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease-out, border-color 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.card a:hover {
+  transform: translateY(-2px);
+  border-color: var(--green-light);
+  box-shadow: 0 6px 20px rgba(45, 80, 22, 0.08);
+}
+
+.card-meta {
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.tag {
+  display: inline-block;
+  margin-left: 0.5rem;
+  background: var(--mint);
+  color: var(--green);
+  border-radius: 3px;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.card h2 {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  line-height: 1.25;
+  margin: 0 0 0.5rem;
+  color: var(--green);
+}
+
+.card-desc { margin: 0 0 1rem; color: var(--muted); }
+
+.card-link { font-weight: 600; color: var(--green-light); }
+.card a:hover .card-link { text-decoration: underline; text-underline-offset: 4px; }
+
+@media (min-width: 60rem) {
+  .cards { grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+}
+
+/* -------------------------------------------------------------- post page */
+
+.post {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+
+.eyebrow {
+  margin: 0 0 1.5rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.eyebrow a { text-decoration: none; font-weight: 600; }
+.eyebrow a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+.post h1 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5.5vw, 2.85rem);
+  line-height: 1.18;
+  margin: 0 0 0.75rem;
+  color: var(--green);
+}
+
+.meta {
+  margin: 0 0 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.post h2 {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  line-height: 1.3;
+  margin: 2.5rem 0 0.75rem;
+  color: var(--green);
+}
+
+.post h3 {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  margin: 2rem 0 0.5rem;
+  color: var(--ink);
+}
+
+.post p { margin: 0 0 1.25rem; }
+
+.post ul { margin: 0 0 1.5rem; padding-left: 1.25rem; }
+.post li { margin-bottom: 0.5rem; }
+
+.post blockquote {
+  margin: 1.75rem 0;
+  padding: 0.25rem 0 0.25rem 1.25rem;
+  border-left: 3px solid var(--green-light);
+  color: var(--muted);
+  font-style: italic;
+}
+.post blockquote p { margin: 0; }
+
+.placeholder-note {
+  background: var(--mint);
+  border-left: 3px solid var(--green);
+  border-radius: 0 4px 4px 0;
+  padding: 0.9rem 1.1rem;
+  margin: 0 0 2rem;
+  font-size: 0.95rem;
+  color: var(--green);
+}
+
+.post figure { margin: 2rem 0; }
+
+.post img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  background: var(--mint);
+}
+
+.post figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.back {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+.back a { font-weight: 600; text-decoration: none; }
+.back a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* ---------------------------------------------------------------- footer */
+
+.site-footer {
+  background: var(--dark);
+  color: #7ba562;
+  padding: 2.5rem 0;
+}
+
+.footer-inner { display: grid; gap: 1rem; }
+
+.footer-brand {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: #fff;
+}
+
+.site-footer nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
+
+.site-footer a {
+  color: #7ba562;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  transition: color 0.2s ease-out;
+}
+.site-footer a:hover { color: #fff; }
+
+.footer-copy { margin: 0; font-size: 0.875rem; color: #4e7a38; }
+
+/* --------------------------------------------------------- reduced motion */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  .card a:hover { transform: none; }
+}

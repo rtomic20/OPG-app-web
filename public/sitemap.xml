@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Static pages. Post URLs are appended into dist/sitemap.xml by scripts/build-blog.mjs.
+     Auth pages (/prijava, /registracija, /profil, ...) stay out: robots.txt disallows them. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://trznjak.com/</loc>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://trznjak.com/opgovi</loc>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://trznjak.com/privatnost</loc>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://trznjak.com/uvjeti</loc>
+    <lastmod>2026-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>

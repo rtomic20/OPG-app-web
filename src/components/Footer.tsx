@@ -27,6 +27,10 @@ export default function Footer() {
                 <Link to="/opgovi" className="hover:text-white transition-colors">OPG-ovi</Link>
               </li>
               <li>
+                {/* Plain <a>: /blog is a build-time static file, not a React route */}
+                <a href="/blog" className="hover:text-white transition-colors">Blog</a>
+              </li>
+              <li>
                 <Link to="/prijava" className="hover:text-white transition-colors">Prijava</Link>
               </li>
               <li>

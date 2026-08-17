@@ -60,9 +60,15 @@ export default function Navbar() {
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-6">
             {!isAuth && !isLegal && (
-              <Link to="/opgovi" className="text-[#2D5016] hover:text-[#5A8B35] font-medium transition-colors">
-                OPG-ovi
-              </Link>
+              <>
+                <Link to="/opgovi" className="text-[#2D5016] hover:text-[#5A8B35] font-medium transition-colors">
+                  OPG-ovi
+                </Link>
+                {/* Plain <a>: /blog is a build-time static file, router navigation would hit the catch-all */}
+                <a href="/blog" className="text-[#2D5016] hover:text-[#5A8B35] font-medium transition-colors">
+                  Blog
+                </a>
+              </>
             )}
             {isLanding && (
               <>
@@ -156,9 +162,14 @@ export default function Navbar() {
         {menuOpen && (
           <div className="md:hidden bg-white border-t border-[#EAF2E0] py-4 space-y-1">
             {!isAuth && !isLegal && (
-              <Link to="/opgovi" className="block px-4 py-2.5 text-[#2D5016] font-medium" onClick={() => setMenuOpen(false)}>
-                OPG-ovi
-              </Link>
+              <>
+                <Link to="/opgovi" className="block px-4 py-2.5 text-[#2D5016] font-medium" onClick={() => setMenuOpen(false)}>
+                  OPG-ovi
+                </Link>
+                <a href="/blog" className="block px-4 py-2.5 text-[#2D5016] font-medium">
+                  Blog
+                </a>
+              </>
             )}
             {user ? (
               <>
