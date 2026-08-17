@@ -124,9 +124,11 @@ const header = () => `<a class="skip-link" href="#sadrzaj">Preskoči na sadržaj
         <nav class="site-nav" aria-label="Glavna navigacija">
           <a href="/opgovi">OPG-ovi</a>
           <a href="/blog" aria-current="page">Blog</a>
+        </nav>
+        <div class="site-nav header-actions">
           <a href="/prijava">Prijava</a>
           <a class="btn" href="/registracija">Registracija</a>
-        </nav>
+        </div>
       </div>
     </header>`
 
