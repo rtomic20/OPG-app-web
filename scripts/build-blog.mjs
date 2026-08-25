@@ -295,7 +295,22 @@ function main() {
   ])
   writeFileSync(join(DIST, 'sitemap.xml'), sitemap, 'utf8')
 
-  console.log(`blog: ${posts.length} objava -> dist/blog/, sitemap +${posts.length + 1} URL-a`)
+  // ponytail: a flat manifest so the React landing page can show the newest posts
+  // without importing the markdown or duplicating the list. Already sorted newest-first.
+  const manifest = posts.map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    description: p.description,
+    date: p.date,
+    image: p.image || '',
+    minute: p.minute,
+    placeholder: p.placeholder,
+  }))
+  writeFileSync(join(outDir, 'posts.json'), JSON.stringify(manifest), 'utf8')
+
+  console.log(
+    `blog: ${posts.length} objava -> dist/blog/, sitemap +${posts.length + 1} URL-a, posts.json OK`
+  )
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main()

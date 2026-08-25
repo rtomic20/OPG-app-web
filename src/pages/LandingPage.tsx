@@ -4,6 +4,7 @@ import Problem from '../components/Problem'
 import HowItWorks from '../components/HowItWorks'
 import Features from '../components/Features'
 import Categories from '../components/Categories'
+import BlogSection from '../components/BlogSection'
 import ObjaveSection from '../components/ObjaveSection'
 import CtaSection from '../components/CtaSection'
 import Footer from '../components/Footer'
@@ -13,6 +14,7 @@ export default function LandingPage() {
     <div className="min-h-screen">
       <Navbar />
       <Hero />
+      <BlogSection />
       <Problem />
       <HowItWorks />
       <Features />
