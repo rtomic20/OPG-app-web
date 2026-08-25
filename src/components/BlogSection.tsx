@@ -62,7 +62,12 @@ export default function BlogSection() {
           </p>
         </div>
 
-        <div className={`grid gap-6 lg:grid-cols-2 ${visible ? 'section-visible' : ''}`}>
+        {/* ponytail: one post -> single centred card, otherwise lead + sidebar */}
+        <div
+          className={`grid gap-6 ${rest.length > 0 ? 'lg:grid-cols-2' : 'max-w-2xl mx-auto'} ${
+            visible ? 'section-visible' : ''
+          }`}
+        >
           {/* Najnovija objava - velika */}
           <a
             href={`/blog/${lead.slug}`}

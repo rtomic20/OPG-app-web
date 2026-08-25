@@ -59,8 +59,18 @@ a:hover { color: var(--green-light); }
 /* ---------------------------------------------------------------- header */
 
 .site-header {
-  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
   border-bottom: 1px solid var(--line);
+}
+
+/* Fallback where backdrop-filter is unsupported - keep the bar opaque, never see-through. */
+@supports not (backdrop-filter: blur(12px)) {
+  .site-header { background: #fff; }
 }
 
 .header-inner {
@@ -84,20 +94,61 @@ a:hover { color: var(--green-light); }
   padding: 0.5rem 0;
 }
 
-.site-nav { display: flex; align-items: center; gap: 0.25rem; }
+.site-nav { display: flex; align-items: center; gap: 0.375rem; }
 
 .site-nav a {
+  position: relative;
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  padding: 0 0.75rem;
-  font-weight: 500;
+  padding: 0 0.95rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
   text-decoration: none;
   color: var(--green);
-  transition: color 0.2s ease-out, background-color 0.2s ease-out;
+  transition: color 0.18s ease-out, background-color 0.18s ease-out;
 }
-.site-nav a:hover { color: var(--green-light); }
-.site-nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: 6px; }
+.site-nav a:hover { color: var(--dark); background: var(--mint); }
+.site-nav a:focus-visible { outline: 2px solid var(--green-light); outline-offset: 2px; }
+
+/* Current page: filled pill + a short bar under it, so it reads as active
+   without relying on colour alone. */
+.site-nav a[aria-current="page"] {
+  background: var(--mint);
+  color: var(--dark);
+  text-decoration: none;
+}
+.site-nav a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 18px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--green-light);
+  transform: translateX(-50%);
+}
+
+/* Right-hand group: Prijava stays quiet, Registracija carries the emphasis. */
+.header-actions { gap: 0.5rem; }
+.header-actions a:not(.btn) { color: var(--muted); font-weight: 500; }
+.header-actions a:not(.btn):hover { color: var(--green); background: var(--mint); }
+
+.site-nav a.btn {
+  background: var(--green);
+  color: #fff;
+  padding: 0 1.15rem;
+  box-shadow: 0 1px 2px rgba(17, 30, 11, 0.18);
+}
+.site-nav a.btn:hover { background: var(--dark); color: #fff; }
+
+@media (max-width: 640px) {
+  .header-inner { gap: 0.5rem 0.75rem; }
+  .site-nav a { padding: 0 0.7rem; font-size: 0.9rem; }
+}
 
 .site-nav .btn {
   background: var(--green);

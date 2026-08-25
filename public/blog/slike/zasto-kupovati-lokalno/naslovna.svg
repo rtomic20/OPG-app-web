@@ -1,73 +1,140 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Ilustracija: polja, sunce i štand s domaćim proizvodima">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Ilustracija: štand s domaćim proizvodima pred poljima i brdima u zalazak sunca">
   <defs>
-    <linearGradient id="nebo" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#FAF7F2"/>
-      <stop offset="100%" stop-color="#EAF2E0"/>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FDF6E9"/>
+      <stop offset="55%" stop-color="#FAF0DC"/>
+      <stop offset="100%" stop-color="#EDF3E2"/>
     </linearGradient>
+    <linearGradient id="hillFar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#A8C68C"/>
+      <stop offset="100%" stop-color="#93B878"/>
+    </linearGradient>
+    <linearGradient id="hillMid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7BA562"/>
+      <stop offset="100%" stop-color="#649050"/>
+    </linearGradient>
+    <linearGradient id="hillNear" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5A8B35"/>
+      <stop offset="100%" stop-color="#47702A"/>
+    </linearGradient>
+    <linearGradient id="awning" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F5F1E6"/>
+      <stop offset="100%" stop-color="#E6DFCC"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F5C763" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#F5C763" stop-opacity="0"/>
+    </radialGradient>
   </defs>
 
-  <rect width="1200" height="630" fill="url(#nebo)"/>
+  <rect width="1200" height="630" fill="url(#sky)"/>
 
-  <!-- sunce -->
-  <circle cx="962" cy="150" r="58" fill="#F2C14E"/>
-  <circle cx="962" cy="150" r="80" fill="#F2C14E" opacity="0.18"/>
+  <!-- sunce i topli sjaj -->
+  <circle cx="905" cy="168" r="180" fill="url(#glow)"/>
+  <circle cx="905" cy="168" r="52" fill="#F3C25A"/>
 
-  <!-- brda -->
-  <path d="M0 356 C 150 296, 300 396, 470 350 C 620 310, 700 344, 810 322 C 940 296, 1080 340, 1200 314 L1200 630 L0 630 Z" fill="#7BA562"/>
-  <path d="M0 424 C 180 382, 330 446, 520 414 C 700 384, 860 434, 1010 408 C 1100 392, 1160 404, 1200 398 L1200 630 L0 630 Z" fill="#5A8B35"/>
-
-  <!-- redovi u polju -->
-  <g stroke="#4E7A38" stroke-width="4" stroke-linecap="round" opacity="0.55">
-    <path d="M70 486 C 300 452, 700 452, 1140 470"/>
-    <path d="M70 520 C 300 486, 700 486, 1140 504"/>
-    <path d="M70 554 C 300 520, 700 520, 1140 538"/>
+  <!-- ptice -->
+  <g stroke="#8FA37E" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.75">
+    <path d="M232 128 q12 -10 24 0 q12 -10 24 0"/>
+    <path d="M300 96 q9 -8 18 0 q9 -8 18 0"/>
+    <path d="M186 176 q9 -8 18 0 q9 -8 18 0"/>
   </g>
 
-  <!-- stabla -->
+  <!-- brda, tri sloja dubine -->
+  <path d="M0 330 C 130 272, 268 348, 402 318 C 540 286, 632 336, 760 310 C 900 282, 1060 330, 1200 300 L1200 630 L0 630 Z" fill="url(#hillFar)"/>
+  <path d="M0 392 C 160 344, 316 408, 470 380 C 636 350, 780 398, 934 374 C 1050 356, 1140 382, 1200 370 L1200 630 L0 630 Z" fill="url(#hillMid)"/>
+  <path d="M0 452 C 190 410, 372 470, 560 444 C 760 416, 928 462, 1084 442 C 1140 435, 1176 440, 1200 436 L1200 630 L0 630 Z" fill="url(#hillNear)"/>
+
+  <!-- redovi nasada -->
+  <g stroke="#3C6222" stroke-width="3.5" stroke-linecap="round" opacity="0.35">
+    <path d="M40 512 C 320 476, 760 476, 1170 498"/>
+    <path d="M40 548 C 320 512, 760 512, 1170 534"/>
+    <path d="M40 584 C 320 548, 760 548, 1170 570"/>
+  </g>
+
+  <!-- čempresi -->
   <g>
-    <rect x="146" y="322" width="9" height="42" fill="#4F4F49"/>
-    <circle cx="150" cy="306" r="34" fill="#2D5016"/>
-    <rect x="242" y="336" width="8" height="34" fill="#4F4F49"/>
-    <circle cx="246" cy="322" r="26" fill="#4E7A38"/>
+    <ellipse cx="118" cy="300" rx="19" ry="58" fill="#3F6B2A"/>
+    <rect x="114" y="352" width="8" height="26" fill="#5B4A32"/>
+    <ellipse cx="163" cy="318" rx="15" ry="44" fill="#4A7A31"/>
+    <rect x="160" y="358" width="7" height="22" fill="#5B4A32"/>
   </g>
+  <!-- stablo desno -->
+  <g>
+    <rect x="1063" y="332" width="11" height="46" rx="3" fill="#5B4A32"/>
+    <circle cx="1068" cy="312" r="40" fill="#4A7A31"/>
+    <circle cx="1044" cy="326" r="26" fill="#568A38"/>
+    <circle cx="1092" cy="328" r="24" fill="#3F6B2A"/>
+  </g>
+
+  <!-- sjena ispod štanda -->
+  <ellipse cx="600" cy="586" rx="286" ry="20" fill="#2D5016" opacity="0.16"/>
+
+  <!-- nadstrešnica -->
+  <path d="M336 296 L864 296 L836 344 L364 344 Z" fill="url(#awning)"/>
+  <g fill="#C9482F">
+    <path d="M364 344 L392 344 L400 296 L372 296 Z" opacity="0.85"/>
+    <path d="M452 344 L480 344 L484 296 L456 296 Z" opacity="0.85"/>
+    <path d="M540 344 L568 344 L568 296 L540 296 Z" opacity="0.85"/>
+    <path d="M628 344 L656 344 L652 296 L624 296 Z" opacity="0.85"/>
+    <path d="M716 344 L744 344 L736 296 L708 296 Z" opacity="0.85"/>
+    <path d="M804 344 L832 344 L820 296 L792 296 Z" opacity="0.85"/>
+  </g>
+  <path d="M336 296 L864 296 L858 306 L342 306 Z" fill="#2D5016" opacity="0.18"/>
+  <!-- stupovi -->
+  <rect x="356" y="344" width="11" height="216" rx="3" fill="#6F5436"/>
+  <rect x="833" y="344" width="11" height="216" rx="3" fill="#6F5436"/>
 
   <!-- stol -->
-  <rect x="330" y="470" width="540" height="15" rx="5" fill="#8A6A44"/>
-  <rect x="360" y="485" width="14" height="86" fill="#6F5436"/>
-  <rect x="826" y="485" width="14" height="86" fill="#6F5436"/>
+  <rect x="330" y="470" width="540" height="18" rx="6" fill="#9A7A4E"/>
+  <rect x="330" y="488" width="540" height="7" rx="3" fill="#7A5F3B"/>
 
-  <!-- gajba lijevo: rajčice -->
+  <!-- GAJBA 1: rajčice -->
   <g>
-    <rect x="356" y="404" width="170" height="66" rx="7" fill="#B98A54"/>
-    <rect x="356" y="404" width="170" height="66" rx="7" fill="none" stroke="#8A6A44" stroke-width="3"/>
-    <circle cx="396" cy="396" r="25" fill="#C8442F"/>
-    <circle cx="446" cy="390" r="27" fill="#D6503A"/>
-    <circle cx="497" cy="397" r="24" fill="#C8442F"/>
-    <path d="M446 364 l0 -12 M438 366 q8 -12 18 -6" stroke="#2D5016" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <rect x="352" y="402" width="164" height="68" rx="8" fill="#C09257"/>
+    <path d="M352 424 h164 M352 446 h164" stroke="#A87F49" stroke-width="3"/>
+    <rect x="352" y="402" width="164" height="68" rx="8" fill="none" stroke="#8A6A44" stroke-width="3"/>
+    <circle cx="390" cy="396" r="26" fill="#C8442F"/>
+    <circle cx="383" cy="388" r="8" fill="#DB5C45" opacity="0.6"/>
+    <circle cx="440" cy="389" r="28" fill="#D6503A"/>
+    <circle cx="432" cy="380" r="9" fill="#E8705A" opacity="0.6"/>
+    <circle cx="491" cy="397" r="25" fill="#C8442F"/>
+    <path d="M440 361 l0 -13" stroke="#3F6B2A" stroke-width="5" stroke-linecap="round"/>
+    <path d="M429 364 q11 -13 23 -7" stroke="#3F6B2A" stroke-width="5" fill="none" stroke-linecap="round"/>
   </g>
 
-  <!-- gajba sredina: zelje -->
+  <!-- GAJBA 2: zelje i paprika -->
   <g>
-    <rect x="540" y="410" width="150" height="60" rx="7" fill="#B98A54"/>
-    <rect x="540" y="410" width="150" height="60" rx="7" fill="none" stroke="#8A6A44" stroke-width="3"/>
-    <circle cx="578" cy="402" r="24" fill="#5A8B35"/>
-    <circle cx="624" cy="396" r="26" fill="#4E7A38"/>
-    <circle cx="668" cy="403" r="23" fill="#5A8B35"/>
+    <rect x="530" y="410" width="150" height="60" rx="8" fill="#C09257"/>
+    <path d="M530 430 h150 M530 450 h150" stroke="#A87F49" stroke-width="3"/>
+    <rect x="530" y="410" width="150" height="60" rx="8" fill="none" stroke="#8A6A44" stroke-width="3"/>
+    <circle cx="566" cy="402" r="25" fill="#5A8B35"/>
+    <circle cx="559" cy="394" r="8" fill="#74A64B" opacity="0.6"/>
+    <circle cx="612" cy="396" r="27" fill="#4A7A31"/>
+    <path d="M655 380 q16 6 14 22 q-2 16 -18 16 q-16 0 -18 -16 q-2 -16 14 -22 z" fill="#D9762F"/>
+    <path d="M651 380 l4 -10 l8 4" stroke="#3F6B2A" stroke-width="4" fill="none" stroke-linecap="round"/>
   </g>
 
-  <!-- gajba desno: jabuke i staklenka meda -->
+  <!-- GAJBA 3: jabuke, med, jaja -->
   <g>
-    <rect x="704" y="414" width="146" height="56" rx="7" fill="#B98A54"/>
-    <rect x="704" y="414" width="146" height="56" rx="7" fill="none" stroke="#8A6A44" stroke-width="3"/>
-    <circle cx="740" cy="408" r="22" fill="#D9762F"/>
-    <circle cx="784" cy="404" r="23" fill="#E0873C"/>
-    <path d="M784 377 l0 -10" stroke="#2D5016" stroke-width="5" stroke-linecap="round"/>
-    <rect x="812" y="378" width="34" height="34" rx="5" fill="#E8A33D"/>
-    <rect x="810" y="370" width="38" height="10" rx="3" fill="#8A6A44"/>
+    <rect x="694" y="414" width="150" height="56" rx="8" fill="#C09257"/>
+    <path d="M694 432 h150 M694 452 h150" stroke="#A87F49" stroke-width="3"/>
+    <rect x="694" y="414" width="150" height="56" rx="8" fill="none" stroke="#8A6A44" stroke-width="3"/>
+    <circle cx="726" cy="408" r="23" fill="#D9762F"/>
+    <circle cx="720" cy="400" r="7" fill="#EB9550" opacity="0.6"/>
+    <circle cx="770" cy="404" r="24" fill="#C86A2A"/>
+    <path d="M770 378 l0 -11" stroke="#3F6B2A" stroke-width="5" stroke-linecap="round"/>
+    <!-- staklenka meda -->
+    <rect x="800" y="376" width="38" height="40" rx="6" fill="#E8A33D"/>
+    <rect x="800" y="376" width="14" height="40" rx="6" fill="#F0B75C" opacity="0.7"/>
+    <rect x="796" y="366" width="46" height="12" rx="4" fill="#8A6A44"/>
+    <rect x="806" y="390" width="26" height="12" rx="2" fill="#FDF6E9" opacity="0.9"/>
   </g>
 
-  <!-- natpis na stolu -->
-  <rect x="470" y="500" width="262" height="46" rx="8" fill="#FAF7F2" stroke="#2D5016" stroke-width="3"/>
-  <text x="601" y="531" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="26" fill="#2D5016">domaće, iz tvog kraja</text>
+  <!-- ploča s natpisom -->
+  <g>
+    <rect x="452" y="502" width="296" height="52" rx="10" fill="#FDF6E9" stroke="#2D5016" stroke-width="3"/>
+    <text x="600" y="536" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="27" fill="#2D5016">domaće, iz tvog kraja</text>
+  </g>
 </svg>
