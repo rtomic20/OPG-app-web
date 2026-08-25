@@ -9,7 +9,9 @@
     "blog": "node scripts/build-blog.mjs",
     "test:blog": "node scripts/build-blog.test.mjs",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:routes": "node scripts/routes.test.mjs",
+    "test": "node scripts/build-blog.test.mjs && node scripts/routes.test.mjs"
   },
   "dependencies": {
     "@tabler/icons-react": "^3.44.0",

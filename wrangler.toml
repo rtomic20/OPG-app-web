@@ -1,7 +1,15 @@
 name = "opg-app-web"
 account_id = "9a3891f3cbdfe81d27d28f519445acd7"
-compatibility_date = "2024-01-01"
+# Bumped from 2024-01-01: Workers Static Assets with a Worker script (the ASSETS
+# binding below) needs a compat date on or after 2024-09-23.
+compatibility_date = "2024-11-01"
+main = "src/worker.js"
 
 [assets]
 directory = "./dist"
-not_found_handling = "single-page-application"
+binding = "ASSETS"
+# "none" (not "single-page-application") so a missing file reaches the Worker, which
+# decides whether it is a client-side route (200 + index.html) or a real 404.
+# With SPA handling, every unknown URL returned 200 + index.html and Search Console
+# reported "Duplicate without user-selected canonical".
+not_found_handling = "none"
