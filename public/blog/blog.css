@@ -30,7 +30,15 @@ body {
   font-size: 17px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
+  /* Sticky footer: short pages (one post) otherwise left a blank strip of --paper
+     under the footer down to the bottom of the viewport. */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+
+body > main { flex: 1 0 auto; }
+body > .site-footer { flex-shrink: 0; }
 
 @media (min-width: 768px) { body { font-size: 18px; } }
 
